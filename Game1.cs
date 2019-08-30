@@ -3,7 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using static Zeds.ZedController;
+using static Zeds.HumanController;
+
 using static Zeds.Graphics;
+using static Zeds.Variables;
+
 
 namespace Zeds
 {
@@ -12,13 +16,6 @@ namespace Zeds
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        private Texture2D backgroundTexture;
-        private Texture2D human;
-        private Texture2D zed;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -35,7 +32,15 @@ namespace Zeds
         {
             // TODO: Add your initialization logic here
 
+            // Screen Setup
+            PreferredBackBufferWidth = 800;
+            PreferredBackBufferHeight = 600;
+            IsFullScreen = false;
+            graphics.ApplyChanges();
+            Window.Title = "Zeds";
             base.Initialize();
+
+            mapCentre();
         }
 
         /// <summary>
@@ -44,14 +49,22 @@ namespace Zeds
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            //Screen setup
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            device = GraphicsDevice;
+
+            screenWidth = device.PresentationParameters.BackBufferWidth;
+            screenHeight = device.PresentationParameters.BackBufferHeight;
 
             // TODO: use this.Content to load your game content here
 
             backgroundTexture = Content.Load<Texture2D>("background");
-            human = Content.Load<Texture2D>("human");
-            zed = Content.Load<Texture2D>("zed");
+            humanTexture = Content.Load<Texture2D>("human");
+            zedTexture = Content.Load<Texture2D>("zed");
+
+            SpawnHumans();
+            SpawnZeds();
+
         }
 
         /// <summary>
@@ -75,8 +88,8 @@ namespace Zeds
 
             // TODO: Add your update logic here
 
-            ZedSpawnLocations();
-
+            IncreaseZeds();
+            ZedMovement();
             base.Update(gameTime);
         }
 
@@ -90,7 +103,9 @@ namespace Zeds
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-                DrawBackground(backgroundTexture);
+                spriteBatch.Draw(backgroundTexture, Vector2.Zero);
+                DrawHumans();
+                DrawZeds();
             spriteBatch.End();
 
             base.Draw(gameTime);
