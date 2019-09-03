@@ -41,6 +41,7 @@ namespace Zeds
             base.Initialize();
 
             mapCentre();
+            PopulateZedList();
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace Zeds
 
             // TODO: Add your update logic here
 
-            IncreaseZeds();
+            //IncreaseZeds();
             ZedMovement();
             base.Update(gameTime);
         }

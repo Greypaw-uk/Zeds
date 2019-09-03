@@ -22,40 +22,46 @@ namespace Zeds
         private static Vector2 zone3;
         private static Vector2 zone4;
 
-        public static Zed[] zed;
-        public static List<Zed> zeds = new List<Zed>();
+        public static Zed[] zed = new Zed[100];
+        public static List<Zed> ZedList = new List<Zed>();
+
+        public static void PopulateZedList()
+        {
+            for(var i = 0; i < zedQuantity; i++)
+            {
+                zed[i].position = ZedSpawnPoint();
+                zed[i].hasSpawned = true;
+                zed[i].isAlive = true;
+                zed[i].health = 1;
+                zed[i].speed = 0.25f;
+
+                ZedList.Add(zed[i]);
+            }
+
+            SpawnZeds();
+        }
 
         public static void SpawnZeds()
         {
-            if (zed.Length == 0)
-            {
-
-            }
-            else
-            {
-                for (int i = 0; i < zeds.Count; i++)
+            if (ZedList.Count != 0)
+            { 
+                for (var i = 0; i < ZedList.Count; i++)
                 {
-                    if (!zed[i].hasSpawned)
-                    {
-                        zed[i].position = ZedSpawnPoint();
-                        zed[i].hasSpawned = true;
-                        zed[i].isAlive = true;
-                        zed[i].health = 1;
-                        zed[i].speed = 0.25f;
-                    }
+                    if (zed[i].hasSpawned) continue;
+                    zed[i].position = ZedSpawnPoint();
+                    zed[i].hasSpawned = true;
+                    zed[i].isAlive = true;
+                    zed[i].health = 1;
+                    zed[i].speed = 0.25f;
                 }
             }
         }
 
         public static void ZedMovement()
         {
-            if (zed.Length == 0)
+            if (ZedList.Count != 0)
             {
-
-            }
-            else
-            {
-                for (int i = 0; i < zeds.Count; i++)
+                for (var i = 0; i < ZedList.Count; i++)
                 {
                     // Orientate Zed with map's centre
                     Vector2 dir = mapCentre() - zed[i].position;
@@ -74,9 +80,9 @@ namespace Zeds
         public static void IncreaseZeds()
         {
             Random random = new Random(Guid.NewGuid().GetHashCode());
-            int increaseRoll = random.Next(1, 100);
+            var increaseRoll = random.Next(1, 1000);
 
-            if (increaseRoll > 98)
+            if (increaseRoll > 998)
             {
                 zedQuantity++;
             }
@@ -97,7 +103,7 @@ namespace Zeds
             zone4.Y = 600 - zedTexture.Height;
 
             Random random = new Random(Guid.NewGuid().GetHashCode());
-            int randomZone = random.Next(0, 3);
+            var randomZone = random.Next(0, 3);
 
             Vector2 zedSpawnPoint = new Vector2();
 

@@ -21,7 +21,7 @@ namespace Zeds
 
         public static void DrawZeds()
         {
-            foreach (var pawn in zeds)
+            foreach (var pawn in ZedList)
             {
                 if (pawn.isAlive)
                 {
