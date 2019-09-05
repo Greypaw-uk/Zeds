@@ -23,8 +23,8 @@ namespace Zeds
                 human[i].hasSpawned = true;
                 human[i].isAlive = true;
                 human[i].health = 1;
-                human[i].position.X = screenWidth / 2;
-                human[i].position.Y = screenHeight / 2;
+                human[i].position.X = (float)screenWidth / 2;
+                human[i].position.Y = (float)screenHeight / 2;
                 human[i].angle = 0;
             }
         }

@@ -64,8 +64,6 @@ namespace Zeds
             zedTexture = Content.Load<Texture2D>("zed");
 
             SpawnHumans();
-            SpawnZeds();
-
         }
 
         /// <summary>
@@ -89,8 +87,9 @@ namespace Zeds
 
             // TODO: Add your update logic here
 
-            //IncreaseZeds();
-            ZedMovement();
+            IncreaseZeds();
+            StopZedsBunching();
+            CalculateZedMovement();
             base.Update(gameTime);
         }
 

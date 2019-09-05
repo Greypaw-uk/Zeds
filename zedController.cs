@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using static Zeds.Variables;
+using static Zeds.Collisions;
 
 namespace Zeds
 {
-    public struct Zed
+    public class Zed
     {
         public int health;
         public Vector2 position;
@@ -13,6 +14,8 @@ namespace Zeds
         public bool hasSpawned;
         public float speed;
         public float angle;
+        public BoundingBox BoundingBox;
+        public string ID;
     }
 
     public static class ZedController
@@ -22,57 +25,60 @@ namespace Zeds
         private static Vector2 zone3;
         private static Vector2 zone4;
 
-        public static Zed[] zed = new Zed[100];
         public static List<Zed> ZedList = new List<Zed>();
 
         public static void PopulateZedList()
         {
-            for(var i = 0; i < zedQuantity; i++)
+            for (var i = 0; i < zedQuantity; i++)
             {
-                zed[i].position = ZedSpawnPoint();
-                zed[i].hasSpawned = true;
-                zed[i].isAlive = true;
-                zed[i].health = 1;
-                zed[i].speed = 0.25f;
-
-                ZedList.Add(zed[i]);
-            }
-
-            SpawnZeds();
-        }
-
-        public static void SpawnZeds()
-        {
-            if (ZedList.Count != 0)
-            { 
-                for (var i = 0; i < ZedList.Count; i++)
+                Zed zed = new Zed
                 {
-                    if (zed[i].hasSpawned) continue;
-                    zed[i].position = ZedSpawnPoint();
-                    zed[i].hasSpawned = true;
-                    zed[i].isAlive = true;
-                    zed[i].health = 1;
-                    zed[i].speed = 0.25f;
-                }
+                    position = ZedSpawnPoint(),
+                    hasSpawned = true,
+                    isAlive = true,
+                    health = 1,
+                    speed = 0.5f,
+                    ID = Guid.NewGuid().ToString()
+            };
+
+                ZedList.Add(zed);
             }
         }
 
-        public static void ZedMovement()
+        public static void CalculateZedMovement()
         {
             if (ZedList.Count != 0)
             {
-                for (var i = 0; i < ZedList.Count; i++)
+                foreach(var zed in ZedList)
                 {
-                    // Orientate Zed with map's centre
-                    Vector2 dir = mapCentre() - zed[i].position;
+                    // Move zed towards map centre
+                    Vector2 dir = mapCentre() - zed.position;
                     dir.Normalize();
 
                     // Rotate to face movement direction
                     float rotation = (float)Math.Atan2(dir.Y, dir.X);
-                    zed[i].angle = rotation;
 
-                    // Move zed towards map centre
-                    zed[i].position += dir * zed[i].speed;
+                    UpdateZedPosition(zed, rotation, dir);
+                }
+            }
+        }
+
+        public static void UpdateZedPosition(Zed zed, float rotation, Vector2 dir)
+        {
+            zed.angle = rotation;
+            zed.position += dir * zed.speed;
+        }
+
+        public static void StopZedsBunching()
+        {
+            foreach(var zed in ZedList)
+            {
+                foreach (var otherZed in ZedList)
+                {
+                    if(zed.BoundingBox.Intersects(otherZed.BoundingBox) && zed.ID != otherZed.ID)
+                    {
+                        otherZed.position.X++;
+                    }
                 }
             }
         }
@@ -80,11 +86,14 @@ namespace Zeds
         public static void IncreaseZeds()
         {
             Random random = new Random(Guid.NewGuid().GetHashCode());
-            var increaseRoll = random.Next(1, 1000);
-
-            if (increaseRoll > 998)
+            if (zedQuantity < 100)
             {
-                zedQuantity++;
+                var increaseRoll = random.Next(1, 1000);
+
+                if (increaseRoll > 998)
+                {
+                    zedQuantity++;
+                }
             }
         }
 

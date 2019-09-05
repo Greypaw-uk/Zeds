@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Buildings.cs" />
+    <Compile Include="Collisions.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Graphics.cs" />
     <Compile Include="HumanController.cs" />
