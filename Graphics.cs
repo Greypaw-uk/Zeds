@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using static Zeds.Variables;
-using static Zeds.HumanController;
-using static Zeds.ZedController;
 
 namespace Zeds
 {
@@ -9,12 +7,12 @@ namespace Zeds
     {
         public static void DrawHumans()
         {
-            foreach (var pawn in human)
+            foreach (var pawn in HumanList)
             {
                 if (pawn.isAlive)
                 {
-                    spriteBatch.Draw(humanTexture, pawn.position, null, null,
-                        new Vector2(0, humanTexture.Height), pawn.angle);
+                    SpriteBatch.Draw(HumanTexture, pawn.position, null, null,
+                        new Vector2(0, HumanTexture.Height), pawn.angle);
                 }
             }
         }
@@ -25,10 +23,15 @@ namespace Zeds
             {
                 if (pawn.isAlive)
                 {
-                    spriteBatch.Draw(zedTexture, pawn.position, null, null,
-                        new Vector2(0,zedTexture.Height), pawn.angle);
+                    SpriteBatch.Draw(ZedTexture, pawn.position, null, null,
+                        new Vector2(0,ZedTexture.Height), pawn.angle);
                 }
             }
+        }
+
+        public static void DrawBuildings()
+        {
+            SpriteBatch.Draw(HqTexture, MapCentre());
         }
     }
 }

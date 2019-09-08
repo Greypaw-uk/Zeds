@@ -21,7 +21,7 @@ namespace Zeds
             }
         }
 
-        public GameObject(Texture2D texture, Vector2 position)
+        /*public GameObject(Texture2D texture, Vector2 position)
         {
             this.texture = texture;
             this.Position = position;
@@ -34,10 +34,11 @@ namespace Zeds
             this.Velocity = velocity;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch SpriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
+            SpriteBatch.Draw(texture, Position, Color.White);
         }
+        */
     }
 
     class Collisions

@@ -18,7 +18,7 @@ namespace Zeds
     {
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            Variables.Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -33,14 +33,17 @@ namespace Zeds
             // TODO: Add your initialization logic here
 
             // Screen Setup
-            PreferredBackBufferWidth = 800;
-            PreferredBackBufferHeight = 600;
+            ScreenHeight = 1600;
+            ScreenWidth = 1024;
+
+            PreferredBackBufferWidth = ScreenWidth;
+            PreferredBackBufferHeight = ScreenHeight;
             IsFullScreen = false;
-            graphics.ApplyChanges();
+            Variables.Graphics.ApplyChanges();
             Window.Title = "Zeds";
             base.Initialize();
 
-            mapCentre();
+            MapCentre();
             PopulateZedList();
         }
 
@@ -51,17 +54,19 @@ namespace Zeds
         protected override void LoadContent()
         {
             //Screen setup
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            device = GraphicsDevice;
+            Variables.SpriteBatch = new SpriteBatch(GraphicsDevice);
+            Device = GraphicsDevice;
 
-            screenWidth = device.PresentationParameters.BackBufferWidth;
-            screenHeight = device.PresentationParameters.BackBufferHeight;
+            ScreenWidth = Device.PresentationParameters.BackBufferWidth;
+            ScreenHeight = Device.PresentationParameters.BackBufferHeight;
 
             // TODO: use this.Content to load your game content here
 
-            backgroundTexture = Content.Load<Texture2D>("background");
-            humanTexture = Content.Load<Texture2D>("human");
-            zedTexture = Content.Load<Texture2D>("zed");
+            BackgroundTexture = Content.Load<Texture2D>("background");
+            HumanTexture = Content.Load<Texture2D>("Human1");
+            ZedTexture = Content.Load<Texture2D>("BasicZed");
+
+            HqTexture = Content.Load<Texture2D>("HQ");
 
             SpawnHumans();
         }
@@ -88,8 +93,9 @@ namespace Zeds
             // TODO: Add your update logic here
 
             IncreaseZeds();
-            StopZedsBunching();
+            //StopZedsBunching();
             CalculateZedMovement();
+            RunFromZeds();
             base.Update(gameTime);
         }
 
@@ -102,11 +108,12 @@ namespace Zeds
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-                spriteBatch.Draw(backgroundTexture, Vector2.Zero);
+            Variables.SpriteBatch.Begin();
+                Variables.SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
+                DrawBuildings();
                 DrawHumans();
                 DrawZeds();
-            spriteBatch.End();
+            Variables.SpriteBatch.End();
 
             base.Draw(gameTime);
         }
