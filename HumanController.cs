@@ -6,32 +6,33 @@ namespace Zeds
 {
     public class Human
     {
-        public int health;
-        public Vector2 position;
-        public bool isAlive;
-        public bool hasSpawned;
-        public float speed;
-        public float angle;
+        public int Health;
+        public Vector2 Position;
+        public bool IsAlive;
+        public bool HasSpawned;
+        public float Speed;
+        public float Angle;
         public BoundingBox BoundingBox;
+        public string ID;
     }
 
     public static class HumanController
     {
         public static Human[] human;
         
-
         public static void SpawnHumans()
         {
             for (int i = 0; i < SurvivorQuantity; i++)
             {
                 Human human = new Human
                 {
-                    hasSpawned = true,
-                    isAlive = true,
-                    health = 1,
-                    position = MapCentre(),
-                    angle = 0,
-                    speed = 0.3f
+                    HasSpawned = true,
+                    IsAlive = true,
+                    Health = 1,
+                    Position = MapCentre(),
+                    Angle = 0,
+                    Speed = 0.3f,
+                    ID = Guid.NewGuid().ToString()
                 };
 
                 HumanList.Add(human);
@@ -44,17 +45,16 @@ namespace Zeds
             {
                 foreach (var zed in ZedList)
                 {
-                    float distance = (human.position.Y - zed.position.Y) * (human.position.Y - zed.position.Y) +
-                                   (human.position.X - zed.position.X) * (human.position.X - zed.position.X);
+                    float distance = (human.Position.Y - zed.Position.Y) * (human.Position.Y - zed.Position.Y) +
+                                   (human.Position.X - zed.Position.X) * (human.Position.X - zed.Position.X);
 
                     distance = (float)Math.Sqrt(distance);
 
                     if (distance !=0)
                     {
-                        Console.WriteLine("Zed distance = " + (int)distance + ".  Panic distance = " + (int)PanicDistance);
                         if (distance <= PanicDistance)
                         {
-                            Vector2 dir = human.position - zed.position;
+                            Vector2 dir = human.Position - zed.Position;
                             dir.Normalize();
 
                             // Rotate to face movement direction
@@ -69,8 +69,8 @@ namespace Zeds
 
         public static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
         {
-            human.angle = rotation;
-            human.position += dir * human.speed;
+            human.Angle = rotation;
+            human.Position += dir * human.Speed;
         }
     }
 }

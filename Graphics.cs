@@ -9,10 +9,10 @@ namespace Zeds
         {
             foreach (var pawn in HumanList)
             {
-                if (pawn.isAlive)
+                if (pawn.IsAlive)
                 {
-                    SpriteBatch.Draw(HumanTexture, pawn.position, null, null,
-                        new Vector2(0, HumanTexture.Height), pawn.angle);
+                    SpriteBatch.Draw(HumanTexture, pawn.Position, null, null,
+                        new Vector2(0, HumanTexture.Height), pawn.Angle);
                 }
             }
         }
@@ -21,17 +21,20 @@ namespace Zeds
         {
             foreach (var pawn in ZedList)
             {
-                if (pawn.isAlive)
+                if (pawn.IsAlive)
                 {
-                    SpriteBatch.Draw(ZedTexture, pawn.position, null, null,
-                        new Vector2(0,ZedTexture.Height), pawn.angle);
+                    SpriteBatch.Draw(ZedTexture, pawn.Position, null, null,
+                        new Vector2(0,ZedTexture.Height), pawn.Angle);
                 }
             }
         }
 
         public static void DrawBuildings()
         {
-            SpriteBatch.Draw(HqTexture, MapCentre());
+            foreach (var Building in BuildingList)
+            {
+                SpriteBatch.Draw(Building.Texture, Building.Position);
+            }
         }
     }
 }

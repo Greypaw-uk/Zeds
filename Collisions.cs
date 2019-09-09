@@ -21,16 +21,16 @@ namespace Zeds
             }
         }
 
-        /*public GameObject(Texture2D texture, Vector2 position)
+        /*public GameObject(Texture2D texture, Vector2 Position)
         {
             this.texture = texture;
-            this.Position = position;
+            this.Position = Position;
         }
 
-        public GameObject(Texture2D texture, Vector2 position, Vector2 velocity)
+        public GameObject(Texture2D texture, Vector2 Position, Vector2 velocity)
         {
             this.texture = texture;
-            this.Position = position;
+            this.Position = Position;
             this.Velocity = velocity;
         }
 

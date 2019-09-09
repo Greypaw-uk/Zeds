@@ -7,6 +7,7 @@ using static Zeds.HumanController;
 
 using static Zeds.Graphics;
 using static Zeds.Variables;
+using static Zeds.Buildings;
 
 
 namespace Zeds
@@ -67,7 +68,10 @@ namespace Zeds
             ZedTexture = Content.Load<Texture2D>("BasicZed");
 
             HqTexture = Content.Load<Texture2D>("HQ");
+            SmallTentTexture = Content.Load<Texture2D>("SmallTent");
 
+            HQSetup();
+            SmallTent();
             SpawnHumans();
         }
 
@@ -93,8 +97,8 @@ namespace Zeds
             // TODO: Add your update logic here
 
             IncreaseZeds();
-            //StopZedsBunching();
             CalculateZedMovement();
+
             RunFromZeds();
             base.Update(gameTime);
         }

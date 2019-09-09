@@ -6,14 +6,15 @@ namespace Zeds
 {
     public class Zed
     {
-        public int health;
-        public Vector2 position;
-        public bool isAlive;
-        public bool hasSpawned;
-        public float speed;
-        public float angle;
+        public int Health;
+        public Vector2 Position;
+        public bool IsAlive;
+        public bool HasSpawned;
+        public float Speed;
+        public float Angle;
         public BoundingBox BoundingBox;
         public string ID;
+        public float AlertRange;
     }
 
     public static class ZedController
@@ -33,13 +34,13 @@ namespace Zeds
             {
                 Zed zed = new Zed
                 {
-                    position = ZedSpawnPoint(),
-                    hasSpawned = true,
-                    isAlive = true,
-                    health = 1,
-                    speed = 0.25f,
+                    Position = ZedSpawnPoint(),
+                    HasSpawned = true,
+                    IsAlive = true,
+                    Health = 1,
+                    Speed = 0.25f,
                     ID = Guid.NewGuid().ToString()
-            };
+                };
 
                 StopZedsBunching();
 
@@ -55,21 +56,21 @@ namespace Zeds
                 {
                     if (zed.BoundingBox.Intersects(otherZed.BoundingBox) && !zed.ID.Equals(otherZed.ID))
                     {
-                        if (zed.position.X >= otherZed.position.X)
+                        if (zed.Position.X >= otherZed.Position.X)
                         {
-                            zed.position.X -= ZedTexture.Width;
+                            zed.Position.X -= ZedTexture.Width;
                         }
-                        else if (zed.position.X <= otherZed.position.X)
+                        else if (zed.Position.X <= otherZed.Position.X)
                         {
-                            zed.position.X += ZedTexture.Width;
+                            zed.Position.X += ZedTexture.Width;
                         }
-                        else if (zed.position.Y >= otherZed.position.Y)
+                        else if (zed.Position.Y >= otherZed.Position.Y)
                         {
-                            zed.position.Y += ZedTexture.Height;
+                            zed.Position.Y += ZedTexture.Height;
                         }
-                        else if (zed.position.Y <= otherZed.position.Y)
+                        else if (zed.Position.Y <= otherZed.Position.Y)
                         {
-                            zed.position.Y -= ZedTexture.Height;
+                            zed.Position.Y -= ZedTexture.Height;
                         }
                     }
                 }
@@ -82,8 +83,8 @@ namespace Zeds
             {
                 foreach(var zed in ZedList)
                 {
-                    // Move zed towards map centre
-                    Vector2 dir = MapCentre() - zed.position;
+                    // Move zed towards closest target
+                    Vector2 dir = FindClosestTarget(zed) - zed.Position;
                     dir.Normalize();
 
                     // Rotate to face movement direction
@@ -94,10 +95,66 @@ namespace Zeds
             }
         }
 
+        public static Vector2 FindClosestTarget(Zed zed)
+        {
+            Vector2 buildingLocation = new Vector2();
+            Vector2 humanLocation = new Vector2();
+            Vector2 target = new Vector2();
+
+            float closestBuilding = 1000;
+            float closestHuman = 1000;
+
+            if (closestHuman <= zed.AlertRange)
+            {
+                target = humanLocation;
+            }
+            else
+            {
+                if (BuildingList.Count != 0)
+                {
+                    foreach (var building in BuildingList)
+                    {
+                        var distance = Vector2.Distance(zed.Position, building.Position);
+
+                        if (distance <= closestBuilding)
+                        {
+                            closestBuilding = distance;
+                            buildingLocation = building.Position;
+                        }
+                    }
+                }
+
+                if (HumanList.Count != 0)
+                {
+                    foreach (var human in HumanList)
+                    {
+                        var distance = Vector2.Distance(zed.Position, human.Position);
+
+                        if (distance <= closestHuman)
+                        {
+                            closestHuman = distance;
+                            humanLocation = human.Position;
+                        }
+                    }
+                }
+
+                if (closestHuman < closestBuilding)
+                {
+                    target = humanLocation;
+                }
+                else
+                {
+                    target = buildingLocation;
+                }
+            }
+
+            return target;
+        }
+
         public static void UpdateZedPosition(Zed zed, float rotation, Vector2 dir)
         {
-            zed.angle = rotation;
-            zed.position += dir * zed.speed;
+            zed.Angle = rotation;
+            zed.Position += dir * zed.Speed;
         }
 
         public static void IncreaseZeds()

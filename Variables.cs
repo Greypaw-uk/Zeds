@@ -14,6 +14,7 @@ namespace Zeds
         public static Texture2D ZedTexture;
 
         public static Texture2D HqTexture;
+        public static Texture2D SmallTentTexture;
 
         // Screen setup
         public static GraphicsDeviceManager Graphics;
@@ -40,6 +41,7 @@ namespace Zeds
 
         public static List<Zed> ZedList = new List<Zed>();
         public static List<Human> HumanList = new List<Human>();
+        public static List<Building> BuildingList = new List<Building>();
 
         public static float PanicDistance = 100f;
 
