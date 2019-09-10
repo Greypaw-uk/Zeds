@@ -48,7 +48,7 @@
     <Compile Include="HumanController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Variables.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="zedController.cs" />
   </ItemGroup>
   <ItemGroup>

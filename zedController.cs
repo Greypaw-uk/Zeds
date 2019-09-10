@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using static Zeds.Variables;
+using static Zeds.Engine;
+using static Zeds.Collisions;
 
 namespace Zeds
 {
@@ -12,13 +13,15 @@ namespace Zeds
         public bool HasSpawned;
         public float Speed;
         public float Angle;
-        public BoundingBox BoundingBox;
+        public BoundingBox boundingBox;
         public string ID;
         public float AlertRange;
     }
 
     public static class ZedController
     {
+        public static int ZedQuantity = 3;
+
         private static Vector2 zone1;
         private static Vector2 zone2;
         private static Vector2 zone3;
@@ -39,41 +42,13 @@ namespace Zeds
                     IsAlive = true,
                     Health = 1,
                     Speed = 0.25f,
-                    ID = Guid.NewGuid().ToString()
+                    ID = Guid.NewGuid().ToString(),
+                    boundingBox = new BoundingBox()
                 };
 
                 StopZedsBunching();
 
                 ZedList.Add(zed);
-            }
-        }
-
-        public static void StopZedsBunching()
-        {
-            foreach(var zed in ZedList)
-            {
-                foreach (var otherZed in ZedList)
-                {
-                    if (zed.BoundingBox.Intersects(otherZed.BoundingBox) && !zed.ID.Equals(otherZed.ID))
-                    {
-                        if (zed.Position.X >= otherZed.Position.X)
-                        {
-                            zed.Position.X -= ZedTexture.Width;
-                        }
-                        else if (zed.Position.X <= otherZed.Position.X)
-                        {
-                            zed.Position.X += ZedTexture.Width;
-                        }
-                        else if (zed.Position.Y >= otherZed.Position.Y)
-                        {
-                            zed.Position.Y += ZedTexture.Height;
-                        }
-                        else if (zed.Position.Y <= otherZed.Position.Y)
-                        {
-                            zed.Position.Y -= ZedTexture.Height;
-                        }
-                    }
-                }
             }
         }
 
@@ -104,18 +79,25 @@ namespace Zeds
             float closestBuilding = 1000;
             float closestHuman = 1000;
 
-            if (closestHuman <= zed.AlertRange)
+            if (HumanList.Count != 0)
             {
-                target = humanLocation;
-            }
-            else
-            {
-                if (BuildingList.Count != 0)
+                foreach (var human in HumanList)
                 {
-                    foreach (var building in BuildingList)
-                    {
-                        var distance = Vector2.Distance(zed.Position, building.Position);
+                    var distance = Vector2.Distance(zed.Position, human.Position);
 
+                    if (distance <= closestHuman)
+                    {
+                        closestHuman = distance;
+                        humanLocation = human.Position;
+                    } 
+                }
+            }
+            else if (BuildingList.Count != 0)
+            {
+                foreach (var building in BuildingList)
+                {
+                    var distance = Vector2.Distance(zed.Position, building.Position);
+                    {
                         if (distance <= closestBuilding)
                         {
                             closestBuilding = distance;
@@ -123,29 +105,15 @@ namespace Zeds
                         }
                     }
                 }
-
-                if (HumanList.Count != 0)
-                {
-                    foreach (var human in HumanList)
-                    {
-                        var distance = Vector2.Distance(zed.Position, human.Position);
-
-                        if (distance <= closestHuman)
-                        {
-                            closestHuman = distance;
-                            humanLocation = human.Position;
-                        }
-                    }
-                }
-
-                if (closestHuman < closestBuilding)
-                {
-                    target = humanLocation;
-                }
-                else
-                {
-                    target = buildingLocation;
-                }
+            }            
+            
+            if (closestHuman < closestBuilding)
+            {
+                target = humanLocation;
+            }
+            else
+            {
+                target = buildingLocation;
             }
 
             return target;

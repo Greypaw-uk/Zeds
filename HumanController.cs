@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using static Zeds.Variables;
+using static Zeds.Engine;
 
 namespace Zeds
 {
@@ -18,6 +18,8 @@ namespace Zeds
 
     public static class HumanController
     {
+        public static int SurvivorQuantity = 1;
+        private static float PanicDistance = 100f;
         public static Human[] human;
         
         public static void SpawnHumans()

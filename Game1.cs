@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,62 +7,64 @@ using static Zeds.ZedController;
 using static Zeds.HumanController;
 
 using static Zeds.Graphics;
-using static Zeds.Variables;
+using static Zeds.Engine;
 using static Zeds.Buildings;
-
 
 namespace Zeds
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class Game1 : Game
     {
+        public static SpriteBatch SpriteBatch;
+
         public Game1()
         {
-            Variables.Graphics = new GraphicsDeviceManager(this);
+            Engine.Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             // Screen Setup
-            ScreenHeight = 1600;
-            ScreenWidth = 1024;
+            resolution = Resolution.Three;
+                //Set game play area to screen size
+                PreferredBackBufferWidth = ScreenWidth;
+                PreferredBackBufferHeight = ScreenHeight;
+            //Engine.Graphics.IsFullScreen = true;
+            Engine.Graphics.IsFullScreen = false;
 
-            PreferredBackBufferWidth = ScreenWidth;
-            PreferredBackBufferHeight = ScreenHeight;
-            IsFullScreen = false;
-            Variables.Graphics.ApplyChanges();
+                //Handle manual screen resizing
+                Window.AllowUserResizing = true;
+                Window.ClientSizeChanged += (Window_ClientSizeChanged);
+
+                void Window_ClientSizeChanged(object sender, EventArgs e)
+                {
+                    Engine.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                    Engine.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+                    Engine.Graphics.ApplyChanges();
+
+                    MapCentre();
+
+                    //TODO Re-align assets with new window size
+            }
+            Engine.Graphics.ApplyChanges();
+
             Window.Title = "Zeds";
+
+            IsMouseVisible = true;
+
             base.Initialize();
 
-            MapCentre();
             PopulateZedList();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
             //Screen setup
-            Variables.SpriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             Device = GraphicsDevice;
 
             ScreenWidth = Device.PresentationParameters.BackBufferWidth;
             ScreenHeight = Device.PresentationParameters.BackBufferHeight;
-
-            // TODO: use this.Content to load your game content here
 
             BackgroundTexture = Content.Load<Texture2D>("background");
             HumanTexture = Content.Load<Texture2D>("Human1");
@@ -75,26 +78,15 @@ namespace Zeds
             SpawnHumans();
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
 
             IncreaseZeds();
             CalculateZedMovement();
@@ -103,21 +95,17 @@ namespace Zeds
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-            Variables.SpriteBatch.Begin();
-                Variables.SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
+            //TODO Adjust scaling to screenResolution
+            SpriteBatch.Begin();
+                SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
                 DrawBuildings();
                 DrawHumans();
                 DrawZeds();
-            Variables.SpriteBatch.End();
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }

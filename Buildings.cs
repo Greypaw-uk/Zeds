@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Zeds.Variables;
+using static Zeds.Engine;
+using static Zeds.Collisions;
 
 namespace Zeds
 {
@@ -11,6 +12,7 @@ namespace Zeds
         public float Health;
         public Texture2D Texture;
         public string ID;
+        //public BoundingRectangle boundingBox;
     }
 
     public static class Buildings
@@ -23,6 +25,8 @@ namespace Zeds
                 Texture = HqTexture,
                 ID = Guid.NewGuid().ToString()
             };
+
+            //hq.boundingBox = new BoundingRectangle(hq.Position, hq.Texture);
 
             BuildingList.Add(hq);
         }
