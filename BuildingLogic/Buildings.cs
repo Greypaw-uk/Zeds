@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
 using static Zeds.Engine;
 using static Zeds.Collisions;
 
@@ -12,7 +13,7 @@ namespace Zeds
         public float Health;
         public Texture2D Texture;
         public string ID;
-        //public BoundingRectangle boundingBox;
+        public Rectangle BRec;
     }
 
     public static class Buildings
@@ -26,7 +27,10 @@ namespace Zeds
                 ID = Guid.NewGuid().ToString()
             };
 
-            //hq.boundingBox = new BoundingRectangle(hq.Position, hq.Texture);
+            hq.Position.X = hq.Position.X - hq.Texture.Width / 2;
+            hq.Position.Y = hq.Position.Y - hq.Texture.Height / 2;
+
+            hq.BRec = CreateBoundingBox(hq.Position, hq.Texture);
 
             BuildingList.Add(hq);
         }
@@ -44,6 +48,10 @@ namespace Zeds
                 Texture = SmallTentTexture,
                 ID = Guid.NewGuid().ToString()
             };
+            smallTent.BRec = CreateBoundingBox(smallTent.Position, smallTent.Texture);
+
+            smallTent.Position.X = position.X - smallTent.Texture.Width / 2;
+            smallTent.Position.Y = position.Y - smallTent.Texture.Height / 2;
 
             BuildingList.Add(smallTent);
         }

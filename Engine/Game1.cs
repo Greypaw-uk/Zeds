@@ -1,14 +1,12 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using static Zeds.ZedController;
-using static Zeds.HumanController;
-
-using static Zeds.Graphics;
-using static Zeds.Engine;
+using System;
 using static Zeds.Buildings;
+using static Zeds.Engine;
+using static Zeds.HumanController;
+using static Zeds.ZedController;
+using static Zeds.Graphics;
 
 namespace Zeds
 {
@@ -26,26 +24,27 @@ namespace Zeds
         {
             // Screen Setup
             resolution = Resolution.Three;
-                //Set game play area to screen size
-                PreferredBackBufferWidth = ScreenWidth;
-                PreferredBackBufferHeight = ScreenHeight;
+            //Set game play area to screen size
+            PreferredBackBufferWidth = ScreenWidth;
+            PreferredBackBufferHeight = ScreenHeight;
             //Engine.Graphics.IsFullScreen = true;
             Engine.Graphics.IsFullScreen = false;
 
-                //Handle manual screen resizing
-                Window.AllowUserResizing = true;
-                Window.ClientSizeChanged += (Window_ClientSizeChanged);
+            //Handle manual screen resizing
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
 
-                void Window_ClientSizeChanged(object sender, EventArgs e)
-                {
-                    Engine.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
-                    Engine.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
-                    Engine.Graphics.ApplyChanges();
+            void Window_ClientSizeChanged(object sender, EventArgs e)
+            {
+                Engine.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                Engine.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+                Engine.Graphics.ApplyChanges();
 
-                    MapCentre();
+                MapCentre();
 
-                    //TODO Re-align assets with new window size
+                //TODO Re-align assets with new window size
             }
+
             Engine.Graphics.ApplyChanges();
 
             Window.Title = "Zeds";
@@ -73,6 +72,8 @@ namespace Zeds
             HqTexture = Content.Load<Texture2D>("HQ");
             SmallTentTexture = Content.Load<Texture2D>("SmallTent");
 
+            BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
+
             HQSetup();
             SmallTent();
             SpawnHumans();
@@ -80,12 +81,12 @@ namespace Zeds
 
         protected override void UnloadContent()
         {
-
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             IncreaseZeds();
@@ -101,10 +102,11 @@ namespace Zeds
 
             //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin();
-                SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
-                DrawBuildings();
-                DrawHumans();
-                DrawZeds();
+            SpriteBatch.Draw(BackgroundTexture, Vector2.Zero, Color.White);
+            DrawBuildMenu();
+            DrawBuildings();
+            DrawHumans();
+            DrawZeds();
             SpriteBatch.End();
 
             base.Draw(gameTime);

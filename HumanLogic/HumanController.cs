@@ -6,27 +6,27 @@ namespace Zeds
 {
     public class Human
     {
-        public int Health;
-        public Vector2 Position;
-        public bool IsAlive;
-        public bool HasSpawned;
-        public float Speed;
         public float Angle;
         public BoundingBox BoundingBox;
+        public bool HasSpawned;
+        public int Health;
         public string ID;
+        public bool IsAlive;
+        public Vector2 Position;
+        public float Speed;
     }
 
     public static class HumanController
     {
         public static int SurvivorQuantity = 1;
-        private static float PanicDistance = 100f;
+        private static readonly float PanicDistance = 100f;
         public static Human[] human;
-        
+
         public static void SpawnHumans()
         {
-            for (int i = 0; i < SurvivorQuantity; i++)
+            for (var i = 0; i < SurvivorQuantity; i++)
             {
-                Human human = new Human
+                var human = new Human
                 {
                     HasSpawned = true,
                     IsAlive = true,
@@ -44,28 +44,24 @@ namespace Zeds
         public static void RunFromZeds()
         {
             foreach (var human in HumanList)
+            foreach (var zed in ZedList)
             {
-                foreach (var zed in ZedList)
-                {
-                    float distance = (human.Position.Y - zed.Position.Y) * (human.Position.Y - zed.Position.Y) +
-                                   (human.Position.X - zed.Position.X) * (human.Position.X - zed.Position.X);
+                var distance = (human.Position.Y - zed.Position.Y) * (human.Position.Y - zed.Position.Y) +
+                               (human.Position.X - zed.Position.X) * (human.Position.X - zed.Position.X);
 
-                    distance = (float)Math.Sqrt(distance);
+                distance = (float) Math.Sqrt(distance);
 
-                    if (distance !=0)
+                if (distance != 0)
+                    if (distance <= PanicDistance)
                     {
-                        if (distance <= PanicDistance)
-                        {
-                            Vector2 dir = human.Position - zed.Position;
-                            dir.Normalize();
+                        var dir = human.Position - zed.Position;
+                        dir.Normalize();
 
-                            // Rotate to face movement direction
-                            float rotation = (float)Math.Atan2(dir.Y, dir.X);
+                        // Rotate to face movement direction
+                        var rotation = (float) Math.Atan2(dir.Y, dir.X);
 
-                            UpdateHumanPosition(human, rotation, dir);
-                        }
+                        UpdateHumanPosition(human, rotation, dir);
                     }
-                }
             }
         }
 

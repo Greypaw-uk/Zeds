@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 namespace Zeds
 {
@@ -16,17 +16,20 @@ namespace Zeds
         public static Resolution resolution;
 
 
-
         // Textures
         public static Texture2D BackgroundTexture;
+
         public static Texture2D HumanTexture;
         public static Texture2D ZedTexture;
 
         public static Texture2D HqTexture;
         public static Texture2D SmallTentTexture;
 
+        public static Texture2D BuildMenuIconTexture;
+
         // Screen setup
         public static GraphicsDeviceManager Graphics;
+
         public static GraphicsDevice Device;
         public static int PreferredBackBufferWidth { get; set; }
         public static int PreferredBackBufferHeight { get; set; }
@@ -36,8 +39,11 @@ namespace Zeds
 
         // Entity lists
         public static List<Zed> ZedList = new List<Zed>();
+
         public static List<Human> HumanList = new List<Human>();
         public static List<Building> BuildingList = new List<Building>();
+
+        public static List<BuildMenuIcon> MainIconList = new List<BuildMenuIcon>();
 
         public static void SetResolution()
         {
@@ -48,25 +54,25 @@ namespace Zeds
                     ScreenWidth = 800;
                     ScreenHeight = 600;
                 }
-                break;
+                    break;
                 case Resolution.Two:
                 {
                     ScreenWidth = 1600;
                     ScreenHeight = 900;
                 }
-                break;
+                    break;
                 case Resolution.Three:
                 {
                     ScreenWidth = 1920;
                     ScreenHeight = 1080;
                 }
-                break;
+                    break;
             }
         }
 
         public static Vector2 MapCentre()
         {
-            Vector2 mapCentre = new Vector2
+            var mapCentre = new Vector2
             {
                 X = ScreenWidth / 2 - HumanTexture.Width / 2,
                 Y = ScreenHeight / 2 - HumanTexture.Height / 2
