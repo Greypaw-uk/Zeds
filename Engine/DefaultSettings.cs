@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-<<<<<<< Updated upstream:Engine/DefaultSettings.cs
 using Zeds.ZedLogic;
-=======
->>>>>>> Stashed changes:Engine.cs
+
 
 namespace Zeds
 {
@@ -73,8 +71,6 @@ namespace Zeds
                     break;
             }
         }
-<<<<<<< Updated upstream:Engine/DefaultSettings.cs
-=======
 
         public static Vector2 MapCentre()
         {
@@ -86,6 +82,5 @@ namespace Zeds
 
             return mapCentre;
         }
->>>>>>> Stashed changes:Engine.cs
     }
 }

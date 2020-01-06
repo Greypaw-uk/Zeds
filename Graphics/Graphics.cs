@@ -24,7 +24,6 @@ namespace Zeds
 
         public static void DrawBuildings()
         {
-<<<<<<< Updated upstream:Graphics/Graphics.cs
             foreach (var Building in BuildingList)
                 SpriteBatch.Draw(Building.Texture, Building.Position);
         }
@@ -41,9 +40,7 @@ namespace Zeds
             {
                 SpriteBatch.Draw(icon.Texture, icon.Position,null, null, iconScale);
             }
-=======
             foreach (var Building in BuildingList) SpriteBatch.Draw(Building.Texture, Building.Position);
->>>>>>> Stashed changes:Graphics.cs
         }
     }
 }

@@ -1,16 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-<<<<<<< Updated upstream:Engine/Engine.cs
 using System;
 using Zeds.ZedLogic;
 using static Zeds.DefaultSettings;
 using static Zeds.HumanController;
 using static Zeds.ZedLogic.ZedController;
-=======
-using static Zeds.ZedController;
-using static Zeds.HumanController;
->>>>>>> Stashed changes:Game1.cs
 using static Zeds.Graphics;
 
 namespace Zeds
@@ -32,42 +27,38 @@ namespace Zeds
             //Set game play area to screen size
             PreferredBackBufferWidth = ScreenWidth;
             PreferredBackBufferHeight = ScreenHeight;
-<<<<<<< Updated upstream:Engine/Engine.cs
+
             //DefaultSettings.Graphics.IsFullScreen = true;
             DefaultSettings.Graphics.IsFullScreen = false;
-=======
+
             //Engine.Graphics.IsFullScreen = true;
-            Engine.Graphics.IsFullScreen = false;
->>>>>>> Stashed changes:Game1.cs
+            IsFullScreen = false;
+
 
             //Handle manual screen resizing
             Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += Window_ClientSizeChanged;
+            Window.ClientSizeChanged += WindowClientSizeChanged;
 
-            void Window_ClientSizeChanged(object sender, EventArgs e)
+            void WindowClientSizeChanged(object sender, EventArgs e)
             {
-<<<<<<< Updated upstream:Engine/Engine.cs
-                DefaultSettings.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
-                DefaultSettings.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+
+                PreferredBackBufferWidth = Window.ClientBounds.Width;
+                PreferredBackBufferHeight = Window.ClientBounds.Height;
                 DefaultSettings.Graphics.ApplyChanges();
 
                 Map.MapCentre();
-=======
-                Engine.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
-                Engine.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
-                Engine.Graphics.ApplyChanges();
+
+                PreferredBackBufferWidth = Window.ClientBounds.Width;
+                PreferredBackBufferHeight = Window.ClientBounds.Height;
+                DefaultSettings.Graphics.ApplyChanges();
 
                 MapCentre();
->>>>>>> Stashed changes:Game1.cs
 
                 //TODO Re-align assets with new window size
             }
 
-<<<<<<< Updated upstream:Engine/Engine.cs
+
             DefaultSettings.Graphics.ApplyChanges();
-=======
-            Engine.Graphics.ApplyChanges();
->>>>>>> Stashed changes:Game1.cs
 
             Window.Title = "Zeds";
 
@@ -124,12 +115,12 @@ namespace Zeds
 
             //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin();
-<<<<<<< Updated upstream:Engine/Engine.cs
+
             SpriteBatch.Draw(BackgroundTexture, Vector2.Zero, Color.White);
             DrawBuildMenu();
-=======
+
             SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
->>>>>>> Stashed changes:Game1.cs
+
             DrawBuildings();
             DrawHumans();
             DrawZeds();
