@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+<<<<<<< Updated upstream:Engine/DefaultSettings.cs
 using Zeds.ZedLogic;
+=======
+>>>>>>> Stashed changes:Engine.cs
 
 namespace Zeds
 {
@@ -32,9 +35,6 @@ namespace Zeds
         public static GraphicsDeviceManager Graphics;
 
         public static GraphicsDevice Device;
-        public static int PreferredBackBufferWidth { get; set; }
-        public static int PreferredBackBufferHeight { get; set; }
-        public static bool IsFullScreen { get; set; }
         public static int ScreenWidth;
         public static int ScreenHeight;
 
@@ -43,6 +43,9 @@ namespace Zeds
 
         public static List<Human> HumanList = new List<Human>();
         public static List<Building> BuildingList = new List<Building>();
+        public static int PreferredBackBufferWidth { get; set; }
+        public static int PreferredBackBufferHeight { get; set; }
+        public static bool IsFullScreen { get; set; }
 
         public static List<BuildMenuIcon> MainIconList = new List<BuildMenuIcon>();
 
@@ -70,5 +73,19 @@ namespace Zeds
                     break;
             }
         }
+<<<<<<< Updated upstream:Engine/DefaultSettings.cs
+=======
+
+        public static Vector2 MapCentre()
+        {
+            var mapCentre = new Vector2
+            {
+                X = ScreenWidth / 2 - HumanTexture.Width / 2,
+                Y = ScreenHeight / 2 - HumanTexture.Height / 2
+            };
+
+            return mapCentre;
+        }
+>>>>>>> Stashed changes:Engine.cs
     }
 }
