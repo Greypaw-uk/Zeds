@@ -3,8 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.ZedLogic;
 
-
-namespace Zeds
+namespace Zeds.Engine
 {
     public static class DefaultSettings
     {

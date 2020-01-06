@@ -1,4 +1,5 @@
 ﻿using System;
+using Zeds.Engine;
 
 namespace Zeds
 {
@@ -14,7 +15,7 @@ namespace Zeds
         [STAThread]
         private static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Engine.Zeds())
             {
                 game.Run();
             }

@@ -1,19 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Zeds.ZedLogic
+namespace Zeds.Pawns
 {
-    public class Zed
+    public class Creature
     {
-        public float AlertRange;
-        public float Angle;
-        public Rectangle BRec;
-        public bool HasSpawned;
+        public bool IsAlive;
+        public bool IsSpawned;
+
         public int Health;
         public string ID;
-        public bool IsAlive;
+
+        public float Angle;
         public Vector2 Position;
         public float Speed;
+        public BoundingBox BoundingBox;
+
         public Texture2D Texture;
     }
 }

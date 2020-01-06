@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using static Zeds.DefaultSettings;
+using static Zeds.Engine.DefaultSettings;
 
-namespace Zeds
+namespace Zeds.Engine
 {
     public static class Map
     {

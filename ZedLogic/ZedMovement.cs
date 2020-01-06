@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Zeds.Engine;
 using Zeds.Engine.Collisions;
 
 namespace Zeds.ZedLogic

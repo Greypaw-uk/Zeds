@@ -1,20 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using Zeds.ZedLogic;
-using static Zeds.DefaultSettings;
+using static Zeds.Engine.DefaultSettings;
 using static Zeds.HumanController;
 using static Zeds.ZedLogic.ZedController;
 using static Zeds.Graphics;
 
-namespace Zeds
+namespace Zeds.Engine
 {
-    public class Game1 : Game
+    public class Zeds : Game
     {
         public static SpriteBatch SpriteBatch;
 
-        public Game1()
+        public Zeds()
         {
             DefaultSettings.Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -31,9 +31,7 @@ namespace Zeds
             //DefaultSettings.Graphics.IsFullScreen = true;
             DefaultSettings.Graphics.IsFullScreen = false;
 
-            //Engine.Graphics.IsFullScreen = true;
             IsFullScreen = false;
-
 
             //Handle manual screen resizing
             Window.AllowUserResizing = true;
@@ -47,12 +45,6 @@ namespace Zeds
                 DefaultSettings.Graphics.ApplyChanges();
 
                 Map.MapCentre();
-
-                PreferredBackBufferWidth = Window.ClientBounds.Width;
-                PreferredBackBufferHeight = Window.ClientBounds.Height;
-                DefaultSettings.Graphics.ApplyChanges();
-
-                MapCentre();
 
                 //TODO Re-align assets with new window size
             }
@@ -89,7 +81,7 @@ namespace Zeds
 
             HQ.HQSetup();
             Tent.SmallTent();
-            SpawnHumans();
+            HumanSpawner.SpawnHumans();
         }
 
         protected override void UnloadContent()
@@ -119,7 +111,7 @@ namespace Zeds
             SpriteBatch.Draw(BackgroundTexture, Vector2.Zero, Color.White);
             DrawBuildMenu();
 
-            SpriteBatch.Draw(BackgroundTexture, Vector2.Zero);
+            SpriteBatch.Draw(BackgroundTexture, Vector2.Zero, Color.AliceBlue);
 
             DrawBuildings();
             DrawHumans();

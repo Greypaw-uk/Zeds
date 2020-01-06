@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using static Zeds.DefaultSettings;
+using static Zeds.Engine.DefaultSettings;
 
 namespace Zeds
 {

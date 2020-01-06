@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using static Zeds.DefaultSettings;
+using Zeds.Engine;
+using static Zeds.Engine.DefaultSettings;
 
 namespace Zeds.ZedLogic
 {
-    public static class ZedSpawns
+    public static class ZedSpawner
     {
         public static int ZedQuantity = 3;
         private static Vector2 zone1;
