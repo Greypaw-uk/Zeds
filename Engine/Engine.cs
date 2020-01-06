@@ -1,84 +1,115 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
+using Zeds.ZedLogic;
+using static Zeds.DefaultSettings;
+using static Zeds.HumanController;
+using static Zeds.ZedLogic.ZedController;
+using static Zeds.Graphics;
 
 namespace Zeds
 {
-    public static class Engine
+    public class Game1 : Game
     {
-        public enum Resolution
+        public static SpriteBatch SpriteBatch;
+
+        public Game1()
         {
-            One, //800 x 600
-            Two, //1600 x 900,
-            Three //1920 x 1080
+            DefaultSettings.Graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
         }
 
-        public static Resolution resolution;
-
-
-        // Textures
-        public static Texture2D BackgroundTexture;
-
-        public static Texture2D HumanTexture;
-        public static Texture2D ZedTexture;
-
-        public static Texture2D HqTexture;
-        public static Texture2D SmallTentTexture;
-
-        public static Texture2D BuildMenuIconTexture;
-
-        // Screen setup
-        public static GraphicsDeviceManager Graphics;
-
-        public static GraphicsDevice Device;
-        public static int PreferredBackBufferWidth { get; set; }
-        public static int PreferredBackBufferHeight { get; set; }
-        public static bool IsFullScreen { get; set; }
-        public static int ScreenWidth;
-        public static int ScreenHeight;
-
-        // Entity lists
-        public static List<Zed> ZedList = new List<Zed>();
-
-        public static List<Human> HumanList = new List<Human>();
-        public static List<Building> BuildingList = new List<Building>();
-
-        public static List<BuildMenuIcon> MainIconList = new List<BuildMenuIcon>();
-
-        public static void SetResolution()
+        protected override void Initialize()
         {
-            switch (resolution)
+            // Screen Setup
+            resolution = Resolution.Three;
+            //Set game play area to screen size
+            PreferredBackBufferWidth = ScreenWidth;
+            PreferredBackBufferHeight = ScreenHeight;
+            //DefaultSettings.Graphics.IsFullScreen = true;
+            DefaultSettings.Graphics.IsFullScreen = false;
+
+            //Handle manual screen resizing
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
+
+            void Window_ClientSizeChanged(object sender, EventArgs e)
             {
-                case Resolution.One:
-                {
-                    ScreenWidth = 800;
-                    ScreenHeight = 600;
-                }
-                    break;
-                case Resolution.Two:
-                {
-                    ScreenWidth = 1600;
-                    ScreenHeight = 900;
-                }
-                    break;
-                case Resolution.Three:
-                {
-                    ScreenWidth = 1920;
-                    ScreenHeight = 1080;
-                }
-                    break;
+                DefaultSettings.Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                DefaultSettings.Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+                DefaultSettings.Graphics.ApplyChanges();
+
+                Map.MapCentre();
+
+                //TODO Re-align assets with new window size
             }
+
+            DefaultSettings.Graphics.ApplyChanges();
+
+            Window.Title = "Zeds";
+
+            IsMouseVisible = true;
+
+            base.Initialize();
+
+            PopulateZedList();
         }
 
-        public static Vector2 MapCentre()
+        protected override void LoadContent()
         {
-            var mapCentre = new Vector2
-            {
-                X = ScreenWidth / 2 - HumanTexture.Width / 2,
-                Y = ScreenHeight / 2 - HumanTexture.Height / 2
-            };
+            //Screen setup
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            Device = GraphicsDevice;
 
-            return mapCentre;
+            ScreenWidth = Device.PresentationParameters.BackBufferWidth;
+            ScreenHeight = Device.PresentationParameters.BackBufferHeight;
+
+            BackgroundTexture = Content.Load<Texture2D>("background");
+            HumanTexture = Content.Load<Texture2D>("Human1");
+            ZedTexture = Content.Load<Texture2D>("BasicZed");
+
+            HqTexture = Content.Load<Texture2D>("HQ");
+            SmallTentTexture = Content.Load<Texture2D>("SmallTent");
+
+            BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
+
+            HQ.HQSetup();
+            Tent.SmallTent();
+            SpawnHumans();
+        }
+
+        protected override void UnloadContent()
+        {
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            IncreaseZeds();
+            ZedMovement.CalculateZedMovement();
+
+            HumanMovement.RunFromZeds();
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            //TODO Adjust scaling to screenResolution
+            SpriteBatch.Begin();
+            SpriteBatch.Draw(BackgroundTexture, Vector2.Zero, Color.White);
+            DrawBuildMenu();
+            DrawBuildings();
+            DrawHumans();
+            DrawZeds();
+            SpriteBatch.End();
+
+            base.Draw(gameTime);
         }
     }
 }

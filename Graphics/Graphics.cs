@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using static Zeds.Engine;
+using static Zeds.DefaultSettings;
 using static Zeds.Game1;
 
 namespace Zeds
