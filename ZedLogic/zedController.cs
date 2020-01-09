@@ -1,6 +1,6 @@
 ﻿using System;
 using static Zeds.Engine.DefaultSettings;
-using static Zeds.BoundingBoxes;
+using static Zeds.Collisions.BoundingBoxes;
 using static Zeds.ZedLogic.ZedSpawner;
 
 namespace Zeds.ZedLogic

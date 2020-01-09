@@ -48,8 +48,12 @@
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
     <Compile Include="Engine\Map.cs" />
     <Compile Include="Engine\Engine.cs" />
-    <Compile Include="Graphics\BuildMenu.cs" />
-    <Compile Include="Graphics\Graphics.cs" />
+    <Compile Include="Graphics\DrawHumanPawns.cs" />
+    <Compile Include="Graphics\DrawMenus.cs" />
+    <Compile Include="Graphics\DrawStructures.cs" />
+    <Compile Include="Graphics\DrawZedPawns.cs" />
+    <Compile Include="Graphics\RenderBackground.cs" />
+    <Compile Include="Graphics\ResolutionHandler.cs" />
     <Compile Include="HumanLogic\HumanSpawner.cs" />
     <Compile Include="Pawns\Human.cs" />
     <Compile Include="HumanLogic\HumanController.cs" />

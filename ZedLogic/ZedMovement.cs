@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Zeds.Engine;
+﻿using Microsoft.Xna.Framework;
+using System;
 using Zeds.Engine.Collisions;
+using Zeds.Pawns;
+using static Zeds.Engine.DefaultSettings;
 
 namespace Zeds.ZedLogic
 {
@@ -15,8 +16,8 @@ namespace Zeds.ZedLogic
 
         public static void CalculateZedMovement()
         {
-            if (DefaultSettings.ZedList.Count != 0)
-                foreach (var zed in DefaultSettings.ZedList)
+            if (ZedList.Count != 0)
+                foreach (var zed in ZedList)
                 {
                     // Move zed towards closest target
                     var dir = FindClosestTarget(zed) - zed.Position;
@@ -30,7 +31,7 @@ namespace Zeds.ZedLogic
                 }
         }
 
-        private static Vector2 FindClosestTarget(Zed zed)
+        private static Vector2 FindClosestTarget(Creature zed)
         {
             var buildingLocation = new Vector2();
             var humanLocation = new Vector2();
@@ -39,8 +40,8 @@ namespace Zeds.ZedLogic
             float closestBuilding = 1000;
             float closestHuman = 1000;
 
-            if (DefaultSettings.HumanList.Count != 0)
-                foreach (var human in DefaultSettings.HumanList)
+            if (HumanList.Count != 0)
+                foreach (var human in HumanList)
                 {
                     var distance = Vector2.Distance(zed.Position, human.Position);
 
@@ -50,8 +51,8 @@ namespace Zeds.ZedLogic
                         humanLocation = human.Position;
                     }
                 }
-            else if (DefaultSettings.BuildingList.Count != 0)
-                foreach (var building in DefaultSettings.BuildingList)
+            else if (BuildingList.Count != 0)
+                foreach (var building in BuildingList)
                 {
                     var distance = Vector2.Distance(zed.Position, building.Position);
                     {

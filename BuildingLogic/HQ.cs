@@ -1,22 +1,19 @@
 ﻿using System;
 using Zeds.Engine;
-using static Zeds.BoundingBoxes;
+using static Zeds.Collisions.BoundingBoxes;
 
-namespace Zeds
+namespace Zeds.BuildingLogic
 {
     public class HQ : Building
     {
         public static void HQSetup()
         {
-            Building hq = new Building
+            HQ hq = new HQ
             {
                 Position = Map.MapCentre(),
                 Texture = DefaultSettings.HqTexture,
                 ID = Guid.NewGuid().ToString()
             };
-
-            hq.Position.X -= hq.Texture.Width / 2;
-            hq.Position.Y -= hq.Texture.Height / 2;
 
             hq.BRec = BoundingBox(hq.Position, hq.Texture);
 

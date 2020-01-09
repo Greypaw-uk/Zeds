@@ -1,7 +1,7 @@
-﻿    using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Zeds
+namespace Zeds.BuildingLogic
 {
     public class Building
     {
