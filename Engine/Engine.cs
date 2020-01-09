@@ -96,19 +96,19 @@ namespace Zeds.Engine
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
+            if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
                 resolution = Resolution.One;
                 SetResolution();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
+            if (Keyboard.GetState().IsKeyDown(Keys.F2))
             {
                 resolution = Resolution.Two;
                 SetResolution();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
+            if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 resolution = Resolution.Three;
                 SetResolution();

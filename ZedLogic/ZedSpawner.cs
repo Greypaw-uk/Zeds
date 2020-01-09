@@ -7,7 +7,7 @@ namespace Zeds.ZedLogic
 {
     public static class ZedSpawner
     {
-        public static int ZedQuantity = 3;
+        public static int ZedQuantity = 1;
         private static Vector2 zone1;
         private static Vector2 zone2;
         private static Vector2 zone3;

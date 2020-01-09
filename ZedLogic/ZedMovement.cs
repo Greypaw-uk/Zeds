@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Zeds.Engine.Collisions;
 using Zeds.Pawns;
 using static Zeds.Engine.DefaultSettings;
@@ -22,12 +22,12 @@ namespace Zeds.ZedLogic
                     // Move zed towards closest target
                     var dir = FindClosestTarget(zed) - zed.Position;
                     dir.Normalize();
-
+                    
                     // Rotate to face movement direction
                     var rotation = (float) Math.Atan2(dir.Y, dir.X);
 
                     UpdateBoundingRectangle(zed);
-                    UpdateZedPosition(zed, rotation, dir);
+                    UpdateZedPosition(zed, rotation, dir);  
                 }
         }
 
