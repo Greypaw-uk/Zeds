@@ -2,7 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.Engine;
-using static Zeds.Engine.DefaultSettings;
+
+using static Zeds.Engine.EntityLists;
 
 namespace Zeds.Graphics
 {
@@ -29,7 +30,7 @@ namespace Zeds.Graphics
                 var buildMenu = new BuildMenuIcon
                 {
                     Position = buildMenuIconLocation,
-                    Texture = BuildMenuIconTexture,
+                    Texture = Textures.BuildMenuIconTexture,
                     ID = Guid.NewGuid().ToString()
                 };
 
@@ -39,12 +40,12 @@ namespace Zeds.Graphics
 
         public static void DrawBuildMenu()
         {
-            foreach (var icon in DefaultSettings.MainIconList)
+            foreach (var icon in EntityLists.MainIconList)
             {
                 Engine.Zeds.SpriteBatch.Draw(icon.Texture, icon.Position, Color.AliceBlue);
             }
 
-            foreach (var building in DefaultSettings.BuildingList) 
+            foreach (var building in EntityLists.BuildingList) 
                 Engine.Zeds.SpriteBatch.Draw(building.Texture, building.Position, Color.AliceBlue);
         }
     }

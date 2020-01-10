@@ -2,7 +2,8 @@
 using Microsoft.Xna.Framework;
 using Zeds.Engine.Collisions;
 using Zeds.Pawns;
-using static Zeds.Engine.DefaultSettings;
+
+using static Zeds.Engine.EntityLists;
 
 namespace Zeds.ZedLogic
 {

@@ -10,7 +10,7 @@ namespace Zeds.BuildingLogic
         {
             Tent smallTent = new Tent
             {
-                Texture = DefaultSettings.SmallTentTexture,
+                Texture = Textures.SmallTentTexture,
                 ID = Guid.NewGuid().ToString()
             };
             
@@ -19,7 +19,7 @@ namespace Zeds.BuildingLogic
 
             smallTent.BRec = BoundingBox(smallTent.Position, smallTent.Texture);
 
-            DefaultSettings.BuildingList.Add(smallTent);
+            EntityLists.BuildingList.Add(smallTent);
         }
     }
 }

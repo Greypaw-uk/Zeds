@@ -10,8 +10,8 @@ namespace Zeds
 
         public static void RunFromZeds()
         {
-            foreach (var human in DefaultSettings.HumanList)
-            foreach (var zed in DefaultSettings.ZedList)
+            foreach (var human in EntityLists.HumanList)
+            foreach (var zed in EntityLists.ZedList)
             {
                 var distance = (human.Position.Y - zed.Position.Y) * (human.Position.Y - zed.Position.Y) +
                                (human.Position.X - zed.Position.X) * (human.Position.X - zed.Position.X);

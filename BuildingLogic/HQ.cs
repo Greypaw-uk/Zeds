@@ -11,13 +11,13 @@ namespace Zeds.BuildingLogic
             HQ hq = new HQ
             {
                 Position = Map.MapCentre(),
-                Texture = DefaultSettings.HqTexture,
+                Texture = Textures.HqTexture,
                 ID = Guid.NewGuid().ToString()
             };
 
             hq.BRec = BoundingBox(hq.Position, hq.Texture);
 
-            DefaultSettings.BuildingList.Add(hq);
+            EntityLists.BuildingList.Add(hq);
         }
     }
 }

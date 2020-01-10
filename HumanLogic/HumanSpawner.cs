@@ -22,7 +22,7 @@ namespace Zeds
                     ID = Guid.NewGuid().ToString()
                 };
 
-                DefaultSettings.HumanList.Add(human);
+                EntityLists.HumanList.Add(human);
             }
         }
     }

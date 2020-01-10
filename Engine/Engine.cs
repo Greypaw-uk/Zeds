@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Comora;
 using Zeds.BuildingLogic;
 using Zeds.ZedLogic;
-using static Zeds.Engine.DefaultSettings;
+
 using static Zeds.Graphics.ResolutionHandler;
 using static Zeds.ZedLogic.ZedController;
 
@@ -20,14 +21,30 @@ namespace Zeds.Engine
     {
         public static SpriteBatch SpriteBatch;
 
+        public static GraphicsDeviceManager Graphics;
+        public static GraphicsDevice Device;
+
+        private Vector2 cameraPosition;
+
+        private Camera camera;
+
+        // Screen setup
+        public static int ScreenWidth;
+        public static int ScreenHeight;
+        public static int PreferredBackBufferWidth { get; set; }
+        public static int PreferredBackBufferHeight { get; set; }
+
         public Zeds()
         {
-            DefaultSettings.Graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
+            camera = new Camera(Graphics.GraphicsDevice);
+            cameraPosition = Map.MapCentre();
+
             // Screen Setup
             resolution = Resolution.Three;
 
@@ -35,10 +52,8 @@ namespace Zeds.Engine
             PreferredBackBufferWidth = ScreenWidth;
             PreferredBackBufferHeight = ScreenHeight;
 
-            //DefaultSettings.Graphics.IsFullScreen = true;
-            DefaultSettings.Graphics.IsFullScreen = false;
-
-            IsFullScreen = false;
+            //Graphics.IsFullScreen = true;
+            Graphics.IsFullScreen = false;
 
             //Handle manual screen resizing
             Window.AllowUserResizing = true;
@@ -70,14 +85,14 @@ namespace Zeds.Engine
 
 
             //Textures
-            BackgroundTexture = Content.Load<Texture2D>("background");
-            HumanTexture = Content.Load<Texture2D>("Human1");
-            ZedTexture = Content.Load<Texture2D>("BasicZed");
+            Textures.BackgroundTexture = Content.Load<Texture2D>("background");
+            Textures.HumanTexture = Content.Load<Texture2D>("Human1");
+            Textures.ZedTexture = Content.Load<Texture2D>("BasicZed");
 
-            HqTexture = Content.Load<Texture2D>("HQ");
-            SmallTentTexture = Content.Load<Texture2D>("SmallTent");
+            Textures.HqTexture = Content.Load<Texture2D>("HQ");
+            Textures.SmallTentTexture = Content.Load<Texture2D>("SmallTent");
 
-            BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
+            Textures.BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
 
 
             //Initial set up
@@ -92,29 +107,57 @@ namespace Zeds.Engine
 
         protected override void Update(GameTime gameTime)
         {
+            camera.Update(gameTime);
+            
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+
+            // Move Camera
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && cameraPosition.X >= 0)
+                cameraPosition.X -= 10;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && cameraPosition.X <= ScreenWidth)
+                cameraPosition.X += 10;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && cameraPosition.Y >= 0)
+                cameraPosition.Y -= 10;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && cameraPosition.Y <= ScreenHeight)
+                cameraPosition.Y += 10;
+
+            camera.Position = cameraPosition;
+
+
+            //Toggle Resolution Test
+            var resolutionChanged = false;
+
             if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
                 resolution = Resolution.One;
-                SetResolution();
+                resolutionChanged = true;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F2))
             {
                 resolution = Resolution.Two;
-                SetResolution();
+                resolutionChanged = true;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 resolution = Resolution.Three;
-                SetResolution();
+                resolutionChanged = true;
             }
 
-            DefaultSettings.Graphics.ApplyChanges();
+            if(resolutionChanged)
+            {
+                SetResolution();
+                Graphics.ApplyChanges();
+            }
+
 
             IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -129,7 +172,7 @@ namespace Zeds.Engine
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //TODO Adjust scaling to screenResolution
-            SpriteBatch.Begin();
+            SpriteBatch.Begin(camera);
 
             DrawBackground();
 

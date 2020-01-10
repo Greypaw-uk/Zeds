@@ -1,8 +1,4 @@
-﻿using System;
-using Zeds.Engine;
-using static Zeds.Engine.DefaultSettings;
-
-namespace Zeds
+﻿namespace Zeds
 {
     public static class HumanController
     {

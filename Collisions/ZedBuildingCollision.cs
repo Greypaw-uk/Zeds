@@ -7,7 +7,7 @@ namespace Zeds.Engine.Collisions
     {
         public static void CheckZedBuildingCollision(Zed zed)
         {
-            foreach (var building in DefaultSettings.BuildingList)
+            foreach (var building in EntityLists.BuildingList)
                 if (zed.BRec.Intersects(building.BRec))
                 {
                     Console.WriteLine("Bump");

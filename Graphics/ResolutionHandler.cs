@@ -1,6 +1,6 @@
 ﻿using System;
-using Zeds.Engine;
-using static Zeds.Engine.DefaultSettings;
+
+using static Zeds.Engine.Zeds;
 
 namespace Zeds.Graphics
 {
@@ -45,7 +45,7 @@ namespace Zeds.Graphics
             PreferredBackBufferWidth = ScreenWidth;
             PreferredBackBufferHeight = ScreenHeight;
 
-            DefaultSettings.Graphics.ApplyChanges();
+            Zeds.Engine.Zeds.Graphics.ApplyChanges();
         }
     }
 }

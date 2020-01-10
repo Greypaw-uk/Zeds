@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Zeds.Engine;
-using static Zeds.Engine.DefaultSettings;
+
+using static Zeds.Engine.Zeds;
 
 namespace Zeds.ZedLogic
 {
@@ -19,29 +20,29 @@ namespace Zeds.ZedLogic
 
         public static Vector2 ZedSpawnPoint()
         {
-            zone1.X = 0 - DefaultSettings.ZedTexture.Width;
-            zone1.Y = 0 - DefaultSettings.ZedTexture.Height;
+            zone1.X = 0 - Textures.ZedTexture.Width;
+            zone1.Y = 0 - Textures.ZedTexture.Height;
 
-            zone2.X = ScreenWidth + DefaultSettings.ZedTexture.Width;
-            zone2.Y = 0 + DefaultSettings.ZedTexture.Height;
+            zone2.X = ScreenWidth + Textures.ZedTexture.Width;
+            zone2.Y = 0 + Textures.ZedTexture.Height;
 
-            zone3.X = 0 - DefaultSettings.ZedTexture.Width;
-            zone3.Y = ScreenHeight - DefaultSettings.ZedTexture.Height;
+            zone3.X = 0 - Textures.ZedTexture.Width;
+            zone3.Y = ScreenHeight - Textures.ZedTexture.Height;
 
-            zone4.X = ScreenWidth + DefaultSettings.ZedTexture.Width;
-            zone4.Y = ScreenHeight + DefaultSettings.ZedTexture.Height;
+            zone4.X = ScreenWidth + Textures.ZedTexture.Width;
+            zone4.Y = ScreenHeight + Textures.ZedTexture.Height;
 
-            zone5.X = ScreenWidth / 2 - DefaultSettings.ZedTexture.Width;
-            zone5.Y = 0 - DefaultSettings.ZedTexture.Height;
+            zone5.X = ScreenWidth / 2 - Textures.ZedTexture.Width;
+            zone5.Y = 0 - Textures.ZedTexture.Height;
 
-            zone6.X = ScreenWidth - DefaultSettings.ZedTexture.Width;
-            zone6.Y = ScreenHeight / 2 - DefaultSettings.ZedTexture.Height;
+            zone6.X = ScreenWidth - Textures.ZedTexture.Width;
+            zone6.Y = ScreenHeight / 2 - Textures.ZedTexture.Height;
 
-            zone7.X = ScreenWidth / 2 - DefaultSettings.ZedTexture.Width;
-            zone7.Y = ScreenHeight + DefaultSettings.ZedTexture.Height;
+            zone7.X = ScreenWidth / 2 - Textures.ZedTexture.Width;
+            zone7.Y = ScreenHeight + Textures.ZedTexture.Height;
 
-            zone8.X = 0 - DefaultSettings.ZedTexture.Width;
-            zone8.Y = ScreenHeight / 2 + DefaultSettings.ZedTexture.Height;
+            zone8.X = 0 - Textures.ZedTexture.Width;
+            zone8.Y = ScreenHeight / 2 + Textures.ZedTexture.Height;
 
             var random = new Random(Guid.NewGuid().GetHashCode());
             var randomZone = random.Next(0, 7);
@@ -95,17 +96,17 @@ namespace Zeds.ZedLogic
 
         public static void StopZedsBunching()
         {
-            foreach (var zed in DefaultSettings.ZedList)
-            foreach (var otherZed in DefaultSettings.ZedList)
+            foreach (var zed in EntityLists.ZedList)
+            foreach (var otherZed in EntityLists.ZedList)
                 if (zed.BRec.Intersects(otherZed.BRec) && !zed.ID.Equals(otherZed.ID))
                     if (zed.Position.X >= otherZed.Position.X)
-                        zed.Position.X -= DefaultSettings.ZedTexture.Width;
+                        zed.Position.X -= Textures.ZedTexture.Width;
                     else if (zed.Position.X <= otherZed.Position.X)
-                        zed.Position.X += DefaultSettings.ZedTexture.Width;
+                        zed.Position.X += Textures.ZedTexture.Width;
                     else if (zed.Position.Y >= otherZed.Position.Y)
-                        zed.Position.Y += DefaultSettings.ZedTexture.Height;
+                        zed.Position.Y += Textures.ZedTexture.Height;
                     else if (zed.Position.Y <= otherZed.Position.Y)
-                        zed.Position.Y -= DefaultSettings.ZedTexture.Height;
+                        zed.Position.Y -= Textures.ZedTexture.Height;
         }
     }
 }
