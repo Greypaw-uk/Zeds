@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.Engine;
 
-using static Zeds.Engine.EntityLists;
-
 namespace Zeds.Graphics
 {
     public static class DrawMenus
@@ -34,7 +32,7 @@ namespace Zeds.Graphics
                     ID = Guid.NewGuid().ToString()
                 };
 
-                MainIconList.Add(buildMenu);
+                EntityLists.MainIconList.Add(buildMenu);
             }
         }
 

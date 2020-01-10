@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-using static Zeds.Engine.Zeds;
+using Zeds.Engine;
 
 namespace Zeds.Engine
 {
@@ -10,8 +10,8 @@ namespace Zeds.Engine
         {
             var mapCentre = new Vector2
             {
-                X = ScreenWidth / 2,
-                Y = ScreenHeight / 2
+                X = Zeds.ScreenWidth / 2,
+                Y = Zeds.ScreenHeight / 2
             };
 
             return mapCentre;

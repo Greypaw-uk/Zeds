@@ -1,6 +1,6 @@
 ﻿using System;
 using Zeds.Engine;
-using static Zeds.Collisions.BoundingBoxes;
+using Zeds.Collisions;
 
 namespace Zeds.BuildingLogic
 {
@@ -17,7 +17,7 @@ namespace Zeds.BuildingLogic
             //smallTent.Position.X = ScreenWidth / 2 - smallTent.Texture.Width / 2;
             //smallTent.Position.Y = ScreenHeight / 2 - 100 - smallTent.Texture.Height / 2;
 
-            smallTent.BRec = BoundingBox(smallTent.Position, smallTent.Texture);
+            smallTent.BRec = BoundingBoxes.BoundingBox(smallTent.Position, smallTent.Texture);
 
             EntityLists.BuildingList.Add(smallTent);
         }

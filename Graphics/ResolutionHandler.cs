@@ -1,7 +1,5 @@
 ﻿using System;
 
-using static Zeds.Engine.Zeds;
-
 namespace Zeds.Graphics
 {
     static class ResolutionHandler
@@ -22,28 +20,28 @@ namespace Zeds.Graphics
             {
                 case Resolution.One:
                     {
-                        ScreenWidth = 800;
-                        ScreenHeight = 600;
+                        Engine.Zeds.ScreenWidth = 800;
+                        Engine.Zeds.ScreenHeight = 600;
                     }
                     break;
                 case Resolution.Two:
                     {
-                        ScreenWidth = 1600;
-                        ScreenHeight = 900;
+                        Engine.Zeds.ScreenWidth = 1600;
+                        Engine.Zeds.ScreenHeight = 900;
                     }
                     break;
                 case Resolution.Three:
                     {
-                        ScreenWidth = 1920;
-                        ScreenHeight = 1080;
+                        Engine.Zeds.ScreenWidth = 1920;
+                        Engine.Zeds.ScreenHeight = 1080;
                     }
                     break;
             }
 
             Console.WriteLine("Resolution changed to " + resolution);
 
-            PreferredBackBufferWidth = ScreenWidth;
-            PreferredBackBufferHeight = ScreenHeight;
+            Engine.Zeds.PreferredBackBufferWidth = Engine.Zeds.ScreenWidth;
+            Engine.Zeds.PreferredBackBufferHeight = Engine.Zeds.ScreenHeight;
 
             Zeds.Engine.Zeds.Graphics.ApplyChanges();
         }

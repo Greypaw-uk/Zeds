@@ -1,8 +1,7 @@
 ﻿using System;
 using Zeds.Engine;
-using static Zeds.Collisions.BoundingBoxes;
-using static Zeds.ZedLogic.ZedSpawner;
-using static Zeds.Engine.EntityLists;
+using Zeds.Collisions;
+
 
 namespace Zeds.ZedLogic
 {
@@ -10,11 +9,11 @@ namespace Zeds.ZedLogic
     {
         public static void PopulateZedList()
         {
-            for (var i = 0; i < ZedQuantity; i++)
+            for (var i = 0; i < ZedSpawner.ZedQuantity; i++)
             {
                 var zed = new Zed
                 {
-                    Position = ZedSpawnPoint(),
+                    Position = ZedSpawner.ZedSpawnPoint(),
                     IsSpawned = true,
                     IsAlive = true,
                     Health = 1,
@@ -23,22 +22,22 @@ namespace Zeds.ZedLogic
                     ID = Guid.NewGuid().ToString()
                 };
 
-                zed.BRec = BoundingBox(zed.Position, zed.Texture);
+                zed.BRec = BoundingBoxes.BoundingBox(zed.Position, zed.Texture);
 
-                StopZedsBunching();
+                ZedSpawner.StopZedsBunching();
 
-                ZedList.Add(zed);
+                EntityLists.ZedList.Add(zed);
             }
         }
 
         public static void IncreaseZeds()
         {
             var random = new Random(Guid.NewGuid().GetHashCode());
-            if (ZedQuantity < 100)
+            if (ZedSpawner.ZedQuantity < 100)
             {
                 var increaseRoll = random.Next(1, 1000);
 
-                if (increaseRoll > 998) ZedQuantity++;
+                if (increaseRoll > 998) ZedSpawner.ZedQuantity++;
             }
         }
     }

@@ -5,15 +5,7 @@ using System;
 using Comora;
 using Zeds.BuildingLogic;
 using Zeds.ZedLogic;
-
-using static Zeds.Graphics.ResolutionHandler;
-using static Zeds.ZedLogic.ZedController;
-
-using static Zeds.Graphics.DrawHumanPawns;
-using static Zeds.Graphics.DrawZedPawns;
-using static Zeds.Graphics.DrawMenus;
-using static Zeds.Graphics.DrawStructures;
-using static Zeds.Graphics.RenderBackground;
+using Zeds.Graphics;
 
 namespace Zeds.Engine
 {
@@ -46,7 +38,7 @@ namespace Zeds.Engine
             cameraPosition = Map.MapCentre();
 
             // Screen Setup
-            resolution = Resolution.Three;
+            ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
             //Set game play area to screen size
             PreferredBackBufferWidth = ScreenWidth;
@@ -71,7 +63,7 @@ namespace Zeds.Engine
 
             base.Initialize();
 
-            PopulateZedList();
+            ZedController.PopulateZedList();
         }
 
         protected override void LoadContent()
@@ -136,30 +128,30 @@ namespace Zeds.Engine
 
             if (Keyboard.GetState().IsKeyDown(Keys.F1))
             {
-                resolution = Resolution.One;
+                ResolutionHandler.resolution = ResolutionHandler.Resolution.One;
                 resolutionChanged = true;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F2))
             {
-                resolution = Resolution.Two;
+                ResolutionHandler.resolution = ResolutionHandler.Resolution.Two;
                 resolutionChanged = true;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
-                resolution = Resolution.Three;
+                ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
                 resolutionChanged = true;
             }
 
             if(resolutionChanged)
             {
-                SetResolution();
+                ResolutionHandler.SetResolution();
                 Graphics.ApplyChanges();
             }
 
 
-            IncreaseZeds();
+            ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
 
             HumanMovement.RunFromZeds();
@@ -174,13 +166,13 @@ namespace Zeds.Engine
             //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin(camera);
 
-            DrawBackground();
+            RenderBackground.DrawBackground();
 
-            DrawBuildMenu();
+            DrawMenus.DrawBuildMenu();
 
-            DrawBuildings();
-            DrawHumans();
-            DrawZeds();
+            DrawStructures.DrawBuildings();
+            DrawHumanPawns.DrawHumans();
+            DrawZedPawns.DrawZeds();
             SpriteBatch.End();
 
             base.Draw(gameTime);

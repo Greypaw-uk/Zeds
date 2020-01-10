@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
-using static Zeds.Engine.Zeds;
 
 namespace Zeds.Graphics
 {
@@ -10,11 +9,11 @@ namespace Zeds.Graphics
         {
             Vector2 position = new Vector2();
 
-            SpriteBatch.Draw(Textures.BackgroundTexture,
-                new Rectangle((int) position.X, (int) position.Y, PreferredBackBufferWidth, PreferredBackBufferHeight),
-                new Rectangle(0, 0, PreferredBackBufferWidth, PreferredBackBufferHeight), Color.White);
+            Engine.Zeds.SpriteBatch.Draw(Textures.BackgroundTexture,
+                new Rectangle((int) position.X, (int) position.Y, Engine.Zeds.PreferredBackBufferWidth, Engine.Zeds.PreferredBackBufferHeight),
+                new Rectangle(0, 0, Engine.Zeds.PreferredBackBufferWidth, Engine.Zeds.PreferredBackBufferHeight), Color.White);
 
-            SpriteBatch.Draw(Textures.BackgroundTexture, Vector2.Zero, Color.White);
+            Engine.Zeds.SpriteBatch.Draw(Textures.BackgroundTexture, Vector2.Zero, Color.White);
         }
     }
 }
