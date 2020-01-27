@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 
-using Zeds.Engine;
-
 namespace Zeds.Engine
 {
     public static class Map
@@ -10,8 +8,9 @@ namespace Zeds.Engine
         {
             var mapCentre = new Vector2
             {
-                X = Zeds.ScreenWidth / 2,
-                Y = Zeds.ScreenHeight / 2
+                //Todo Change from BackBuffer to RenderTarget
+                X = Engine.MapSizeX / 2,
+                Y = Engine.MapSizeY / 2
             };
 
             return mapCentre;

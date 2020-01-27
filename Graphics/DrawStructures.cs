@@ -8,7 +8,7 @@ namespace Zeds.Graphics
         public static void DrawBuildings()
         {
             foreach (var building in EntityLists.BuildingList)
-                Engine.Zeds.SpriteBatch.Draw(building.Texture, building.Position, Color.AliceBlue);
+                Engine.Engine.SpriteBatch.Draw(building.Texture, building.Position, Color.AliceBlue);
         }
     }
 }

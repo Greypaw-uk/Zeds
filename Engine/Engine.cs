@@ -6,27 +6,32 @@ using Comora;
 using Zeds.BuildingLogic;
 using Zeds.ZedLogic;
 using Zeds.Graphics;
+using static Zeds.Graphics.RenderTargetHandler;
 
 namespace Zeds.Engine
 {
-    public class Zeds : Game
+    public class Engine : Game
     {
         public static SpriteBatch SpriteBatch;
 
         public static GraphicsDeviceManager Graphics;
         public static GraphicsDevice Device;
-
+        
         private Vector2 cameraPosition;
+
+        public static int MapSizeX;
+        public static int MapSizeY;
 
         private Camera camera;
 
         // Screen setup
+        public static RenderTarget2D RenderTarget;
         public static int ScreenWidth;
         public static int ScreenHeight;
-        public static int PreferredBackBufferWidth { get; set; }
-        public static int PreferredBackBufferHeight { get; set; }
+        //public static int PreferredBackBufferWidth { get; set; }
+        //public static int PreferredBackBufferHeight { get; set; }
 
-        public Zeds()
+        public Engine()
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -40,9 +45,24 @@ namespace Zeds.Engine
             // Screen Setup
             ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
-            //Set game play area to screen size
-            PreferredBackBufferWidth = ScreenWidth;
-            PreferredBackBufferHeight = ScreenHeight;
+            Graphics.GraphicsProfile = GraphicsProfile.HiDef;
+
+            MapSizeX = 1000;
+            MapSizeY = 1000;
+
+            RenderTarget = new RenderTarget2D(
+                GraphicsDevice, 
+                MapSizeX,
+                MapSizeY,
+                false,
+                GraphicsDevice.PresentationParameters.BackBufferFormat,
+                DepthFormat.Depth24);
+
+            /*Set game play area to screen size
+            //ToDo Change from BackBuffer to RenderTarget   
+            PreferredBackBufferWidth = 10000;
+            PreferredBackBufferHeight = 10000;
+            */
 
             //Graphics.IsFullScreen = true;
             Graphics.IsFullScreen = false;
@@ -53,11 +73,11 @@ namespace Zeds.Engine
 
             void Window_ClientSizeChanged(object sender, EventArgs e)
             {
-                PreferredBackBufferWidth = Window.ClientBounds.Width;
-                PreferredBackBufferHeight = Window.ClientBounds.Height;
+                ScreenWidth = Window.ClientBounds.Width;
+                ScreenHeight = Window.ClientBounds.Height;
             }
 
-            Window.Title = "Zeds";
+            Window.Title = "Engine";
 
             IsMouseVisible = true;
 
@@ -106,8 +126,8 @@ namespace Zeds.Engine
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
             // Move Camera
+            // ToDo Change from ScreenWidth to RenderTarget
             if (Keyboard.GetState().IsKeyDown(Keys.A) && cameraPosition.X >= 0)
                 cameraPosition.X -= 10;
 
@@ -120,9 +140,15 @@ namespace Zeds.Engine
             if (Keyboard.GetState().IsKeyDown(Keys.S) && cameraPosition.Y <= ScreenHeight)
                 cameraPosition.Y += 10;
 
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad9))
+                camera.Height -= 10;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad7))
+                camera.Height += 10;
+
             camera.Position = cameraPosition;
 
-
+            /*
             //Toggle Resolution Test
             var resolutionChanged = false;
 
@@ -149,7 +175,7 @@ namespace Zeds.Engine
                 ResolutionHandler.SetResolution();
                 Graphics.ApplyChanges();
             }
-
+            */
 
             ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -161,6 +187,8 @@ namespace Zeds.Engine
 
         protected override void Draw(GameTime gameTime)
         {
+            //DrawSceneToTexture(RenderTarget);
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //TODO Adjust scaling to screenResolution

@@ -49,6 +49,7 @@
     <Compile Include="Engine\EntityLists.cs" />
     <Compile Include="Engine\Map.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Graphics\RenderTargetHandler.cs" />
     <Compile Include="Graphics\Textures.cs" />
     <Compile Include="Graphics\DrawHumanPawns.cs" />
     <Compile Include="Graphics\DrawMenus.cs" />
