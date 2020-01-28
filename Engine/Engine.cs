@@ -25,12 +25,22 @@ namespace Zeds.Engine
 
         // Screen setup
         public static bool ResolutionChanged;
+        public static int ScreenWidth = 800;
+        public static int ScreenHeight = 600;
         public static int PreferredBackBufferWidth { get; set; }
         public static int PreferredBackBufferHeight { get; set; }
 
         public Engine()
         {
-            Graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = ScreenWidth,
+                PreferredBackBufferHeight = ScreenHeight,
+
+                //Graphics.IsFullScreen = true
+                IsFullScreen = false
+        };
+
             Content.RootDirectory = "Content";
         }
 
@@ -45,13 +55,6 @@ namespace Zeds.Engine
 
             MapSizeX = 1000;
             MapSizeY = 1000;
-
-            //Set game play area to screen size
-            //PreferredBackBufferWidth = MapSizeX;
-            //PreferredBackBufferHeight = MapSizeY;
-
-            //Graphics.IsFullScreen = true;
-            Graphics.IsFullScreen = false;
 
             //Handle manual screen resizing
             Window.AllowUserResizing = true;
@@ -70,8 +73,6 @@ namespace Zeds.Engine
             base.Initialize();
 
             ZedController.PopulateZedList();
-
-            KeyBindings.PreviousScrollValue = KeyBindings.CurrentMouseState.ScrollWheelValue;
         }
 
         protected override void LoadContent()
@@ -111,8 +112,8 @@ namespace Zeds.Engine
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            KeyBindings.CheckKeyBindings();
-            KeyBindings.CheckMouseBindings();
+            KeyBindings.CheckForKeyInput();
+            KeyBindings.CheckForMouseInput();
 
             if (ResolutionChanged)
             {
@@ -121,7 +122,6 @@ namespace Zeds.Engine
             }
 
             Camera.Position = CameraPosition;
-            Console.WriteLine("Zoom = " + Camera.Zoom);
 
             ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -135,15 +135,13 @@ namespace Zeds.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin(Camera, SpriteSortMode.Immediate);
-                GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
-                GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+            SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearWrap, null, null);
 
-                RenderBackground.DrawBackground();
             SpriteBatch.End();
 
             //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin(Camera);
+                RenderBackground.DrawBackground();
                 DrawMenus.DrawBuildMenu();
                 DrawStructures.DrawBuildings();
                 DrawHumanPawns.DrawHumans();

@@ -9,7 +9,7 @@ namespace Zeds.Engine
         public static int PreviousScrollValue;
         public static MouseState CurrentMouseState;
 
-        public static void CheckKeyBindings()
+        public static void CheckForKeyInput()
         {
             // Move Camera
             if (Keyboard.GetState().IsKeyDown(Keys.A) && Engine.CameraPosition.X >= 0)
@@ -52,9 +52,9 @@ namespace Zeds.Engine
             }
         }
 
-        public static void CheckMouseBindings()
-        {
-            Console.WriteLine("Previous scroll value = " + PreviousScrollValue);
+        public static void CheckForMouseInput()
+        { 
+            //Console.WriteLine("Previous scroll value = " + PreviousScrollValue);
             if (CurrentMouseState.ScrollWheelValue > PreviousScrollValue && Engine.Camera.Zoom <= 1.8f)
             {
                 Engine.Camera.Zoom += 0.1f;
@@ -66,7 +66,7 @@ namespace Zeds.Engine
                 Engine.Camera.Zoom -= 0.1f;
                 PreviousScrollValue = CurrentMouseState.ScrollWheelValue;
             }
-            Console.WriteLine("New scroll value = " + CurrentMouseState.ScrollWheelValue);
+            //Console.WriteLine("New scroll value = " + CurrentMouseState.ScrollWheelValue);
         }
     }
 }
