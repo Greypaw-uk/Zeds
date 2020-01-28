@@ -40,11 +40,11 @@ namespace Zeds.Graphics
         {
             foreach (var icon in EntityLists.MainIconList)
             {
-                Engine.Engine.SpriteBatch.Draw(icon.Texture, icon.Position, Color.AliceBlue);
+                Engine.Zeds.SpriteBatch.Draw(icon.Texture, icon.Position, Color.AliceBlue);
             }
 
             foreach (var building in EntityLists.BuildingList) 
-                Engine.Engine.SpriteBatch.Draw(building.Texture, building.Position, Color.AliceBlue);
+                Engine.Zeds.SpriteBatch.Draw(building.Texture, building.Position, Color.AliceBlue);
         }
     }
 }

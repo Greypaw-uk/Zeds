@@ -15,7 +15,7 @@ namespace Zeds
         [STAThread]
         private static void Main()
         {
-            using (var game = new Engine.Engine())
+            using (var game = new Engine.Zeds())
             {
                 game.Run();
             }
