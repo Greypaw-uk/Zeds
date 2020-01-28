@@ -21,26 +21,26 @@ namespace Zeds.ZedLogic
             zone1.X = 0 - Textures.ZedTexture.Width;
             zone1.Y = 0 - Textures.ZedTexture.Height;
 
-            zone2.X = Engine.Zeds.ScreenWidth + Textures.ZedTexture.Width;
+            zone2.X = Engine.Engine.MapSizeX + Textures.ZedTexture.Width;
             zone2.Y = 0 + Textures.ZedTexture.Height;
 
             zone3.X = 0 - Textures.ZedTexture.Width;
-            zone3.Y = Engine.Zeds.ScreenHeight - Textures.ZedTexture.Height;
+            zone3.Y = Engine.Engine.MapSizeY - Textures.ZedTexture.Height;
 
-            zone4.X = Engine.Zeds.ScreenWidth + Textures.ZedTexture.Width;
-            zone4.Y = Engine.Zeds.ScreenHeight + Textures.ZedTexture.Height;
+            zone4.X = Engine.Engine.MapSizeX + Textures.ZedTexture.Width;
+            zone4.Y = Engine.Engine.MapSizeY + Textures.ZedTexture.Height;
 
-            zone5.X = Engine.Zeds.ScreenWidth / 2 - Textures.ZedTexture.Width;
+            zone5.X = Engine.Engine.MapSizeX / 2 - Textures.ZedTexture.Width;
             zone5.Y = 0 - Textures.ZedTexture.Height;
 
-            zone6.X = Engine.Zeds.ScreenWidth - Textures.ZedTexture.Width;
-            zone6.Y = Engine.Zeds.ScreenHeight / 2 - Textures.ZedTexture.Height;
+            zone6.X = Engine.Engine.MapSizeX - Textures.ZedTexture.Width;
+            zone6.Y = Engine.Engine.MapSizeY / 2 - Textures.ZedTexture.Height;
 
-            zone7.X = Engine.Zeds.ScreenWidth / 2 - Textures.ZedTexture.Width;
-            zone7.Y = Engine.Zeds.ScreenHeight + Textures.ZedTexture.Height;
+            zone7.X = Engine.Engine.MapSizeX / 2 - Textures.ZedTexture.Width;
+            zone7.Y = Engine.Engine.MapSizeY + Textures.ZedTexture.Height;
 
             zone8.X = 0 - Textures.ZedTexture.Width;
-            zone8.Y = Engine.Zeds.ScreenHeight / 2 + Textures.ZedTexture.Height;
+            zone8.Y = Engine.Engine.MapSizeY / 2 + Textures.ZedTexture.Height;
 
             var random = new Random(Guid.NewGuid().GetHashCode());
             var randomZone = random.Next(0, 7);

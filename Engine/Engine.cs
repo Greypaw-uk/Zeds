@@ -9,24 +9,26 @@ using Zeds.Graphics;
 
 namespace Zeds.Engine
 {
-    public class Zeds : Game
+    public class Engine : Game
     {
         public static SpriteBatch SpriteBatch;
 
         public static GraphicsDeviceManager Graphics;
-        public static GraphicsDevice Device;
+        private GraphicsDevice device;
 
-        private Vector2 cameraPosition;
+        public static Vector2 CameraPosition;
+        public static Camera Camera;
 
-        private Camera camera;
+        public static int MapSizeX;
+        public static int MapSizeY;
+
 
         // Screen setup
-        public static int ScreenWidth;
-        public static int ScreenHeight;
+        public static bool ResolutionChanged;
         public static int PreferredBackBufferWidth { get; set; }
         public static int PreferredBackBufferHeight { get; set; }
 
-        public Zeds()
+        public Engine()
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -34,15 +36,19 @@ namespace Zeds.Engine
 
         protected override void Initialize()
         {
-            camera = new Camera(Graphics.GraphicsDevice);
-            cameraPosition = Map.MapCentre();
+            Camera = new Camera(Graphics.GraphicsDevice);
+            CameraPosition.X = MapSizeX / 2;
+            CameraPosition.Y = MapSizeY / 2;
 
             // Screen Setup
             ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
+            MapSizeX = 1000;
+            MapSizeY = 1000;
+
             //Set game play area to screen size
-            PreferredBackBufferWidth = ScreenWidth;
-            PreferredBackBufferHeight = ScreenHeight;
+            //PreferredBackBufferWidth = MapSizeX;
+            //PreferredBackBufferHeight = MapSizeY;
 
             //Graphics.IsFullScreen = true;
             Graphics.IsFullScreen = false;
@@ -57,23 +63,22 @@ namespace Zeds.Engine
                 PreferredBackBufferHeight = Window.ClientBounds.Height;
             }
 
-            Window.Title = "Zeds";
+            Window.Title = "Engine";
 
             IsMouseVisible = true;
 
             base.Initialize();
 
             ZedController.PopulateZedList();
+
+            KeyBindings.PreviousScrollValue = KeyBindings.CurrentMouseState.ScrollWheelValue;
         }
 
         protected override void LoadContent()
         {
             //Screen setup
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            Device = GraphicsDevice;
-
-            ScreenWidth = Device.PresentationParameters.BackBufferWidth;
-            ScreenHeight = Device.PresentationParameters.BackBufferHeight;
+            device = GraphicsDevice;
 
 
             //Textures
@@ -99,57 +104,24 @@ namespace Zeds.Engine
 
         protected override void Update(GameTime gameTime)
         {
-            camera.Update(gameTime);
+            Camera.Update(gameTime);
             
-
+            //ToDo Find how to move this into KeyBindings
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            KeyBindings.CheckKeyBindings();
+            KeyBindings.CheckMouseBindings();
 
-            // Move Camera
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && cameraPosition.X >= 0)
-                cameraPosition.X -= 10;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && cameraPosition.X <= ScreenWidth)
-                cameraPosition.X += 10;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && cameraPosition.Y >= 0)
-                cameraPosition.Y -= 10;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && cameraPosition.Y <= ScreenHeight)
-                cameraPosition.Y += 10;
-
-            camera.Position = cameraPosition;
-
-
-            //Toggle Resolution Test
-            var resolutionChanged = false;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.F1))
-            {
-                ResolutionHandler.resolution = ResolutionHandler.Resolution.One;
-                resolutionChanged = true;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.F2))
-            {
-                ResolutionHandler.resolution = ResolutionHandler.Resolution.Two;
-                resolutionChanged = true;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.F3))
-            {
-                ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
-                resolutionChanged = true;
-            }
-
-            if(resolutionChanged)
+            if (ResolutionChanged)
             {
                 ResolutionHandler.SetResolution();
                 Graphics.ApplyChanges();
             }
 
+            Camera.Position = CameraPosition;
+            Console.WriteLine("Zoom = " + Camera.Zoom);
 
             ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -163,16 +135,19 @@ namespace Zeds.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            SpriteBatch.Begin(Camera, SpriteSortMode.Immediate);
+                GraphicsDevice.SamplerStates[0].AddressU = TextureAddressMode.Wrap;
+                GraphicsDevice.SamplerStates[0].AddressV = TextureAddressMode.Wrap;
+
+                RenderBackground.DrawBackground();
+            SpriteBatch.End();
+
             //TODO Adjust scaling to screenResolution
-            SpriteBatch.Begin(camera);
-
-            RenderBackground.DrawBackground();
-
-            DrawMenus.DrawBuildMenu();
-
-            DrawStructures.DrawBuildings();
-            DrawHumanPawns.DrawHumans();
-            DrawZedPawns.DrawZeds();
+            SpriteBatch.Begin(Camera);
+                DrawMenus.DrawBuildMenu();
+                DrawStructures.DrawBuildings();
+                DrawHumanPawns.DrawHumans();
+                DrawZedPawns.DrawZeds();
             SpriteBatch.End();
 
             base.Draw(gameTime);

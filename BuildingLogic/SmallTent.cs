@@ -14,8 +14,8 @@ namespace Zeds.BuildingLogic
                 ID = Guid.NewGuid().ToString()
             };
             
-            //smallTent.Position.X = ScreenWidth / 2 - smallTent.Texture.Width / 2;
-            //smallTent.Position.Y = ScreenHeight / 2 - 100 - smallTent.Texture.Height / 2;
+            smallTent.Position.X = Engine.Engine.MapSizeX / 2 - smallTent.Texture.Width / 2;
+            smallTent.Position.Y = Engine.Engine.MapSizeY / 2 - 100 - smallTent.Texture.Height / 2;
 
             smallTent.BRec = BoundingBoxes.BoundingBox(smallTent.Position, smallTent.Texture);
 

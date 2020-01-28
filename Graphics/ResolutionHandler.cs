@@ -20,30 +20,39 @@ namespace Zeds.Graphics
             {
                 case Resolution.One:
                     {
-                        Engine.Zeds.ScreenWidth = 800;
-                        Engine.Zeds.ScreenHeight = 600;
+                        //Engine.Engine.MapSizeX = 800;
+                        //Engine.Engine.MapSizeY = 600;
+
+                        Engine.Engine.PreferredBackBufferWidth = 800;
+                        Engine.Engine.PreferredBackBufferHeight = 600;
                     }
                     break;
                 case Resolution.Two:
                     {
-                        Engine.Zeds.ScreenWidth = 1600;
-                        Engine.Zeds.ScreenHeight = 900;
+                        //Engine.Engine.MapSizeX = 1600;
+                        //Engine.Engine.MapSizeY = 900;
+
+                        Engine.Engine.PreferredBackBufferWidth = 1600;
+                        Engine.Engine.PreferredBackBufferHeight = 900;
                     }
                     break;
                 case Resolution.Three:
                     {
-                        Engine.Zeds.ScreenWidth = 1920;
-                        Engine.Zeds.ScreenHeight = 1080;
+                        //Engine.Engine.MapSizeX = 1920;
+                        //Engine.Engine.MapSizeY = 1080;
+
+                        Engine.Engine.PreferredBackBufferWidth = 1920;
+                        Engine.Engine.PreferredBackBufferHeight = 1080;
                     }
                     break;
             }
 
             Console.WriteLine("Resolution changed to " + resolution);
 
-            Engine.Zeds.PreferredBackBufferWidth = Engine.Zeds.ScreenWidth;
-            Engine.Zeds.PreferredBackBufferHeight = Engine.Zeds.ScreenHeight;
+            //Engine.Engine.PreferredBackBufferWidth = Engine.Engine.MapSizeX;
+            //Engine.Engine.PreferredBackBufferHeight = Engine.Engine.MapSizeY;
 
-            Zeds.Engine.Zeds.Graphics.ApplyChanges();
+            Zeds.Engine.Engine.Graphics.ApplyChanges();
         }
     }
 }
