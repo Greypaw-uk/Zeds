@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildingLogic\Building.cs" />
+    <Compile Include="BuildingLogic\BuildingPlacementHandler.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\SmallTent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />

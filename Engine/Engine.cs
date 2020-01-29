@@ -1,11 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Comora;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using Comora;
 using Zeds.BuildingLogic;
-using Zeds.ZedLogic;
 using Zeds.Graphics;
+using Zeds.ZedLogic;
 
 namespace Zeds.Engine
 {
@@ -22,6 +21,9 @@ namespace Zeds.Engine
         public static int MapSizeX;
         public static int MapSizeY;
 
+        private SpriteFont font;
+
+        public static bool isDebugEnabled;
 
         // Screen setup
         public static bool ResolutionChanged;
@@ -58,16 +60,20 @@ namespace Zeds.Engine
 
             //Handle manual screen resizing
             Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += Window_ClientSizeChanged;
+            Window.ClientSizeChanged += WindowSizeChanged;
 
-            void Window_ClientSizeChanged(object sender, EventArgs e)
+            void WindowSizeChanged(object sender, EventArgs e)
             {
+                ScreenWidth = Window.ClientBounds.Width;
+                ScreenHeight = Window.ClientBounds.Height;
+
                 PreferredBackBufferWidth = Window.ClientBounds.Width;
                 PreferredBackBufferHeight = Window.ClientBounds.Height;
             }
 
-            Window.Title = "Engine";
+            Window.Title = "Zeds - Alpha";
 
+            KeyBindings.PreviousScrollValue = 0;
             IsMouseVisible = true;
 
             base.Initialize();
@@ -81,6 +87,7 @@ namespace Zeds.Engine
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             device = GraphicsDevice;
 
+            font = Content.Load<SpriteFont>("font");
 
             //Textures
             Textures.BackgroundTexture = Content.Load<Texture2D>("background");
@@ -92,10 +99,8 @@ namespace Zeds.Engine
 
             Textures.BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
 
-
             //Initial set up
             HQ.HQSetup();
-            Tent.SmallTent();
             HumanSpawner.SpawnHumans();
         }
 
@@ -107,10 +112,12 @@ namespace Zeds.Engine
         {
             Camera.Update(gameTime);
             
+            /*
             //ToDo Find how to move this into KeyBindings
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            */
 
             KeyBindings.CheckForKeyInput();
             KeyBindings.CheckForMouseInput();
@@ -122,6 +129,10 @@ namespace Zeds.Engine
             }
 
             Camera.Position = CameraPosition;
+
+
+            if (BuildingPlacementHandler.IsPlacingBuilding)
+                BuildingPlacementHandler.PlaceAStructure(Textures.SmallTentTexture);
 
             ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -135,17 +146,27 @@ namespace Zeds.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearWrap, null, null);
-
-            SpriteBatch.End();
-
             //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin(Camera);
-                RenderBackground.DrawBackground();
-                DrawMenus.DrawBuildMenu();
-                DrawStructures.DrawBuildings();
-                DrawHumanPawns.DrawHumans();
-                DrawZedPawns.DrawZeds();
+
+            RenderBackground.DrawBackground();
+            DrawMenus.DrawBuildMenu();
+            DrawStructures.DrawBuildings();
+            DrawHumanPawns.DrawHumans();
+            DrawZedPawns.DrawZeds();
+
+            //ToDo Fix display of this text
+            if (isDebugEnabled)
+                SpriteBatch.DrawString(font, BuildingPlacementHandler.MouseCoordinates.X + "," + BuildingPlacementHandler.MouseCoordinates.Y,
+                    new Vector2(BuildingPlacementHandler.MouseCoordinates.X + 10, BuildingPlacementHandler.MouseCoordinates.X - 10), Color.Red);
+
+            if (BuildingPlacementHandler.IsPlacingBuilding)
+            {
+                SpriteBatch.Draw(BuildingPlacementHandler.BuildingTexture, BuildingPlacementHandler.MouseCoordinates,
+                    BuildingPlacementHandler.Blueprint,
+                    !BuildingPlacementHandler.IsGroundClear ? Color.Red : Color.Green);
+            }
+
             SpriteBatch.End();
 
             base.Draw(gameTime);

@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Text;
 using Microsoft.Xna.Framework.Input;
+using Zeds.BuildingLogic;
 using Zeds.Graphics;
 
 namespace Zeds.Engine
@@ -7,7 +8,7 @@ namespace Zeds.Engine
     class KeyBindings
     {
         public static int PreviousScrollValue;
-        public static MouseState CurrentMouseState;
+        private static MouseState currentMouseState = Mouse.GetState();
 
         public static void CheckForKeyInput()
         {
@@ -50,23 +51,34 @@ namespace Zeds.Engine
                 ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
                 Engine.ResolutionChanged = true;
             }
+
+
+            //Enter Modes
+            if (Keyboard.GetState().IsKeyDown(Keys.B))
+                BuildingPlacementHandler.IsPlacingBuilding = true;
+
+
+            //Cancel Modes
+            if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                BuildingPlacementHandler.IsPlacingBuilding = false;
+
+
+            //Debug Mode
+            if (!Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+                Engine.isDebugEnabled = true;
+            if (Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+                Engine.isDebugEnabled = false;
         }
 
         public static void CheckForMouseInput()
-        { 
-            //Console.WriteLine("Previous scroll value = " + PreviousScrollValue);
-            if (CurrentMouseState.ScrollWheelValue > PreviousScrollValue && Engine.Camera.Zoom <= 1.8f)
-            {
+        {
+            if (currentMouseState.ScrollWheelValue > PreviousScrollValue && Engine.Camera.Zoom <= 1.8)
                 Engine.Camera.Zoom += 0.1f;
-                PreviousScrollValue = CurrentMouseState.ScrollWheelValue;
-            }
 
-            if (CurrentMouseState.ScrollWheelValue > PreviousScrollValue && Engine.Camera.Zoom >= 0.2f)
-            {
+            if (currentMouseState.ScrollWheelValue > PreviousScrollValue && Engine.Camera.Zoom >= 0.2)
                 Engine.Camera.Zoom -= 0.1f;
-                PreviousScrollValue = CurrentMouseState.ScrollWheelValue;
-            }
-            //Console.WriteLine("New scroll value = " + CurrentMouseState.ScrollWheelValue);
+
+            PreviousScrollValue = currentMouseState.ScrollWheelValue;
         }
     }
 }
