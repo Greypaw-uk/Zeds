@@ -43,7 +43,6 @@ namespace Zeds.Engine
                 PreferredBackBufferWidth = ScreenWidth,
                 PreferredBackBufferHeight = ScreenHeight,
 
-                //Graphics.IsFullScreen = true
                 IsFullScreen = false
             };
 
@@ -81,7 +80,6 @@ namespace Zeds.Engine
             Window.Title = "Zeds - Alpha";
 
             KeyBindings.PreviousScrollValue = 0;
-            //IsMouseVisible = true;
 
             base.Initialize();
 
@@ -169,7 +167,7 @@ namespace Zeds.Engine
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
             {
-                if (!BuildingPlacementHandler.IsGroundClear)
+                if (!BuildingPlacementHandler.CheckIfGroundClear(Blueprint))
                     SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Red);
                 else
                     SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Green);

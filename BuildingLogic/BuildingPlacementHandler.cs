@@ -8,31 +8,32 @@ namespace Zeds.BuildingLogic
     static class BuildingPlacementHandler
     {
         public static bool IsPlacingBuilding;
-        public static bool IsGroundClear;
         private static Vector2 adjustedCoordinates;
 
         public static void PlaceAStructure(Texture2D texture)
         {
-            //Adjust coordinates to ensure that texture is central to mouse cursor position
-            adjustedCoordinates = new Vector2(Engine.Engine.MouseCoordinates.X - texture.Width, Engine.Engine.MouseCoordinates.Y - texture.Height);
+            adjustedCoordinates = new Vector2(Engine.Engine.MouseCoordinates.X, Engine.Engine.MouseCoordinates.Y);
 
-            Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X, (int)adjustedCoordinates.Y, texture.Width, texture.Height);
+            Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),
+                (int)adjustedCoordinates.Y - (texture.Width / 2), texture.Width, texture.Height);
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && IsGroundClear)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && CheckIfGroundClear(Engine.Engine.Blueprint))
             {
                 Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
 
-                IsGroundClear = false;
                 IsPlacingBuilding = false;
             }
         }
-        
-        public static void CheckIfGroundClear(Rectangle blueprint)
+
+        public static bool CheckIfGroundClear(Rectangle blueprint)
         {
             foreach (var building in EntityLists.BuildingList)
             {
-                IsGroundClear = !Engine.Engine.Blueprint.Intersects(building.BRec);
+                if (blueprint.Intersects(building.BRec))
+                    return false;
             }
+
+            return true;
         }
     }
 }
