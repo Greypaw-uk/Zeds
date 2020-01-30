@@ -9,36 +9,29 @@ namespace Zeds.BuildingLogic
     {
         public static bool IsPlacingBuilding;
         public static bool IsGroundClear;
-
-        public static Vector2 MouseCoordinates;
-        public static Texture2D BuildingTexture;
-
-        public static Rectangle Blueprint;
+        private static Vector2 adjustedCoordinates;
 
         public static void PlaceAStructure(Texture2D texture)
         {
-            BuildingTexture = texture;
+            //Adjust coordinates to ensure that texture is central to mouse cursor position
+            adjustedCoordinates = new Vector2(Engine.Engine.MouseCoordinates.X - texture.Width, Engine.Engine.MouseCoordinates.Y - texture.Height);
 
-            MouseCoordinates.X = Mouse.GetState().X;
-            MouseCoordinates.Y = Mouse.GetState().Y;
-
-            //Adjust position of mouse coordinates to ensure the building's centre is at the mouse pointer
-            //TODo Change adjustment to place building upon Cursor
-            Vector2 adjustedMouseCoordinates = new Vector2(MouseCoordinates.X - texture.Width, MouseCoordinates.Y);
-
-            Blueprint = new Rectangle((int)adjustedMouseCoordinates.X, (int)adjustedMouseCoordinates.Y, texture.Width, texture.Height);
-
-            foreach (var building in EntityLists.BuildingList)
-            {
-                IsGroundClear = !Blueprint.Intersects(building.BRec);
-            }
+            Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X, (int)adjustedCoordinates.Y, texture.Width, texture.Height);
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && IsGroundClear)
             {
-                Tent.CreateSmallTent(adjustedMouseCoordinates, Blueprint);
+                Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
 
                 IsGroundClear = false;
                 IsPlacingBuilding = false;
+            }
+        }
+        
+        public static void CheckIfGroundClear(Rectangle blueprint)
+        {
+            foreach (var building in EntityLists.BuildingList)
+            {
+                IsGroundClear = !Engine.Engine.Blueprint.Intersects(building.BRec);
             }
         }
     }

@@ -57,6 +57,9 @@ namespace Zeds.Engine
             if (Keyboard.GetState().IsKeyDown(Keys.B))
                 BuildingPlacementHandler.IsPlacingBuilding = true;
 
+            if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                BuildingPlacementHandler.IsPlacingBuilding = false;
+
 
             //Cancel Modes
             if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -64,7 +67,7 @@ namespace Zeds.Engine
 
 
             //Debug Mode
-            if (!Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+            if (!Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
                 Engine.isDebugEnabled = true;
             if (Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
                 Engine.isDebugEnabled = false;

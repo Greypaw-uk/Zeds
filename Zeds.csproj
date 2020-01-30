@@ -47,6 +47,7 @@
     <Compile Include="BuildingLogic\SmallTent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
+    <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\EntityLists.cs" />
     <Compile Include="Engine\KeyBindings.cs" />
     <Compile Include="Engine\Map.cs" />
