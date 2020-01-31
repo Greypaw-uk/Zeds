@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
+using Zeds.UI;
 using Zeds.ZedLogic;
 
 namespace Zeds.Engine
@@ -23,11 +24,13 @@ namespace Zeds.Engine
         public static int MapSizeY;
 
         public static Vector2 MouseCoordinates;
+
+
+        //UI
+        public static bool IsDebugEnabled;
         public static Rectangle Blueprint;
+        public static bool IsBuildMenuOpen;
 
-        public static SpriteFont Font;
-
-        public static bool isDebugEnabled;
 
         // Screen setup
         public static bool ResolutionChanged;
@@ -43,7 +46,9 @@ namespace Zeds.Engine
                 PreferredBackBufferWidth = ScreenWidth,
                 PreferredBackBufferHeight = ScreenHeight,
 
-                IsFullScreen = false
+                //HardwareModeSwitch = fullscreen if true, border-less fullscreen if false
+                IsFullScreen = false,
+                //HardwareModeSwitch = false
             };
 
             Content.RootDirectory = "Content";
@@ -64,6 +69,7 @@ namespace Zeds.Engine
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += WindowSizeChanged;
 
+            //ToDo 3 Move to new class
             void WindowSizeChanged(object sender, EventArgs e)
             {
                 ScreenWidth = Window.ClientBounds.Width;
@@ -79,16 +85,22 @@ namespace Zeds.Engine
 
             Window.Title = "Zeds - Alpha";
 
+            IsMouseVisible = false;
+
             KeyBindings.PreviousScrollValue = 0;
+
+            RollOverText.RollOverTextPosition.X = 0;
+            RollOverText.RollOverTextPosition.Y = 0;
 
             base.Initialize();
 
             ZedController.PopulateZedList();
+            PopulateMenus.PopulateMenuIconList();
         }
 
         protected override void LoadContent()
         {
-            Font = Content.Load<SpriteFont>("Font");
+            Fonts.DebugFont = Content.Load<SpriteFont>("DebugFont");
 
             //Textures
             Textures.BackgroundTexture = Content.Load<Texture2D>("background");
@@ -101,6 +113,8 @@ namespace Zeds.Engine
             Textures.BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
 
             Textures.CursorTexture = Content.Load<Texture2D>("cursor");
+
+            Textures.tempIcon = Content.Load<Texture2D>("tempIcon");
 
             //Initial set up
             HQ.HQSetup();
@@ -116,12 +130,13 @@ namespace Zeds.Engine
             Camera.Update(gameTime);
 
             /*
-            //ToDo Find how to move this into KeyBindings
+            //ToDo 3 Move to new class
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             */
 
+            //ToDo 1 Fix mouse getting 'stuck' in fullscreen mode
             MouseCoordinates.X = Mouse.GetState().X;
             MouseCoordinates.Y = Mouse.GetState().Y;
 
@@ -135,6 +150,7 @@ namespace Zeds.Engine
             }
 
             Camera.Position = CameraPosition;
+            Camera.Debug.IsVisible = IsDebugEnabled;
 
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
@@ -142,6 +158,7 @@ namespace Zeds.Engine
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
                 BuildingPlacementHandler.CheckIfGroundClear(Blueprint);
+
 
             ZedController.IncreaseZeds();
             ZedMovement.CalculateZedMovement();
@@ -155,29 +172,29 @@ namespace Zeds.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //TODO Adjust scaling to screenResolution
             SpriteBatch.Begin(Camera);
 
             RenderBackground.DrawBackground();
-            DrawMenus.DrawBuildMenu();
+            DrawMenus.DrawMainMenuIcons();
             DrawStructures.DrawBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 
+            Cursor.DrawCursor();
+
+            if (IsBuildMenuOpen)
+                DrawMenus.DrawBuildMenuIcons();
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
             {
-                if (!BuildingPlacementHandler.CheckIfGroundClear(Blueprint))
-                    SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Red);
-                else
+                if (BuildingPlacementHandler.CheckIfGroundClear(Blueprint))
                     SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Green);
+                else
+                    SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Red);
             }
 
-            if (isDebugEnabled)
-                Debug.DrawDebugInfo();
-
-            if (!BuildingPlacementHandler.IsPlacingBuilding)
-                SpriteBatch.Draw(Textures.CursorTexture, MouseCoordinates, Color.White);
+            if (RollOverText.IsRollOverTextVisible)
+                RollOverText.DrawUIText(RollOverText.RollOverTxt);
 
             SpriteBatch.End();
 

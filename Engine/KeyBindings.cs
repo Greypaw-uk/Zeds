@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
 
@@ -55,10 +54,16 @@ namespace Zeds.Engine
 
             //Enter Modes
             if (Keyboard.GetState().IsKeyDown(Keys.B))
+            {
                 BuildingPlacementHandler.IsPlacingBuilding = true;
+                Engine.IsBuildMenuOpen = true;
+            }
 
             if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 BuildingPlacementHandler.IsPlacingBuilding = false;
+                Engine.IsBuildMenuOpen = false;
+            }
 
 
             //Cancel Modes
@@ -67,10 +72,10 @@ namespace Zeds.Engine
 
 
             //Debug Mode
-            if (!Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
-                Engine.isDebugEnabled = true;
-            if (Engine.isDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
-                Engine.isDebugEnabled = false;
+            if (!Engine.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
+                Engine.IsDebugEnabled = true;
+            if (Engine.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+                Engine.IsDebugEnabled = false;
         }
 
         public static void CheckForMouseInput()

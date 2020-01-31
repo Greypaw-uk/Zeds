@@ -43,15 +43,20 @@
   <ItemGroup>
     <Compile Include="BuildingLogic\Building.cs" />
     <Compile Include="BuildingLogic\BuildingPlacementHandler.cs" />
+    <Compile Include="BuildingLogic\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\SmallTent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
+    <Compile Include="UI\BasicBuildMenu.cs" />
+    <Compile Include="UI\MainMenu.cs" />
+    <Compile Include="UI\Cursor.cs" />
     <Compile Include="Engine\Debug.cs" />
     <Compile Include="Engine\EntityLists.cs" />
     <Compile Include="Engine\KeyBindings.cs" />
     <Compile Include="Engine\Map.cs" />
     <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Graphics\Fonts.cs" />
     <Compile Include="Graphics\Textures.cs" />
     <Compile Include="Graphics\DrawHumanPawns.cs" />
     <Compile Include="Graphics\DrawMenus.cs" />
@@ -67,6 +72,8 @@
     <Compile Include="Pawns\Creature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pawns\Zed.cs" />
+    <Compile Include="UI\PopulateMenus.cs" />
+    <Compile Include="UI\RollOverText.cs" />
     <Compile Include="ZedLogic\ZedController.cs" />
     <Compile Include="ZedLogic\ZedMovement.cs" />
     <Compile Include="ZedLogic\ZedSpawner.cs" />

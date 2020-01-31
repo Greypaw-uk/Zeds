@@ -13,7 +13,7 @@ namespace Zeds.Graphics
 
         public static Resolution resolution;
 
-        //TODO add texture scaling 
+        //TODO 2 add texture scaling 
         public static void SetResolution()
         {
             switch (resolution)

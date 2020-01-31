@@ -11,5 +11,7 @@ namespace Zeds.Engine
         public static Texture2D SmallTentTexture;
         public static Texture2D BuildMenuIconTexture;
         public static Texture2D CursorTexture;
+
+        public static Texture2D tempIcon;
     }
 }

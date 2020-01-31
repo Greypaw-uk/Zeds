@@ -6,10 +6,10 @@ namespace Zeds.Engine
     {
         public static void DrawDebugInfo()
         {
-            Engine.SpriteBatch.DrawString(Engine.Font, "Debug = " + Engine.isDebugEnabled, new Vector2(10, 10), Color.White);
-            Engine.SpriteBatch.DrawString(Engine.Font,
+            Engine.SpriteBatch.DrawString(Graphics.Fonts.DebugFont, "Debug = " + Engine.IsDebugEnabled, new Vector2(10, 10), Color.White);
+            Engine.SpriteBatch.DrawString(Graphics.Fonts.DebugFont,
                     Engine.MouseCoordinates.X + "," + Engine.MouseCoordinates.Y,
-                    new Vector2(Engine.MouseCoordinates.X, Engine.MouseCoordinates.Y), Color.White);
+                    new Vector2(Engine.MouseCoordinates.X + 20, Engine.MouseCoordinates.Y), Color.White);
         }
     }
 }
