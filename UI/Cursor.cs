@@ -3,10 +3,10 @@ using Zeds.BuildingLogic;
 
 namespace Zeds.Engine
 {
-    static class Cursor
+    public static class Cursor
     {
-        public static Rectangle CursorRectangle;
-        public static Vector2 CursorRectangleLocation;
+        public static Rectangle CursorRectangle = new Rectangle((int)CursorRectangleLocation.X, (int)CursorRectangleLocation.Y, 30, 30);
+        public static Vector2 CursorRectangleLocation = Engine.MouseCoordinates;
 
         public static void UpdateCursorRectangleLocation()
         {

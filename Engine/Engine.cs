@@ -85,7 +85,12 @@ namespace Zeds.Engine
 
             Window.Title = "Zeds - Alpha";
 
+
+            //Mouse
             IsMouseVisible = false;
+            MouseCoordinates.X = 0;
+            MouseCoordinates.Y = 0;
+
 
             KeyBindings.PreviousScrollValue = 0;
 
@@ -164,6 +169,9 @@ namespace Zeds.Engine
             ZedMovement.CalculateZedMovement();
 
             HumanMovement.RunFromZeds();
+
+            Cursor.UpdateCursorRectangleLocation();
+            IsBuildMenuOpen = MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
 
             base.Update(gameTime);
         }

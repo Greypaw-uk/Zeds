@@ -23,6 +23,7 @@ namespace Zeds.BuildingLogic
                 Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
 
                 IsPlacingBuilding = false;
+                Engine.Engine.IsBuildMenuOpen = false;
             }
         }
 

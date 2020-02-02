@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
+using Zeds.UI;
 
 namespace Zeds.Engine
 {
@@ -52,6 +53,11 @@ namespace Zeds.Engine
             }
 
 
+            //Menu Interaction
+            if (Engine.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Engine.IsBuildMenuOpen = false;
+
+
             //Enter Modes
             if (Keyboard.GetState().IsKeyDown(Keys.B))
             {
@@ -87,6 +93,13 @@ namespace Zeds.Engine
                 Engine.Camera.Zoom -= 0.1f;
 
             PreviousScrollValue = currentMouseState.ScrollWheelValue;
+
+            if (MenuInteraction.IsBuildMenuActive &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Engine.IsBuildMenuOpen = false;
+                MenuInteraction.IsBuildMenuActive = false;
+            }
         }
     }
 }
