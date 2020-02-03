@@ -43,12 +43,13 @@
   <ItemGroup>
     <Compile Include="BuildingLogic\Building.cs" />
     <Compile Include="BuildingLogic\BuildingPlacementHandler.cs" />
-    <Compile Include="BuildingLogic\Bulldozer.cs" />
+    <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\SmallTent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
     <Compile Include="UI\BasicBuildMenu.cs" />
+    <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\Cursor.cs" />
     <Compile Include="Engine\Debug.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pawns\Zed.cs" />
     <Compile Include="UI\MenuInteraction.cs" />
+    <Compile Include="UI\BuildMenuPane.cs" />
     <Compile Include="UI\PopulateMenus.cs" />
     <Compile Include="UI\RollOverText.cs" />
     <Compile Include="ZedLogic\ZedController.cs" />

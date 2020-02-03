@@ -1,28 +1,39 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Zeds.BuildingLogic;
 using Zeds.Engine;
 
 namespace Zeds.UI
 {
     public static class MenuInteraction
     {
-        public static bool IsBuildMenuActive;
+        public static bool IsBuildMenuOpen;
 
-        public static bool CheckCursorMenuInteraction(Rectangle cursor)
+        public static void CheckCursorMenuInteraction(Rectangle cursor)
         {
             foreach (var item in EntityLists.MainIconList)
             {
                 if (cursor.Intersects(item.BRec))
                 {
-                    //ToDo 1 Keep menu open whilst selecting a build open
-                    if (item.Texture == Textures.BuildMenuIconTexture &&
-                        Mouse.GetState().LeftButton == ButtonState.Pressed || IsBuildMenuActive)
-                    { IsBuildMenuActive = true;
-                        return true;
+                    if (item.Texture == Textures.BuildMenuIcon &&
+                        Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        IsBuildMenuOpen = true;
                     }
                 }
             }
-            return false;
+        }
+
+        public static void CheckSmallTentIconInteraction()
+        {
+            //ToDo !Test
+            if (Cursor.CursorRectangle.Intersects(Textures.TempMenuIcon.Bounds) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                BuildingPlacementHandler.IsPlacingBuilding = true;
+                IsBuildMenuOpen = false;
+
+                BuildingPlacementHandler.SelectedStructure = BuildingSelected.SmallTent;
+            }
         }
     }
 }

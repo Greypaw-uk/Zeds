@@ -1,23 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
 using Zeds.BuildingLogic;
+using Zeds.Engine;
 
-namespace Zeds.Engine
+namespace Zeds.UI
 {
     public static class Cursor
     {
-        public static Rectangle CursorRectangle = new Rectangle((int)CursorRectangleLocation.X, (int)CursorRectangleLocation.Y, 30, 30);
-        public static Vector2 CursorRectangleLocation = Engine.MouseCoordinates;
+        public static Rectangle CursorRectangle = new Rectangle((int) Engine.Engine.MouseCoordinates.X - 5,
+            (int) Engine.Engine.MouseCoordinates.Y - 5, 10, 10);
+
 
         public static void UpdateCursorRectangleLocation()
         {
-            CursorRectangle.X = (int)Engine.MouseCoordinates.X;
-            CursorRectangle.Y = (int)Engine.MouseCoordinates.Y;
+            CursorRectangle.X = (int)Engine.Engine.MouseCoordinates.X;
+            CursorRectangle.Y = (int)Engine.Engine.MouseCoordinates.Y;
         }
 
         public static void DrawCursor()
         {
             if (!BuildingPlacementHandler.IsPlacingBuilding)
-                Engine.SpriteBatch.Draw(Textures.CursorTexture, Engine.MouseCoordinates, Color.White);
+                Engine.Engine.SpriteBatch.Draw(Textures.CursorTexture, Engine.Engine.MouseCoordinates, Color.White);
             //ToDo 2 Add cursor for demolition mode
         }
     }

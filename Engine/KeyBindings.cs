@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using System.Diagnostics.Eventing.Reader;
+using Microsoft.Xna.Framework.Input;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
 using Zeds.UI;
@@ -54,21 +55,20 @@ namespace Zeds.Engine
 
 
             //Menu Interaction
-            if (Engine.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Engine.IsBuildMenuOpen = false;
+            if (MenuInteraction.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                MenuInteraction.IsBuildMenuOpen = false;
+
+            if (BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.B))
+                BuildMenuPane.IsBuildMenuWindowVisible = false;
+
+            if (!BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.B))
+                BuildMenuPane.IsBuildMenuWindowVisible = true;
 
 
             //Enter Modes
-            if (Keyboard.GetState().IsKeyDown(Keys.B))
-            {
-                BuildingPlacementHandler.IsPlacingBuilding = true;
-                Engine.IsBuildMenuOpen = true;
-            }
-
             if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                BuildingPlacementHandler.IsPlacingBuilding = false;
-                Engine.IsBuildMenuOpen = false;
+                MenuInteraction.IsBuildMenuOpen = false;
             }
 
 
@@ -94,11 +94,13 @@ namespace Zeds.Engine
 
             PreviousScrollValue = currentMouseState.ScrollWheelValue;
 
-            if (MenuInteraction.IsBuildMenuActive &&
-                Mouse.GetState().LeftButton == ButtonState.Pressed)
+            //ToDo 2 Add option for every menu item in the Build Menu
+            if (MenuInteraction.IsBuildMenuOpen &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed &&
+                (!Cursor.CursorRectangle.Intersects(Textures.BuildMenuIcon.Bounds) ||
+                 !Cursor.CursorRectangle.Intersects(Textures.TempMenuIcon.Bounds)))
             {
-                Engine.IsBuildMenuOpen = false;
-                MenuInteraction.IsBuildMenuActive = false;
+                MenuInteraction.IsBuildMenuOpen = false;
             }
         }
     }

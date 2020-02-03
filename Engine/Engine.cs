@@ -29,8 +29,8 @@ namespace Zeds.Engine
         //UI
         public static bool IsDebugEnabled;
         public static Rectangle Blueprint;
-        public static bool IsBuildMenuOpen;
-
+        public static bool IsBuildWindowVisible;
+        
 
         // Screen setup
         public static bool ResolutionChanged;
@@ -85,7 +85,6 @@ namespace Zeds.Engine
 
             Window.Title = "Zeds - Alpha";
 
-
             //Mouse
             IsMouseVisible = false;
             MouseCoordinates.X = 0;
@@ -97,6 +96,11 @@ namespace Zeds.Engine
             RollOverText.RollOverTextPosition.X = 0;
             RollOverText.RollOverTextPosition.Y = 0;
 
+
+            BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
+            IsBuildWindowVisible = true;
+
+
             base.Initialize();
 
             ZedController.PopulateZedList();
@@ -107,19 +111,7 @@ namespace Zeds.Engine
         {
             Fonts.DebugFont = Content.Load<SpriteFont>("DebugFont");
 
-            //Textures
-            Textures.BackgroundTexture = Content.Load<Texture2D>("background");
-            Textures.HumanTexture = Content.Load<Texture2D>("Human1");
-            Textures.ZedTexture = Content.Load<Texture2D>("BasicZed");
-
-            Textures.HqTexture = Content.Load<Texture2D>("HQ");
-            Textures.SmallTentTexture = Content.Load<Texture2D>("SmallTent");
-
-            Textures.BuildMenuIconTexture = Content.Load<Texture2D>("BuildMenuIcon");
-
-            Textures.CursorTexture = Content.Load<Texture2D>("cursor");
-
-            Textures.tempIcon = Content.Load<Texture2D>("tempIcon");
+            Textures.LoadTextures(this.Content);
 
             //Initial set up
             HQ.HQSetup();
@@ -145,8 +137,10 @@ namespace Zeds.Engine
             MouseCoordinates.X = Mouse.GetState().X;
             MouseCoordinates.Y = Mouse.GetState().Y;
 
+
             KeyBindings.CheckForKeyInput();
             KeyBindings.CheckForMouseInput();
+
 
             if (ResolutionChanged)
             {
@@ -154,24 +148,38 @@ namespace Zeds.Engine
                 Graphics.ApplyChanges();
             }
 
+
             Camera.Position = CameraPosition;
             Camera.Debug.IsVisible = IsDebugEnabled;
 
 
+            //Menu 
+            MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
+
+            if (MenuInteraction.IsBuildMenuOpen)
+            {
+                RollOverText.GenerateRollOverText();
+
+                MenuInteraction.CheckSmallTentIconInteraction();
+            }
+
+
+            //Building Placement
             if (BuildingPlacementHandler.IsPlacingBuilding)
-                BuildingPlacementHandler.PlaceAStructure(Textures.SmallTentTexture);
+                BuildingPlacementHandler.PlaceAStructure(BuildingPlacementHandler.SetBuildingTexture());
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
                 BuildingPlacementHandler.CheckIfGroundClear(Blueprint);
 
 
             ZedController.IncreaseZeds();
-            ZedMovement.CalculateZedMovement();
 
+
+            //Movement
+            ZedMovement.CalculateZedMovement();
             HumanMovement.RunFromZeds();
 
             Cursor.UpdateCursorRectangleLocation();
-            IsBuildMenuOpen = MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
 
             base.Update(gameTime);
         }
@@ -188,21 +196,26 @@ namespace Zeds.Engine
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 
-            Cursor.DrawCursor();
+            BuildMenuPane.UpdateBuildMenuWindowLocation();
 
-            if (IsBuildMenuOpen)
+            if (MenuInteraction.IsBuildMenuOpen)
                 DrawMenus.DrawBuildMenuIcons();
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
             {
                 if (BuildingPlacementHandler.CheckIfGroundClear(Blueprint))
-                    SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Green);
+                    SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Green);
                 else
-                    SpriteBatch.Draw(Textures.SmallTentTexture, MouseCoordinates, Color.Red);
+                    SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
 
             if (RollOverText.IsRollOverTextVisible)
-                RollOverText.DrawUIText(RollOverText.RollOverTxt);
+                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
+
+            if (BuildMenuPane.IsBuildMenuWindowVisible)
+                BuildMenuPane.DrawBuildMenuPane();
+
+            Cursor.DrawCursor();
 
             SpriteBatch.End();
 

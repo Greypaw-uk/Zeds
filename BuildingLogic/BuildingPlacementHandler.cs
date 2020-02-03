@@ -1,14 +1,42 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Security.Policy;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Zeds.Engine;
+using Zeds.UI;
 
 namespace Zeds.BuildingLogic
 {
+    public enum BuildingSelected
+    {
+        None,
+        SmallTent,
+        LargeTent
+    }
+
     static class BuildingPlacementHandler
     {
         public static bool IsPlacingBuilding;
         private static Vector2 adjustedCoordinates;
+        public static BuildingSelected SelectedStructure;
+
+
+        public static Texture2D SetBuildingTexture()
+        {
+            switch (SelectedStructure)
+            {
+                case BuildingSelected.None:
+                    return null;
+
+                case BuildingSelected.SmallTent:
+                    return Textures.SmallTentTexture;
+
+                //case BuildingSelected.LargeTent:
+                //return Textures.LargeTentTexture;
+            }
+
+            return null;
+        }
 
         public static void PlaceAStructure(Texture2D texture)
         {
@@ -18,12 +46,15 @@ namespace Zeds.BuildingLogic
             Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),
                 (int)adjustedCoordinates.Y - (texture.Width / 2), texture.Width, texture.Height);
 
+            //ToDo !Test
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && CheckIfGroundClear(Engine.Engine.Blueprint))
             {
-                Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
+                if (SelectedStructure == BuildingSelected.SmallTent)
+                    Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
 
                 IsPlacingBuilding = false;
-                Engine.Engine.IsBuildMenuOpen = false;
+                MenuInteraction.IsBuildMenuOpen = false;
+                SelectedStructure = BuildingSelected.None;
             }
         }
 
