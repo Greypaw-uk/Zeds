@@ -1,37 +1,50 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Security.Permissions;
+using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
 namespace Zeds.UI
 {
     public static class PopulateMenus
     {
-        //ToDo 1 Alter locations relevant to the BuildMenuPane
+        private static Vector2 position; 
 
         public static void PopulateMenuIconList()
         {
+            position.X = Engine.Engine.MouseCoordinates.X;
+            position.Y = Engine.Engine.MouseCoordinates.Y;
+
+
             //==== Main Menu ====
             //Main build menu icon
-            var bmLoc = new Vector2(Engine.Engine.ScreenWidth / 2, Engine.Engine.ScreenHeight - 10);
-            var bmRec = new Rectangle((int)bmLoc.X, (int)bmLoc.Y, 30, 30);
-            MainMenu.CreateMainMenuIcon(Textures.BuildMenuIcon, bmLoc, bmRec, "Basic Structures");
+            int bmX = 10;
+            int bmY = 35;
+            var bmP = new Vector2(position.X + bmX, position.Y + bmY);
+            var bmRec = new Rectangle((int)bmP.X + bmX, (int)bmP.Y + bmY, 30, 30);
+            MainMenu.CreateMainMenuIcon(Textures.BuildMenuIcon, bmP, bmX, bmY, bmRec, "Basic Structures");
 
             // Demolish Icon
-            var demLoc = new Vector2((Engine.Engine.ScreenWidth / 2) + 50, Engine.Engine.ScreenHeight - 10);
-            var demRec = new Rectangle((int)demLoc.X, (int)demLoc.Y, 30, 30);
-            MainMenu.CreateMainMenuIcon(Textures.DemolishIcon, demLoc, demRec, "Demolish");
+            int demX = 50;
+            int demY = 35;
+            var demP = new Vector2(position.X + demX, position.Y + demY);
+            var demRec = new Rectangle((int)demP.X, (int)demP.Y, 30, 30);
+            MainMenu.CreateMainMenuIcon(Textures.DemolishIcon, demP, demX,demY, demRec, "Demolish");
 
 
             //==== Build Menu ====
-            //ToDo 2 increase size of Brecs to ensure it can be clicked on correctly
             //Small Tent
-            var stLoc = new Vector2(Engine.Engine.ScreenWidth / 2, Engine.Engine.ScreenHeight - 50);
-            var stRec = new Rectangle((int)stLoc.X, (int)stLoc.Y, 30, 30); 
-            BasicBuildMenu.CreateBuildMenuIcon(Textures.SmallTentBuildIcon, stLoc, stRec, "Small Tent");
+            int stX = 10;
+            int stY = 70;
+            var stP = new Vector2(position.X - stX, position.Y + stY);
+            var stRec = new Rectangle((int)position.X - stX, (int)position.Y, 30, 30); 
+            BasicBuildMenu.CreateBuildMenuIcon(Textures.SmallTentBuildIcon, stP, stRec, "Small Tent");
 
+            
             //Large Tent
-            var ltLoc = new Vector2(Engine.Engine.ScreenWidth / 2, Engine.Engine.ScreenHeight - 100);
-            var ltRec = new Rectangle((int)stLoc.X, (int)stLoc.Y, 30, 30);
-            BasicBuildMenu.CreateBuildMenuIcon(Textures.LargeTentBuildIcon, ltLoc, ltRec, "Large Tent");
+            int ltX = 10;
+            int ltY = 110;
+            var ltP = new Vector2(position.X - ltX, position.Y + stY);
+            var ltRec = new Rectangle((int)ltP.X, (int)ltP.Y, 30, 30);
+            BasicBuildMenu.CreateBuildMenuIcon(Textures.LargeTentBuildIcon, ltP, ltRec, "Large Tent");
         }
     }
 }

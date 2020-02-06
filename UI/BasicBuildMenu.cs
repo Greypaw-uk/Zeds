@@ -14,7 +14,8 @@ namespace Zeds.UI
             {
                 Texture = texture,
                 Position = new Vector2(position.X, position.Y),
-                BRec = bRec
+                BRec = bRec,
+                MouseOverText = mouseOverText
             };
 
             EntityLists.BuildIconList.Add(menuIcon);

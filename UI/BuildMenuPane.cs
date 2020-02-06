@@ -6,26 +6,58 @@ namespace Zeds.UI
 {
     public static class BuildMenuPane
     {
-        private static MoveablePane buildMenuWindow = new MoveablePane
-        {
-            Location = Engine.Engine.MouseCoordinates,
-            Rectangle = new Rectangle((int)Engine.Engine.MouseCoordinates.X,
-                (int)Engine.Engine.MouseCoordinates.Y, 200, 100),
-            Texture = Textures.BuildMenuPane
-        };
+        public static MoveablePane BuildMenuWindow;
 
         public static bool IsBuildMenuWindowVisible;
 
-        //ToDo 1 Update BuildMenuIcons relevant to Location
-        public static void UpdateBuildMenuWindowLocation()
+        public static void CreateBuildMenuWindow()
         {
-            if (Cursor.CursorRectangle.Intersects(buildMenuWindow.Rectangle) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                buildMenuWindow.Location = Engine.Engine.MouseCoordinates;
+            BuildMenuWindow = new MoveablePane
+            {
+                Location = Engine.Engine.MouseCoordinates,
+                Rectangle = new Rectangle((int)Engine.Engine.MouseCoordinates.X,
+                    (int)Engine.Engine.MouseCoordinates.Y, 200, 100),
+                Texture = Textures.BuildMenuPane
+            };
+
+            BuildMenuWindow.Location = Engine.Engine.MouseCoordinates;
+
+            foreach (var icon in EntityLists.MainIconList)
+            {
+                icon.Position.X = (BuildMenuWindow.Location.X + icon.XOffset);
+                icon.Position.Y = (BuildMenuWindow.Location.Y + icon.YOffset);
+            }
         }
 
-        public static void DrawBuildMenuPane()
+        public static void UpdateBuildMenuWindowLocation()
         {
-            Engine.Engine.SpriteBatch.Draw(buildMenuWindow.Texture, buildMenuWindow.Location, Color.White);
+            if (Cursor.CursorRectangle.Intersects(BuildMenuWindow.Rectangle) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                bool isHovering = false;
+
+                foreach (var icon in EntityLists.MainIconList)
+                {
+                    if (Cursor.CursorRectangle.Intersects(icon.BRec))
+                        isHovering = true;
+                }
+                    
+                if (!isHovering)
+                {
+                    BuildMenuWindow.Location.X =
+                        (int) Engine.Engine.MouseCoordinates.X - (Textures.BuildMenuPane.Width / 2);
+                    BuildMenuWindow.Location.Y =
+                        (int) Engine.Engine.MouseCoordinates.Y - (Textures.BuildMenuPane.Height / 2);
+
+                    BuildMenuWindow.Rectangle.X = (int) BuildMenuWindow.Location.X;
+                    BuildMenuWindow.Rectangle.Y = (int) BuildMenuWindow.Location.Y;
+
+                    foreach (var icon in EntityLists.MainIconList)
+                    {
+                        icon.Position.X = (BuildMenuWindow.Location.X + icon.XOffset);
+                        icon.Position.Y = (BuildMenuWindow.Location.Y + icon.YOffset);
+                    }
+                }
+            }
         }
     }
 }

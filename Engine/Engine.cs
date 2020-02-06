@@ -23,6 +23,8 @@ namespace Zeds.Engine
         public static int MapSizeX;
         public static int MapSizeY;
 
+        //ToDo 2 Align in-game coordinates with Windows coordinates 
+        // see http://community.monogame.net/t/mouse-position-in-fullscreen-app/7263
         public static Vector2 MouseCoordinates;
 
 
@@ -98,6 +100,8 @@ namespace Zeds.Engine
 
 
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
+
+            BuildMenuPane.CreateBuildMenuWindow();
             IsBuildWindowVisible = true;
 
 
@@ -134,6 +138,7 @@ namespace Zeds.Engine
             */
 
             //ToDo 1 Fix mouse getting 'stuck' in fullscreen mode
+            // This is probably relevant to the position of the Windows mouse location vs Monogame's mouse location
             MouseCoordinates.X = Mouse.GetState().X;
             MouseCoordinates.Y = Mouse.GetState().Y;
 
@@ -191,12 +196,21 @@ namespace Zeds.Engine
             SpriteBatch.Begin(Camera);
 
             RenderBackground.DrawBackground();
-            DrawMenus.DrawMainMenuIcons();
+
             DrawStructures.DrawBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 
             BuildMenuPane.UpdateBuildMenuWindowLocation();
+
+            if (RollOverText.IsRollOverTextVisible)
+                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
+
+            if (BuildMenuPane.IsBuildMenuWindowVisible)
+            {
+                DrawMenus.DrawBuildMenuPane();
+                DrawMenus.DrawMainMenuIcons();
+            }
 
             if (MenuInteraction.IsBuildMenuOpen)
                 DrawMenus.DrawBuildMenuIcons();
@@ -208,12 +222,6 @@ namespace Zeds.Engine
                 else
                     SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
-
-            if (RollOverText.IsRollOverTextVisible)
-                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
-
-            if (BuildMenuPane.IsBuildMenuWindowVisible)
-                BuildMenuPane.DrawBuildMenuPane();
 
             Cursor.DrawCursor();
 

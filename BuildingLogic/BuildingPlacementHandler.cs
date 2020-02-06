@@ -46,7 +46,7 @@ namespace Zeds.BuildingLogic
             Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),
                 (int)adjustedCoordinates.Y - (texture.Width / 2), texture.Width, texture.Height);
 
-            //ToDo !Test
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && CheckIfGroundClear(Engine.Engine.Blueprint))
             {
                 if (SelectedStructure == BuildingSelected.SmallTent)

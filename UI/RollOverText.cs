@@ -14,7 +14,9 @@ namespace Zeds.UI
         //ToDo 2 Move Rollover text nearer to the icon
         public static void DrawRolloverText(String text)
         {
-            Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, text, RollOverTextPosition, Color.White);
+            //ToDo 1 Fix rollover text not displaying
+            if (text != null)
+                Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, text, RollOverTextPosition, Color.White);
         }
 
         //ToDo !Test
