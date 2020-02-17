@@ -18,5 +18,18 @@ namespace Zeds.BuildingLogic
             
             EntityLists.BuildingList.Add(smallTent);
         }
+
+        public static void CreateLargeTent(Vector2 position, Rectangle bRec)
+        {
+            Tent largeTent = new Tent
+            {
+                Texture = Textures.LargeTentTexture,
+                ID = Guid.NewGuid().ToString(),
+                Position = new Vector2(position.X, position.Y),
+                BRec = bRec
+            };
+
+            EntityLists.BuildingList.Add(largeTent);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Zeds.UI
         {
             if (!BuildingPlacementHandler.IsPlacingBuilding)
                 Engine.Engine.SpriteBatch.Draw(Textures.CursorTexture, Engine.Engine.MouseCoordinates, Color.White);
-            //ToDo 2 Add cursor for demolition mode
+            //ToDo 3 Add cursor for demolition mode
         }
     }
 }

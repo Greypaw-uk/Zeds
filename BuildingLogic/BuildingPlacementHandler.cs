@@ -1,5 +1,4 @@
-﻿using System.Security.Policy;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Zeds.Engine;
@@ -20,7 +19,6 @@ namespace Zeds.BuildingLogic
         private static Vector2 adjustedCoordinates;
         public static BuildingSelected SelectedStructure;
 
-
         public static Texture2D SetBuildingTexture()
         {
             switch (SelectedStructure)
@@ -31,8 +29,8 @@ namespace Zeds.BuildingLogic
                 case BuildingSelected.SmallTent:
                     return Textures.SmallTentTexture;
 
-                //case BuildingSelected.LargeTent:
-                //return Textures.LargeTentTexture;
+                case BuildingSelected.LargeTent:
+                    return Textures.LargeTentTexture;
             }
 
             return null;
@@ -46,11 +44,18 @@ namespace Zeds.BuildingLogic
             Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),
                 (int)adjustedCoordinates.Y - (texture.Width / 2), texture.Width, texture.Height);
 
-
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && CheckIfGroundClear(Engine.Engine.Blueprint))
+            if (CheckMouseState.IsMouseClicked() && CheckIfGroundClear(Engine.Engine.Blueprint))
             {
-                if (SelectedStructure == BuildingSelected.SmallTent)
-                    Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
+                switch (SelectedStructure)
+                {
+                    case BuildingSelected.SmallTent:
+                        Tent.CreateSmallTent(adjustedCoordinates, Engine.Engine.Blueprint);
+                        break;
+
+                    case BuildingSelected.LargeTent:
+                        Tent.CreateLargeTent(adjustedCoordinates, Engine.Engine.Blueprint);
+                        break;
+                }
 
                 IsPlacingBuilding = false;
                 MenuInteraction.IsBuildMenuOpen = false;

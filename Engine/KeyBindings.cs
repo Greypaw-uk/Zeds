@@ -94,13 +94,24 @@ namespace Zeds.Engine
 
             PreviousScrollValue = currentMouseState.ScrollWheelValue;
 
-            //ToDo 2 Add option for every menu item in the Build Menu
-            if (MenuInteraction.IsBuildMenuOpen &&
-                Mouse.GetState().LeftButton == ButtonState.Pressed &&
-                (!Cursor.CursorRectangle.Intersects(Textures.BuildMenuIcon.Bounds) ||
-                 !Cursor.CursorRectangle.Intersects(Textures.TempMenuIcon.Bounds)))
+            
+            if (MenuInteraction.IsBuildMenuOpen)
             {
-                MenuInteraction.IsBuildMenuOpen = false;
+                bool intersects = false;
+                foreach (var icon in EntityLists.BuildIconList)
+                {
+                    if (Cursor.CursorRectangle.Intersects(icon.BRec))
+                        intersects = true;
+                }
+
+                foreach (var icon in EntityLists.MainIconList)
+                {
+                    if (Cursor.CursorRectangle.Intersects(icon.BRec))
+                        intersects = true;
+                }
+
+                if (!intersects && CheckMouseState.IsMouseClicked())
+                    MenuInteraction.IsBuildMenuOpen = false;
             }
         }
     }

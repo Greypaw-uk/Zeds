@@ -1,0 +1,84 @@
+Bug Fixes
+- Fixed issue where clicking BuildIcon moved the BuildMenuPane
+- Fixed RollOverText not correctly displaying during menu interaction
+- Fixed BuildMode not starting on BuildIcon click
+- Fixed RollOverText still displaying whilst in build mode
+
+Added/Altered
+- Rollover Text now displaying in the BuildMenuPane
+- Added missing offset values for icons
+- Changed BuildMenu RollOverText to only display if BuildMenu is open
+- Added LargeTent
+
+Refactored
+- Renamed SmalLTent class to Tent
+- Removed superfluous reference to GraphicsDevice as device
+- Moved variable tracking RollOverTextPosition into RolloverText class
+- Altered BuildingPlacement to a switch statement
+- Moved logic for updating BuildMenuPaneLocation from Draw to Updates
+
+--------------------
+
+03/02/2020
+
+Bug Fixes:
+- Addressed Build menu not opening correctly on click
+
+Added / Altered:
+- Added Panes to allow for movable menus
+- Moved Build Menu to a Pane
+- Added Small/Large Tent icons for Build Menu
+- Added Bulldozer icon for Menu
+- Added function for displaying rollover text for Build Menu items
+- Reworked keybind responsible for hiding/showing Build Menu
+
+Refactored:
+- Moved loading of textures into Textures class to clean up Engine class
+
+--------------------
+
+31/01/2020
+
+- Refactored UI and Build Menus into own classes
+- Added potential for Windowed (borderless) mode
+- Began adding Main Menu and Build Menu
+- Began framework for Rollover text to display info on UI
+
+--------------------
+
+30/01/2020
+
+- Replaced Windows mouse cursor with dedicated in-game cursor for more precise useage
+- Building placement added.
+- Added system to show a blueprint of the building which is about to be placed.
+- Started degbugging tools - currently display mouse coordinates
+
+--------------------
+
+10/01/2019
+
+- Changed code to reduce static directives
+
+--------------------
+
+09/01/2019
+
+- Tests for increasing gameplay area beyond scope of the viewport
+
+--------------------
+
+08/12/2019
+
+- Added in collision-checking
+
+--------------------
+
+06/01/2019
+
+- Refactored code to make it more manageable
+
+--------------------
+
+09/09/2019
+
+- Updated Zed movement logic

@@ -7,8 +7,10 @@ namespace Zeds.Graphics
 {
     public static class DrawMenus
     {
+        //ToDo 3 Move class to UI
         public class MainMenuIcon
         {
+            public string Name;
             public Vector2 Position;
             public Rectangle BRec;
             public Texture2D Texture;
@@ -17,12 +19,16 @@ namespace Zeds.Graphics
             public int YOffset;
         }
 
+        //ToDo 3 Move class to UI
         public class BuildMenuIcon
         {
+            public string Name;
             public Vector2 Position;
             public Rectangle BRec;
             public Texture2D Texture;
             public string MouseOverText;
+            public int XOffset;
+            public int YOffset;
         }
 
         public static void DrawMainMenuIcons()

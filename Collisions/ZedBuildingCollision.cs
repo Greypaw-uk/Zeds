@@ -5,6 +5,7 @@ namespace Zeds.Engine.Collisions
 {
     public static class ZedBuildingCollision
     {
+        // ToDo 2 Check LargeTent collision interaction
         public static void CheckZedBuildingCollision(Zed zed)
         {
             foreach (var building in EntityLists.BuildingList)

@@ -1,5 +1,4 @@
-﻿using System.Security.Permissions;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
 namespace Zeds.UI
@@ -20,31 +19,31 @@ namespace Zeds.UI
             int bmY = 35;
             var bmP = new Vector2(position.X + bmX, position.Y + bmY);
             var bmRec = new Rectangle((int)bmP.X + bmX, (int)bmP.Y + bmY, 30, 30);
-            MainMenu.CreateMainMenuIcon(Textures.BuildMenuIcon, bmP, bmX, bmY, bmRec, "Basic Structures");
+            MainMenu.CreateMainMenuIcon("Basic Structures", Textures.BuildMenuIcon, bmP, bmX, bmY, bmRec, "Basic Structures");
 
             // Demolish Icon
             int demX = 50;
             int demY = 35;
             var demP = new Vector2(position.X + demX, position.Y + demY);
             var demRec = new Rectangle((int)demP.X, (int)demP.Y, 30, 30);
-            MainMenu.CreateMainMenuIcon(Textures.DemolishIcon, demP, demX,demY, demRec, "Demolish");
+            MainMenu.CreateMainMenuIcon("Demolish", Textures.DemolishIcon, demP, demX,demY, demRec, "Demolish");
 
 
             //==== Build Menu ====
             //Small Tent
             int stX = 10;
             int stY = 70;
-            var stP = new Vector2(position.X - stX, position.Y + stY);
-            var stRec = new Rectangle((int)position.X - stX, (int)position.Y, 30, 30); 
-            BasicBuildMenu.CreateBuildMenuIcon(Textures.SmallTentBuildIcon, stP, stRec, "Small Tent");
+            var stP = new Vector2(position.X + stX, position.Y - stY);
+            var stRec = new Rectangle((int)position.X, (int)position.Y, 30, 30); 
+            BasicBuildMenu.CreateBuildMenuIcon("Small Tent", Textures.SmallTentBuildIcon, stP, stRec, stX, stY, "Small Tent");
 
             
             //Large Tent
             int ltX = 10;
             int ltY = 110;
-            var ltP = new Vector2(position.X - ltX, position.Y + stY);
+            var ltP = new Vector2(position.X + ltX, position.Y - stY);
             var ltRec = new Rectangle((int)ltP.X, (int)ltP.Y, 30, 30);
-            BasicBuildMenu.CreateBuildMenuIcon(Textures.LargeTentBuildIcon, ltP, ltRec, "Large Tent");
+            BasicBuildMenu.CreateBuildMenuIcon("Large Tent", Textures.LargeTentBuildIcon, ltP, ltRec, ltX, ltY, "Large Tent");
         }
     }
 }

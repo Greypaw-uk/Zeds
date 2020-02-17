@@ -8,9 +8,11 @@ namespace Zeds.Engine
         public static Texture2D BackgroundTexture;
         public static Texture2D HumanTexture;
         public static Texture2D ZedTexture;
+        public static Texture2D CursorTexture;
+
         public static Texture2D HqTexture;
         public static Texture2D SmallTentTexture;
-        public static Texture2D CursorTexture;
+        public static Texture2D LargeTentTexture;
 
         public static Texture2D BuildMenuPane;
         public static Texture2D BuildMenuIcon;
@@ -31,6 +33,7 @@ namespace Zeds.Engine
             //Structures
             HqTexture = Content.Load<Texture2D>("HQ");
             SmallTentTexture = Content.Load<Texture2D>("SmallTent");
+            LargeTentTexture = Content.Load<Texture2D>("LargeTent");
 
             //Cursors
             CursorTexture = Content.Load<Texture2D>("cursor");

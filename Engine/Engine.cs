@@ -15,7 +15,6 @@ namespace Zeds.Engine
         public static SpriteBatch SpriteBatch;
 
         public static GraphicsDeviceManager Graphics;
-        private GraphicsDevice device;
 
         public static Vector2 CameraPosition;
         public static Camera Camera;
@@ -58,6 +57,8 @@ namespace Zeds.Engine
 
         protected override void Initialize()
         {
+            Textures.LoadTextures(this.Content);
+
             Camera = new Camera(Graphics.GraphicsDevice);
             CameraPosition = Map.MapCentre();
 
@@ -83,7 +84,6 @@ namespace Zeds.Engine
 
             //Screen setup
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            device = GraphicsDevice;
 
             Window.Title = "Zeds - Alpha";
 
@@ -95,27 +95,25 @@ namespace Zeds.Engine
 
             KeyBindings.PreviousScrollValue = 0;
 
-            RollOverText.RollOverTextPosition.X = 0;
-            RollOverText.RollOverTextPosition.Y = 0;
 
-
+            //Build Menu
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
 
-            BuildMenuPane.CreateBuildMenuWindow();
+            PopulateMenus.PopulateMenuIconList();
+            BuildMenuPane.InitialiseBuildMenuLocation();
             IsBuildWindowVisible = true;
+            RollOverText.UpdateRollOverTextPosition();
 
 
             base.Initialize();
 
             ZedController.PopulateZedList();
-            PopulateMenus.PopulateMenuIconList();
         }
 
         protected override void LoadContent()
         {
             Fonts.DebugFont = Content.Load<SpriteFont>("DebugFont");
 
-            Textures.LoadTextures(this.Content);
 
             //Initial set up
             HQ.HQSetup();
@@ -158,24 +156,23 @@ namespace Zeds.Engine
             Camera.Debug.IsVisible = IsDebugEnabled;
 
 
+            RollOverText.GenerateRollOverText();
+
+
+            if (BuildingPlacementHandler.IsPlacingBuilding)
+            {
+                BuildingPlacementHandler.CheckIfGroundClear(Blueprint);
+                BuildingPlacementHandler.PlaceAStructure(BuildingPlacementHandler.SetBuildingTexture());
+            }
+
+
             //Menu 
             MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
 
             if (MenuInteraction.IsBuildMenuOpen)
-            {
-                RollOverText.GenerateRollOverText();
+                MenuInteraction.CheckBuildIconInteraction();
 
-                MenuInteraction.CheckSmallTentIconInteraction();
-            }
-
-
-            //Building Placement
-            if (BuildingPlacementHandler.IsPlacingBuilding)
-                BuildingPlacementHandler.PlaceAStructure(BuildingPlacementHandler.SetBuildingTexture());
-
-            if (BuildingPlacementHandler.IsPlacingBuilding)
-                BuildingPlacementHandler.CheckIfGroundClear(Blueprint);
-
+            BuildMenuPane.UpdateBuildMenuWindowLocation();
 
             ZedController.IncreaseZeds();
 
@@ -185,6 +182,8 @@ namespace Zeds.Engine
             HumanMovement.RunFromZeds();
 
             Cursor.UpdateCursorRectangleLocation();
+
+            CheckMouseState.UpdateMState();
 
             base.Update(gameTime);
         }
@@ -201,7 +200,6 @@ namespace Zeds.Engine
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 
-            BuildMenuPane.UpdateBuildMenuWindowLocation();
 
             if (RollOverText.IsRollOverTextVisible)
                 RollOverText.DrawRolloverText(RollOverText.RollOverTxt);

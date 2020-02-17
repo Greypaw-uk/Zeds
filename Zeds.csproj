@@ -45,9 +45,10 @@
     <Compile Include="BuildingLogic\BuildingPlacementHandler.cs" />
     <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
-    <Compile Include="BuildingLogic\SmallTent.cs" />
+    <Compile Include="BuildingLogic\Tent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
+    <Compile Include="Engine\CheckMouseState.cs" />
     <Compile Include="UI\BasicBuildMenu.cs" />
     <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
@@ -98,6 +99,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <None Include="PatchNotes" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
