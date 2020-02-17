@@ -201,6 +201,9 @@ namespace Zeds.Engine
             DrawZedPawns.DrawZeds();
 
 
+            if (RollOverText.IsRollOverTextVisible)
+                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
+
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
                 DrawMenus.DrawBuildMenuPane();
@@ -217,9 +220,6 @@ namespace Zeds.Engine
                 else
                     SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
-
-            if (RollOverText.IsRollOverTextVisible)
-                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
 
             Cursor.DrawCursor();
 
