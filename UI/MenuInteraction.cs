@@ -17,8 +17,10 @@ namespace Zeds.UI
                 foreach (var item in EntityLists.MainIconList)
                 {
                     if (cursor.Intersects(item.BRec))
-                        if (item.Texture == Textures.BuildMenuIcon && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        if (item.Texture == Textures.BuildMenuIcon && CheckMouseStateChange.IsMouseClicked())
                             IsBuildMenuOpen = true;
+                        else if (item.Texture == Textures.DemolishIcon && CheckMouseStateChange.IsMouseClicked())
+                            Bulldozer.IsBulldozerActive = true;
                 }
             }
         }

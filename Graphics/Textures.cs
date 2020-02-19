@@ -6,9 +6,16 @@ namespace Zeds.Engine
     public static class Textures
     {
         public static Texture2D BackgroundTexture;
+        public static Texture2D GrassTuftTexture;
+        public static Texture2D GrassTuft2Texture;
+        public static Texture2D GrassTuft3Texture;
+        public static Texture2D GrassTuft4Texture;
+
         public static Texture2D HumanTexture;
         public static Texture2D ZedTexture;
+
         public static Texture2D CursorTexture;
+        public static Texture2D DozerTexture;
 
         public static Texture2D HqTexture;
         public static Texture2D SmallTentTexture;
@@ -25,6 +32,10 @@ namespace Zeds.Engine
         {
             //Maps
             BackgroundTexture = Content.Load<Texture2D>("background");
+            GrassTuftTexture = Content.Load<Texture2D>("grasstuft");
+            GrassTuft2Texture = Content.Load<Texture2D>("grasstufttwo");
+            GrassTuft3Texture = Content.Load<Texture2D>("grasstuftthree");
+            GrassTuft4Texture = Content.Load<Texture2D>("grasstuftfour");
 
             //Pawns
             HumanTexture = Content.Load<Texture2D>("Human1");
@@ -37,6 +48,7 @@ namespace Zeds.Engine
 
             //Cursors
             CursorTexture = Content.Load<Texture2D>("cursor");
+            DozerTexture = Content.Load<Texture2D>("DozerIcon");
 
             //Menu Panes
             BuildMenuPane = Content.Load<Texture2D>("BuildMenuPane");

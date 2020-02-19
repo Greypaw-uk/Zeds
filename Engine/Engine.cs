@@ -30,8 +30,7 @@ namespace Zeds.Engine
         //UI
         public static bool IsDebugEnabled;
         public static Rectangle Blueprint;
-        public static bool IsBuildWindowVisible;
-        
+
 
         // Screen setup
         public static bool ResolutionChanged;
@@ -96,12 +95,14 @@ namespace Zeds.Engine
             KeyBindings.PreviousScrollValue = 0;
 
 
+            GrassTufts.CreateGrassTufts();
+
             //Build Menu
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
 
             PopulateMenus.PopulateMenuIconList();
             BuildMenuPane.InitialiseBuildMenuLocation();
-            IsBuildWindowVisible = true;
+            BuildMenuPane.IsBuildMenuWindowVisible = true;
             RollOverText.UpdateRollOverTextPosition();
 
 
@@ -141,10 +142,6 @@ namespace Zeds.Engine
             MouseCoordinates.Y = Mouse.GetState().Y;
 
 
-            KeyBindings.CheckForKeyInput();
-            KeyBindings.CheckForMouseInput();
-
-
             if (ResolutionChanged)
             {
                 ResolutionHandler.SetResolution();
@@ -172,10 +169,15 @@ namespace Zeds.Engine
             if (MenuInteraction.IsBuildMenuOpen)
                 MenuInteraction.CheckBuildIconInteraction();
 
-            BuildMenuPane.UpdateBuildMenuWindowLocation();
+            if (BuildMenuPane.IsBuildMenuWindowVisible)
+                BuildMenuPane.UpdateBuildMenuWindowLocation();
 
             ZedController.IncreaseZeds();
 
+
+            //Building Removal
+            if (Bulldozer.IsBulldozerActive)
+                Bulldozer.DemolishStructure();
 
             //Movement
             ZedMovement.CalculateZedMovement();
@@ -183,7 +185,9 @@ namespace Zeds.Engine
 
             Cursor.UpdateCursorRectangleLocation();
 
-            CheckMouseState.UpdateMState();
+            CheckMouseStateChange.UpdateMouseState();
+            KeyBindings.CheckForKeyInput();
+            KeyBindings.CheckForMouseInput();
 
             base.Update(gameTime);
         }
@@ -195,14 +199,11 @@ namespace Zeds.Engine
             SpriteBatch.Begin(Camera);
 
             RenderBackground.DrawBackground();
+            GrassTufts.DrawGrassTufts();
 
             DrawStructures.DrawBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
-
-
-            if (RollOverText.IsRollOverTextVisible)
-                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
@@ -210,7 +211,7 @@ namespace Zeds.Engine
                 DrawMenus.DrawMainMenuIcons();
             }
 
-            if (MenuInteraction.IsBuildMenuOpen)
+            if (BuildMenuPane.IsBuildMenuWindowVisible && MenuInteraction.IsBuildMenuOpen)
                 DrawMenus.DrawBuildMenuIcons();
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
@@ -221,7 +222,13 @@ namespace Zeds.Engine
                     SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
 
-            Cursor.DrawCursor();
+            if (RollOverText.IsRollOverTextVisible)
+                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
+
+            if (!Bulldozer.IsBulldozerActive)
+                Cursor.DrawCursor();
+            else
+                Cursor.DrawDozerCursor();
 
             SpriteBatch.End();
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Zeds.BuildingLogic;
 using Zeds.Engine;
 using Zeds.Graphics;
@@ -28,7 +27,7 @@ namespace Zeds.UI
         {
             IsRollOverTextVisible = false;
 
-            if (!BuildMenuPane.IsBuildMenuWindowVisible)
+            if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
                 if (!BuildingPlacementHandler.IsPlacingBuilding)
                 {

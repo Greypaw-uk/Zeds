@@ -44,7 +44,7 @@ namespace Zeds.BuildingLogic
             Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),
                 (int)adjustedCoordinates.Y - (texture.Width / 2), texture.Width, texture.Height);
 
-            if (CheckMouseState.IsMouseClicked() && CheckIfGroundClear(Engine.Engine.Blueprint))
+            if (CheckMouseStateChange.IsMouseClicked() && CheckIfGroundClear(Engine.Engine.Blueprint))
             {
                 switch (SelectedStructure)
                 {

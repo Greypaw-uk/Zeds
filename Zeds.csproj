@@ -48,7 +48,8 @@
     <Compile Include="BuildingLogic\Tent.cs" />
     <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
-    <Compile Include="Engine\CheckMouseState.cs" />
+    <Compile Include="Engine\CheckMouseStateChange.cs" />
+    <Compile Include="Graphics\GrassTuft.cs" />
     <Compile Include="UI\BasicBuildMenu.cs" />
     <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
@@ -91,6 +92,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />

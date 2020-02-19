@@ -58,8 +58,12 @@ namespace Zeds.Engine
             if (MenuInteraction.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
                 MenuInteraction.IsBuildMenuOpen = false;
 
-            if (BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.B))
+
+            if (BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.X))
+            {
                 BuildMenuPane.IsBuildMenuWindowVisible = false;
+                MenuInteraction.IsBuildMenuOpen = false;
+            }
 
             if (!BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.B))
                 BuildMenuPane.IsBuildMenuWindowVisible = true;
@@ -76,6 +80,8 @@ namespace Zeds.Engine
             if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
                 BuildingPlacementHandler.IsPlacingBuilding = false;
 
+            if (Bulldozer.IsBulldozerActive && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Bulldozer.IsBulldozerActive = false;
 
             //Debug Mode
             if (!Engine.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
@@ -110,7 +116,7 @@ namespace Zeds.Engine
                         intersects = true;
                 }
 
-                if (!intersects && CheckMouseState.IsMouseClicked())
+                if (!intersects && CheckMouseStateChange.IsMouseClicked())
                     MenuInteraction.IsBuildMenuOpen = false;
             }
         }

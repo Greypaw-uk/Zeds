@@ -1,12 +1,20 @@
-﻿namespace Zeds.Engine
+﻿using Zeds.UI;
+
+namespace Zeds.Engine
 {
     class Bulldozer
     {
-        /*
-         * draw bulldozer location
-         * for each item in building list
-         * if bulldozer intersects
-         * remove item from building list
-         */
+        public static bool IsBulldozerActive;
+
+        public static void DemolishStructure()
+        {
+            // ToDo 2 Increase precision of the intersection event
+            foreach (var building in EntityLists.BuildingList)
+                if (Cursor.CursorRectangle.Intersects(building.BRec) && CheckMouseStateChange.IsMouseClicked())
+                {
+                    EntityLists.BuildingList.Remove(building);
+                    break;
+                }
+        }
     }
 }

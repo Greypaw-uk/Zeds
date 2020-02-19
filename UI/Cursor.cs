@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Zeds.BuildingLogic;
 using Zeds.Engine;
 
@@ -22,6 +21,11 @@ namespace Zeds.UI
             if (!BuildingPlacementHandler.IsPlacingBuilding)
                 Engine.Engine.SpriteBatch.Draw(Textures.CursorTexture, Engine.Engine.MouseCoordinates, Color.White);
             //ToDo 3 Add cursor for demolition mode
+        }
+
+        public static void DrawDozerCursor()
+        {
+            Engine.Engine.SpriteBatch.Draw(Textures.DozerTexture, Engine.Engine.MouseCoordinates, Color.White);
         }
     }
 }

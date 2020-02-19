@@ -1,3 +1,24 @@
+19/02/2020
+
+Bug Fixes:
+- Fixed BuildMenuPane display logic
+- Fixed RollOverText... again
+- Pre-emptatively corrected a situation where BuildMenuIcons would remain when BuildWindowPane closed
+
+Added/Altered:
+- Replaced temp BuildWindowPane texture
+- Added border to BuildMenu icons
+- Introduced option to hide BuildWindowPane with X key
+- Introduced ability to demolish structures
+- Procedurally generated grass
+
+Refactored:
+- Changed names in CheckMouseState
+
+--------------------
+
+07/02/2020
+
 Bug Fixes
 - Fixed issue where clicking BuildIcon moved the BuildMenuPane
 - Fixed RollOverText not correctly displaying during menu interaction
