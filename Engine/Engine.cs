@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
+using Zeds.HumanLogic;
 using Zeds.UI;
 using Zeds.ZedLogic;
 
@@ -28,14 +29,17 @@ namespace Zeds.Engine
 
 
         //UI
-        public static bool IsDebugEnabled;
         public static Rectangle Blueprint;
 
 
         // Screen setup
         public static bool ResolutionChanged;
-        public static int ScreenWidth = 800;
-        public static int ScreenHeight = 600;
+        //public static int ScreenWidth = 1600;
+        //public static int ScreenHeight = 1200;
+
+        public static int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        public static int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
         public static int PreferredBackBufferWidth { get; set; }
         public static int PreferredBackBufferHeight { get; set; }
 
@@ -62,7 +66,7 @@ namespace Zeds.Engine
             CameraPosition = Map.MapCentre();
 
             // Screen Setup
-            ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
+            //ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
             MapSizeX = 1000;
             MapSizeY = 1000;
@@ -105,6 +109,7 @@ namespace Zeds.Engine
             BuildMenuPane.IsBuildMenuWindowVisible = true;
             RollOverText.UpdateRollOverTextPosition();
 
+            DetailsPane.CreateDetailsPane(new Vector2(0,0), "" );
 
             base.Initialize();
 
@@ -150,7 +155,6 @@ namespace Zeds.Engine
 
 
             Camera.Position = CameraPosition;
-            Camera.Debug.IsVisible = IsDebugEnabled;
 
 
             RollOverText.GenerateRollOverText();
@@ -164,13 +168,19 @@ namespace Zeds.Engine
 
 
             //Menu 
-            MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
+            if (!Bulldozer.IsBulldozerActive)
+                MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
 
-            if (MenuInteraction.IsBuildMenuOpen)
+            if (MenuInteraction.IsBuildMenuOpen && !Bulldozer.IsBulldozerActive)
                 MenuInteraction.CheckBuildIconInteraction();
 
-            if (BuildMenuPane.IsBuildMenuWindowVisible)
+            if (BuildMenuPane.IsBuildMenuWindowVisible && !Bulldozer.IsBulldozerActive)
                 BuildMenuPane.UpdateBuildMenuWindowLocation();
+
+
+            //DetailsPane.CheckForDetailsPaneMovement();
+            DetailsPane.DetailsPaneInteraction();
+            
 
             ZedController.IncreaseZeds();
 
@@ -201,9 +211,11 @@ namespace Zeds.Engine
             RenderBackground.DrawBackground();
             GrassTufts.DrawGrassTufts();
 
+
             DrawStructures.DrawBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
+
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
@@ -225,10 +237,17 @@ namespace Zeds.Engine
             if (RollOverText.IsRollOverTextVisible)
                 RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
 
+
+            DetailsPane.DrawDetailsPane();
+
             if (!Bulldozer.IsBulldozerActive)
                 Cursor.DrawCursor();
             else
                 Cursor.DrawDozerCursor();
+
+
+            if (Debug.IsDebugEnabled)
+                Debug.DrawDebugInfo();
 
             SpriteBatch.End();
 

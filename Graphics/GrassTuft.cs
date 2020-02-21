@@ -33,6 +33,7 @@ namespace Zeds.Graphics
 
                 Vector2 location = new Vector2(x, y);
 
+                //ToDo 3 Ensure GrassTufts are more spaced out
                 //Move tuft to reduce overlapping textures
                 if (EntityLists.GrassList.Count > 0)
                     foreach (var tuft in EntityLists.GrassList)

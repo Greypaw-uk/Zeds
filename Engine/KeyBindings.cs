@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
 using Zeds.UI;
@@ -17,13 +16,13 @@ namespace Zeds.Engine
             if (Keyboard.GetState().IsKeyDown(Keys.A) && Engine.CameraPosition.X >= 0)
                 Engine.CameraPosition.X -= 10;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Engine.CameraPosition.X <= Engine.MapSizeX)
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Engine.CameraPosition.X <= Engine.ScreenWidth)
                 Engine.CameraPosition.X += 10;
 
             if (Keyboard.GetState().IsKeyDown(Keys.W) && Engine.CameraPosition.Y >= 0)
                 Engine.CameraPosition.Y -= 10;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && Engine.CameraPosition.Y <= Engine.MapSizeY)
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && Engine.CameraPosition.Y <= Engine.ScreenHeight)
                 Engine.CameraPosition.Y += 10;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Add) && Engine.Camera.Zoom <= 1.8f)
@@ -84,10 +83,10 @@ namespace Zeds.Engine
                 Bulldozer.IsBulldozerActive = false;
 
             //Debug Mode
-            if (!Engine.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
-                Engine.IsDebugEnabled = true;
-            if (Engine.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
-                Engine.IsDebugEnabled = false;
+            if (!Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
+                Debug.IsDebugEnabled = true;
+            if (Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+                Debug.IsDebugEnabled = false;
         }
 
         public static void CheckForMouseInput()

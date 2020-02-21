@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Zeds.Engine;
 using Zeds.ZedLogic;
 
-namespace Zeds.Engine.Collisions
+namespace Zeds.Collisions
 {
     public static class ZedBuildingCollision
     {
@@ -11,7 +11,7 @@ namespace Zeds.Engine.Collisions
             foreach (var building in EntityLists.BuildingList)
                 if (zed.BRec.Intersects(building.BRec))
                 {
-                    Console.WriteLine("Bump");
+                    //Console.WriteLine("Bump");
 
                     if (zed.Position.X >= building.Position.X)
                         zed.Position.X += 1;

@@ -1,6 +1,5 @@
 ﻿using System;
 using Zeds.Engine;
-using Zeds.Collisions;
 
 namespace Zeds.BuildingLogic
 {
@@ -15,7 +14,11 @@ namespace Zeds.BuildingLogic
                 ID = Guid.NewGuid().ToString()
             };
 
-            hq.BRec = BoundingBoxes.BoundingBox(hq.Position, hq.Texture);
+            hq.BRec.X = (int) hq.Position.X;
+            hq.BRec.Y = (int) hq.Position.Y;
+
+            hq.BRec.Width = hq.Texture.Width;
+            hq.BRec.Height = hq.Texture.Height;
 
             EntityLists.BuildingList.Add(hq);
         }

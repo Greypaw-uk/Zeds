@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
 namespace Zeds.Graphics
@@ -8,7 +7,7 @@ namespace Zeds.Graphics
     {
         public static void DrawBackground()
         {
-            var backgroundRec = new Rectangle(0, 0, Engine.Engine.MapSizeX, Engine.Engine.MapSizeY);
+            var backgroundRec = new Rectangle(0, 0, Engine.Engine.ScreenWidth, Engine.Engine.ScreenHeight);
             Engine.Engine.SpriteBatch.Draw(Textures.BackgroundTexture, backgroundRec, Color.White);
 
         }

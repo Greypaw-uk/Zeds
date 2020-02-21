@@ -14,7 +14,7 @@ namespace Zeds.Pawns
         public float Angle;
         public Vector2 Position;
         public float Speed;
-        public BoundingBox BoundingBox;
+        public Rectangle BRec;
 
         public Texture2D Texture;
     }

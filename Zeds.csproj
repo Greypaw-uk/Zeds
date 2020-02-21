@@ -46,11 +46,11 @@
     <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\Tent.cs" />
-    <Compile Include="Collisions\BoundingBoxes.cs" />
     <Compile Include="Collisions\ZedBuildingCollision.cs" />
     <Compile Include="Engine\CheckMouseStateChange.cs" />
     <Compile Include="Graphics\GrassTuft.cs" />
     <Compile Include="UI\BasicBuildMenu.cs" />
+    <Compile Include="UI\DetailsWindowPane.cs" />
     <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\Cursor.cs" />
@@ -69,7 +69,6 @@
     <Compile Include="Graphics\ResolutionHandler.cs" />
     <Compile Include="HumanLogic\HumanSpawner.cs" />
     <Compile Include="Pawns\Human.cs" />
-    <Compile Include="HumanLogic\HumanController.cs" />
     <Compile Include="Engine\Program.cs" />
     <Compile Include="HumanLogic\HumanMovement.cs" />
     <Compile Include="Pawns\Creature.cs" />

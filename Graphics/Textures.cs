@@ -21,12 +21,15 @@ namespace Zeds.Engine
         public static Texture2D SmallTentTexture;
         public static Texture2D LargeTentTexture;
 
+        public static Texture2D BlankWindowPane;
         public static Texture2D BuildMenuPane;
         public static Texture2D BuildMenuIcon;
         public static Texture2D DemolishIcon;
         public static Texture2D TempMenuIcon;
         public static Texture2D SmallTentBuildIcon;
         public static Texture2D LargeTentBuildIcon;
+
+        public static Texture2D DebugSquare;
 
         public static void LoadTextures(ContentManager Content)
         {
@@ -51,6 +54,7 @@ namespace Zeds.Engine
             DozerTexture = Content.Load<Texture2D>("DozerIcon");
 
             //Menu Panes
+            BlankWindowPane = Content.Load<Texture2D>("BlankWindowPane");
             BuildMenuPane = Content.Load<Texture2D>("BuildMenuPane");
 
             //Menu Icons
@@ -59,6 +63,8 @@ namespace Zeds.Engine
             TempMenuIcon = Content.Load<Texture2D>("tempIcon");
             SmallTentBuildIcon = Content.Load<Texture2D>("SmallTentBuildIcon");
             LargeTentBuildIcon = Content.Load<Texture2D>("LargeTentBuildIcon");
+
+            DebugSquare = Content.Load<Texture2D>("DebugSquare");
         }
     }
 }

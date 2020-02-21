@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Zeds.Engine.Collisions;
+using Zeds.Collisions;
 using Zeds.Pawns;
 using Zeds.Engine;
 
@@ -78,6 +78,9 @@ namespace Zeds.ZedLogic
 
             zed.Angle = rotation;
             zed.Position += dir * zed.Speed;
+
+            zed.BRec.X = (int)zed.Position.X;
+            zed.BRec.Y = (int)zed.Position.Y;
         }
     }
 }

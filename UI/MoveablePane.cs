@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Windows;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Zeds.UI
@@ -8,5 +9,6 @@ namespace Zeds.UI
         public Texture2D Texture;
         public Vector2 Location;
         public Rectangle Rectangle;
+        public Vector2 TextCoordinates;
     }
 }

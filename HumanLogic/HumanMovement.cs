@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds
+namespace Zeds.HumanLogic
 {
     public static class HumanMovement
     {
@@ -32,10 +32,13 @@ namespace Zeds
             }
         }
 
-        public static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
+        private static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
         {
             human.Angle = rotation;
             human.Position += dir * human.Speed;
+
+            human.BRec.X = (int)human.Position.X;
+            human.BRec.Y = (int) human.Position.Y;
         }
     }
 }

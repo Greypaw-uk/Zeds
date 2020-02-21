@@ -1,3 +1,22 @@
+
+Bug Fixes:
+- Stopped menu interaction whilst in demolition mode
+- Supressed RollOverText in demolition mode
+
+Added/Altered:
+- Changed screen size values
+- Replaced all references to BoundingBox with Brecs for consistency 
+- Added Brec width/height based on entity's texture size
+- Added debug option - borders for on-screen assets for collision testing
+- Updated screensize logic to report on computer's resolution rather than hard-coded values
+- Added details window - which displays details of entities which have been clicked on
+
+Refactored:
+- Stripped unused code from BuildMenuPane
+- Updated misc namespaces in classes
+
+--------------------
+
 19/02/2020
 
 Bug Fixes:

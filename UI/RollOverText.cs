@@ -29,7 +29,7 @@ namespace Zeds.UI
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
-                if (!BuildingPlacementHandler.IsPlacingBuilding)
+                if (!BuildingPlacementHandler.IsPlacingBuilding && !Bulldozer.IsBulldozerActive)
                 {
                     foreach (var menuIcon in EntityLists.MainIconList)
                     {

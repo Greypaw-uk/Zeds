@@ -10,5 +10,7 @@ namespace Zeds.BuildingLogic
         public Texture2D Texture;
         public string ID;
         public Rectangle BRec;
+        public string Name;
+        public string Description;
     }
 }

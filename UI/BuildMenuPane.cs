@@ -10,7 +10,15 @@ namespace Zeds.UI
 
         public static bool IsBuildMenuWindowVisible;
 
-        public static void CreateBuildMenuWindow()
+
+        public static void InitialiseBuildMenuLocation()
+        {
+            CreateBuildMenuWindow();
+            UpdateMainMenuLocation();
+            UpdateBuildMenuLocation();
+        }
+
+        private static void CreateBuildMenuWindow()
         {
             BuildMenuWindow = new MoveablePane
             {
@@ -36,7 +44,6 @@ namespace Zeds.UI
         {
             if (Cursor.CursorRectangle.Intersects(BuildMenuWindow.Rectangle) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                //var clickLocation = new Vector2();
                 bool isHovering = false;
 
                 foreach (var icon in EntityLists.MainIconList)
@@ -53,18 +60,6 @@ namespace Zeds.UI
                     
                 if (!isHovering)
                 {
-                    /*
-                    clickLocation.X = Engine.Engine.MouseCoordinates.X - BuildMenuWindow.Location.X - 10;
-                    clickLocation.Y = Engine.Engine.MouseCoordinates.Y - BuildMenuWindow.Location.Y - 10;
-
-
-                    BuildMenuWindow.Location.X +=  clickLocation.X;
-                    BuildMenuWindow.Location.Y += clickLocation.Y;
-
-                    BuildMenuWindow.Rectangle.X = (int)BuildMenuWindow.Location.X;
-                    BuildMenuWindow.Rectangle.Y = (int)BuildMenuWindow.Location.Y;
-                    */
-
                     //ToDo 3 Improve movement of Window
                     BuildMenuWindow.Location.X =
                         (int) Engine.Engine.MouseCoordinates.X - (Textures.BuildMenuPane.Width / 2);
@@ -80,13 +75,6 @@ namespace Zeds.UI
                     RollOverText.UpdateRollOverTextPosition();
                 }
             }
-        }
-
-        public static void InitialiseBuildMenuLocation()
-        {
-            CreateBuildMenuWindow();
-            UpdateMainMenuLocation();
-            UpdateBuildMenuLocation();
         }
 
         private static void UpdateMainMenuLocation()

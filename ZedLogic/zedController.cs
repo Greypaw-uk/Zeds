@@ -1,7 +1,6 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using Zeds.Engine;
-using Zeds.Collisions;
-
 
 namespace Zeds.ZedLogic
 {
@@ -22,7 +21,11 @@ namespace Zeds.ZedLogic
                     ID = Guid.NewGuid().ToString()
                 };
 
-                zed.BRec = BoundingBoxes.BoundingBox(zed.Position, zed.Texture);
+                zed.BRec.X = (int) zed.Position.X;
+                zed.BRec.Y = (int)zed.Position.Y;
+
+                zed.BRec.Width = Textures.ZedTexture.Width;
+                zed.BRec.Height = Textures.ZedTexture.Height;
 
                 ZedSpawner.StopZedsBunching();
 

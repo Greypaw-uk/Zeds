@@ -1,15 +1,33 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Zeds.Engine
 {
-    class Debug
+    public static class Debug
     {
+        public static bool IsDebugEnabled;
+        private static List<Rectangle> recList = new List<Rectangle>();
+
         public static void DrawDebugInfo()
         {
-            Engine.SpriteBatch.DrawString(Graphics.Fonts.DebugFont, "Debug = " + Engine.IsDebugEnabled, new Vector2(10, 10), Color.White);
-            Engine.SpriteBatch.DrawString(Graphics.Fonts.DebugFont,
-                    Engine.MouseCoordinates.X + "," + Engine.MouseCoordinates.Y,
-                    new Vector2(Engine.MouseCoordinates.X + 20, Engine.MouseCoordinates.Y), Color.White);
+            DrawCollisionBoxes();
+        }
+
+        private static void DrawCollisionBoxes()
+        {
+            recList.Clear();
+
+            foreach (var zed in EntityLists.ZedList)
+                recList.Add(new Rectangle(zed.BRec.X, zed.BRec.Y, zed.Texture.Width, zed.Texture.Height));
+
+            foreach (var building in EntityLists.BuildingList)
+                recList.Add(new Rectangle(building.BRec.X, building.BRec.Y, building.Texture.Width, building.Texture.Height));
+
+            foreach (var human in EntityLists.HumanList)
+                recList.Add(new Rectangle(human.BRec.X, human.BRec.Y, human.Texture.Width, human.Texture.Height));
+
+            foreach (var rec in recList)
+                Engine.SpriteBatch.Draw(Textures.DebugSquare, new Rectangle(rec.X, rec.Y, rec.Width, rec.Height), Color.White);
         }
     }
 }
