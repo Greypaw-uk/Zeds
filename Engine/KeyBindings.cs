@@ -2,6 +2,7 @@
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
 using Zeds.UI;
+using Zeds.UI.Build_Menu;
 
 namespace Zeds.Engine
 {
@@ -54,14 +55,14 @@ namespace Zeds.Engine
 
 
             //Menu Interaction
-            if (MenuInteraction.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
-                MenuInteraction.IsBuildMenuOpen = false;
+            if (BuildMenuInteraction.IsBuildMenuOpen && Keyboard.GetState().IsKeyDown(Keys.Escape))
+                BuildMenuInteraction.IsBuildMenuOpen = false;
 
 
             if (BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.X))
             {
                 BuildMenuPane.IsBuildMenuWindowVisible = false;
-                MenuInteraction.IsBuildMenuOpen = false;
+                BuildMenuInteraction.IsBuildMenuOpen = false;
             }
 
             if (!BuildMenuPane.IsBuildMenuWindowVisible && Keyboard.GetState().IsKeyDown(Keys.B))
@@ -71,7 +72,7 @@ namespace Zeds.Engine
             //Enter Modes
             if (BuildingPlacementHandler.IsPlacingBuilding && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                MenuInteraction.IsBuildMenuOpen = false;
+                BuildMenuInteraction.IsBuildMenuOpen = false;
             }
 
 
@@ -100,7 +101,7 @@ namespace Zeds.Engine
             PreviousScrollValue = currentMouseState.ScrollWheelValue;
 
             
-            if (MenuInteraction.IsBuildMenuOpen)
+            if (BuildMenuInteraction.IsBuildMenuOpen)
             {
                 bool intersects = false;
                 foreach (var icon in EntityLists.BuildIconList)
@@ -116,7 +117,7 @@ namespace Zeds.Engine
                 }
 
                 if (!intersects && CheckMouseStateChange.IsMouseClicked())
-                    MenuInteraction.IsBuildMenuOpen = false;
+                    BuildMenuInteraction.IsBuildMenuOpen = false;
             }
         }
     }

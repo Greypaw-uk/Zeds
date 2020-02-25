@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.HumanLogic
+namespace Zeds.Pawns.HumanLogic
 {
     public static class HumanMovement
     {
@@ -32,13 +32,14 @@ namespace Zeds.HumanLogic
             }
         }
 
+        //ToDo 2 Rotation is affecting offset of collision box
         private static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
-        {
+        { 
             human.Angle = rotation;
             human.Position += dir * human.Speed;
 
-            human.BRec.X = (int)human.Position.X;
-            human.BRec.Y = (int) human.Position.Y;
+            human.BRec.X = (int)human.Position.X - (human.Texture.Width / 2);
+            human.BRec.Y = (int)human.Position.Y - (human.Texture.Height / 2);
         }
     }
 }

@@ -1,3 +1,28 @@
+Bug Fixes:
+
+Added/Altered:
+
+Refactored:
+
+
+--------------------
+
+25/02/2020
+
+Bug Fixes:
+- Collision boxes now correctly lay over an entity's sprite.
+
+Added/Altered:
+- Added separate Debug boxes, dependant on entity's texture size
+
+Refactored:
+- Moved all classes regarding Humans and Zeds into the Pawns folder
+- Moved all Build Menu classes into their own folder
+- Moved Background and Grass Tufts into their own folder
+
+--------------------
+
+20/02/2020
 
 Bug Fixes:
 - Stopped menu interaction whilst in demolition mode

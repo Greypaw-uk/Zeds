@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using Zeds.BuildingLogic;
 using Zeds.Engine;
 
-namespace Zeds.UI
+namespace Zeds.UI.Build_Menu
 {
-    public static class MenuInteraction
+    public static class BuildMenuInteraction
     {
         public static bool IsBuildMenuOpen;
 

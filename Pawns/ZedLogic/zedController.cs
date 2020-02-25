@@ -1,8 +1,7 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.ZedLogic
+namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedController
     {
@@ -18,7 +17,8 @@ namespace Zeds.ZedLogic
                     Health = 1,
                     Speed = 0.25f,
                     Texture = Textures.ZedTexture,
-                    ID = Guid.NewGuid().ToString()
+                    ID = Guid.NewGuid().ToString(),
+                    Description = "A zombie.  Grr, argh"
                 };
 
                 zed.BRec.X = (int) zed.Position.X;

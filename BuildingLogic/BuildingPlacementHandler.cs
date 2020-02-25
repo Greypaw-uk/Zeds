@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Zeds.Engine;
 using Zeds.UI;
+using Zeds.UI.Build_Menu;
 
 namespace Zeds.BuildingLogic
 {
@@ -58,7 +59,7 @@ namespace Zeds.BuildingLogic
                 }
 
                 IsPlacingBuilding = false;
-                MenuInteraction.IsBuildMenuOpen = false;
+                BuildMenuInteraction.IsBuildMenuOpen = false;
                 SelectedStructure = BuildingSelected.None;
             }
         }

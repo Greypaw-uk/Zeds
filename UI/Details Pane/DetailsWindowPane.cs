@@ -1,10 +1,9 @@
-﻿using System;
+﻿using System.Text;
 using Microsoft.Xna.Framework;
-using System.Text;
 using Zeds.Engine;
 using Zeds.Graphics;
 
-namespace Zeds.UI
+namespace Zeds.UI.Details_Pane
 {
     public static class DetailsPane
     {
@@ -23,8 +22,8 @@ namespace Zeds.UI
 
             {
                 Location =  location,
-                Description = description,
-                Texture = Textures.BlankWindowPane
+                Texture = Textures.BlankWindowPane,
+                Description = ""
             };
 
             detailsPane.Rectangle.X = (int)detailsPane.Location.X;
@@ -37,18 +36,19 @@ namespace Zeds.UI
         public static void DrawDetailsPane()
         {
             Engine.Engine.SpriteBatch.Draw(detailsPane.Texture, detailsPane.Location, Color.AliceBlue);
-            Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, descriptionBuilder, detailsPane.TextCoordinates, Color.White);
+            Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, detailsPane.Description, detailsPane.TextCoordinates, Color.White);
         }
 
         public static void DetailsPaneInteraction()
         {
+            isDetailPaneVisible = false;
+            descriptionBuilder.Clear();
+
             CheckHumanInteraction();
             CheckBuildingInteraction();
             CheckZedInteraction();
 
             CheckForDetailsPaneMovement();
-
-            Console.WriteLine(descriptionBuilder);
         }
 
         private static void CheckForDetailsPaneMovement()
@@ -70,9 +70,8 @@ namespace Zeds.UI
 
         private static void CheckHumanInteraction()
         {
-            descriptionBuilder.Clear();
-
             foreach (var person in EntityLists.HumanList)
+            {
                 if (Cursor.CursorRectangle.Intersects(person.BRec))
                 {
                     descriptionBuilder.Append(person.Name);
@@ -81,39 +80,44 @@ namespace Zeds.UI
                     descriptionBuilder.Append(" year-old ");
                     descriptionBuilder.Append(person.Occupation);
 
+                    detailsPane.Description = descriptionBuilder.ToString();
+
                     isDetailPaneVisible = true;
                     break;
                 }
+            }
         }
 
         private static void CheckBuildingInteraction()
         {
-            descriptionBuilder.Clear();
-
             foreach (var building in EntityLists.BuildingList)
-            {
                 if (Cursor.CursorRectangle.Intersects(building.BRec))
                 {
-                    descriptionBuilder.Append(building.Description);
+                    {
+                        descriptionBuilder.Append(building.Description);
 
-                    isDetailPaneVisible = true;
-                    break;
+                        detailsPane.Description = descriptionBuilder.ToString();
+
+                        isDetailPaneVisible = true;
+                        break;
+                    }
                 }
-            }
         }
 
         private static void CheckZedInteraction()
         {
-            descriptionBuilder.Clear();
-
             foreach (var zed in EntityLists.ZedList)
-            {
                 if (Cursor.CursorRectangle.Intersects(zed.BRec))
-                    descriptionBuilder.Append("A zombie - grr, argh");
+                {
+                    {
+                        descriptionBuilder.Append(zed.Description);
 
-                isDetailPaneVisible = true;
-                break;
-            }
+                        detailsPane.Description = descriptionBuilder.ToString();
+
+                        isDetailPaneVisible = true;
+                        break;
+                    }
+                }
         }
     }
 }

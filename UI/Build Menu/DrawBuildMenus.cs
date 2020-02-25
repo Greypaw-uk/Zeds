@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.Engine;
-using Zeds.UI;
 
-namespace Zeds.Graphics
+namespace Zeds.UI.Build_Menu
 {
-    public static class DrawMenus
+    public static class DrawBuildMenus
     {
         //ToDo 3 Move class to UI
         public class MainMenuIcon

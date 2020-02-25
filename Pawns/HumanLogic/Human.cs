@@ -1,6 +1,4 @@
-﻿using Zeds.Pawns;
-
-namespace Zeds
+﻿namespace Zeds.Pawns.HumanLogic
 {
     public class Human : Creature
     {

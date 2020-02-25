@@ -1,7 +1,7 @@
 ﻿using System;
 using Zeds.Engine;
 
-namespace Zeds.HumanLogic
+namespace Zeds.Pawns.HumanLogic
 {
     public static class HumanSpawner
     {
@@ -23,11 +23,12 @@ namespace Zeds.HumanLogic
                     ID = Guid.NewGuid().ToString(),
                     Name = "Bob",
                     Age = 25,
-                    Occupation = "Nurse"
+                    Occupation = "Nurse",
+                    Description = ""
                 };
 
-                human.BRec.X = (int)human.Position.X;
-                human.BRec.Y = (int)human.Position.Y;
+                human.BRec.X = (int)human.Position.X - (human.Texture.Width / 2);
+                human.BRec.Y = (int)human.Position.Y - human.Texture.Height / 2;
 
                 human.BRec.Width = human.Texture.Width;
                 human.BRec.Height = human.Texture.Height;

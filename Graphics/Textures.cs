@@ -29,7 +29,8 @@ namespace Zeds.Engine
         public static Texture2D SmallTentBuildIcon;
         public static Texture2D LargeTentBuildIcon;
 
-        public static Texture2D DebugSquare;
+        public static Texture2D DebugSquareSmall;
+        public static Texture2D DebugSquareLarge;
 
         public static void LoadTextures(ContentManager Content)
         {
@@ -64,7 +65,9 @@ namespace Zeds.Engine
             SmallTentBuildIcon = Content.Load<Texture2D>("SmallTentBuildIcon");
             LargeTentBuildIcon = Content.Load<Texture2D>("LargeTentBuildIcon");
 
-            DebugSquare = Content.Load<Texture2D>("DebugSquare");
+            DebugSquareSmall = Content.Load<Texture2D>("DebugSquareSmall");
+            DebugSquareLarge = Content.Load<Texture2D>("DebugSquareLarge");
+
         }
     }
 }

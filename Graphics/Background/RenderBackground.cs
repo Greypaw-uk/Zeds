@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.Graphics
+namespace Zeds.Graphics.Background
 {
     static class RenderBackground
     {

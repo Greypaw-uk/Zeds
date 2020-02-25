@@ -1,14 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Zeds.BuildingLogic;
 using Zeds.Engine;
 using Zeds.Graphics;
 
-namespace Zeds.UI
+namespace Zeds.UI.Build_Menu
 {
-    public static class RollOverText
+    public static class BuildMenuRollOverText
     {
         public static string RollOverTxt;
-        public static bool IsRollOverTextVisible;
+        public static bool IsBuildMenuRollOverTextVisible;
         private static Vector2 RollOverTextPosition;
 
         public static void DrawRolloverText(string text)
@@ -25,32 +26,26 @@ namespace Zeds.UI
 
         public static void GenerateRollOverText()
         {
-            IsRollOverTextVisible = false;
+            IsBuildMenuRollOverTextVisible = false;
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
                 if (!BuildingPlacementHandler.IsPlacingBuilding && !Bulldozer.IsBulldozerActive)
                 {
-                    foreach (var menuIcon in EntityLists.MainIconList)
+                    foreach (var menuIcon in EntityLists.MainIconList.Where(menuIcon => Cursor.CursorRectangle.Intersects(menuIcon.BRec)))
                     {
-                        if (Cursor.CursorRectangle.Intersects(menuIcon.BRec))
-                        {
-                            RollOverTxt = menuIcon.MouseOverText;
-                            IsRollOverTextVisible = true;
+                        RollOverTxt = menuIcon.MouseOverText;
+                            IsBuildMenuRollOverTextVisible = true;
                             break;
-                        }
                     }
 
-                    if (MenuInteraction.IsBuildMenuOpen)
+                    if (BuildMenuInteraction.IsBuildMenuOpen)
                     {
-                        foreach (var menuIcon in EntityLists.BuildIconList)
+                        foreach (var menuIcon in EntityLists.BuildIconList.Where(menuIcon => Cursor.CursorRectangle.Intersects(menuIcon.BRec)))
                         {
-                            if (Cursor.CursorRectangle.Intersects(menuIcon.BRec))
-                            {
-                                RollOverTxt = menuIcon.MouseOverText;
-                                IsRollOverTextVisible = true;
+                            RollOverTxt = menuIcon.MouseOverText;
+                                IsBuildMenuRollOverTextVisible = true;
                                 break;
-                            }
                         }
                     }
                 }

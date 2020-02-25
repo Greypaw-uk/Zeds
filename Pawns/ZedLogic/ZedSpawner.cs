@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.ZedLogic
+namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedSpawner
     {

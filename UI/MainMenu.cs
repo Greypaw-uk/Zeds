@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Zeds.Engine;
-using Zeds.Graphics;
+using Zeds.UI.Build_Menu;
 
 namespace Zeds.UI
 {
@@ -10,7 +10,7 @@ namespace Zeds.UI
     {
         public static void CreateMainMenuIcon(string name, Texture2D texture, Vector2 position, int xOffset, int yOffset, Rectangle bRec, String mouseOverText)
         {
-            var menuIcon = new DrawMenus.MainMenuIcon
+            var menuIcon = new DrawBuildMenus.MainMenuIcon
             {
                 Name = name,
                 Texture = texture,

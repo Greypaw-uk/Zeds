@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.UI
+namespace Zeds.UI.Build_Menu
 {
-    public static class PopulateMenus
+    public static class PopulateBuildMenus
     {
         private static Vector2 position; 
 

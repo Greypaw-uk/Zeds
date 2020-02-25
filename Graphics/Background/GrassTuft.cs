@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.Engine;
 
-namespace Zeds.Graphics
+namespace Zeds.Graphics.Background
 {
     public class GrassTuft
     {

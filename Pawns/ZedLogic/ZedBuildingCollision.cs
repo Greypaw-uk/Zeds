@@ -1,7 +1,6 @@
 ﻿using Zeds.Engine;
-using Zeds.ZedLogic;
 
-namespace Zeds.Collisions
+namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedBuildingCollision
     {

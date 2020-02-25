@@ -5,9 +5,12 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
 using Zeds.Graphics;
-using Zeds.HumanLogic;
+using Zeds.Graphics.Background;
+using Zeds.Pawns.HumanLogic;
+using Zeds.Pawns.ZedLogic;
 using Zeds.UI;
-using Zeds.ZedLogic;
+using Zeds.UI.Build_Menu;
+using Zeds.UI.Details_Pane;
 
 namespace Zeds.Engine
 {
@@ -104,10 +107,10 @@ namespace Zeds.Engine
             //Build Menu
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
 
-            PopulateMenus.PopulateMenuIconList();
+            PopulateBuildMenus.PopulateMenuIconList();
             BuildMenuPane.InitialiseBuildMenuLocation();
             BuildMenuPane.IsBuildMenuWindowVisible = true;
-            RollOverText.UpdateRollOverTextPosition();
+            BuildMenuRollOverText.UpdateRollOverTextPosition();
 
             DetailsPane.CreateDetailsPane(new Vector2(0,0), "" );
 
@@ -157,7 +160,7 @@ namespace Zeds.Engine
             Camera.Position = CameraPosition;
 
 
-            RollOverText.GenerateRollOverText();
+            BuildMenuRollOverText.GenerateRollOverText();
 
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
@@ -169,10 +172,10 @@ namespace Zeds.Engine
 
             //Menu 
             if (!Bulldozer.IsBulldozerActive)
-                MenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
+                BuildMenuInteraction.CheckCursorMenuInteraction(Cursor.CursorRectangle);
 
-            if (MenuInteraction.IsBuildMenuOpen && !Bulldozer.IsBulldozerActive)
-                MenuInteraction.CheckBuildIconInteraction();
+            if (BuildMenuInteraction.IsBuildMenuOpen && !Bulldozer.IsBulldozerActive)
+                BuildMenuInteraction.CheckBuildIconInteraction();
 
             if (BuildMenuPane.IsBuildMenuWindowVisible && !Bulldozer.IsBulldozerActive)
                 BuildMenuPane.UpdateBuildMenuWindowLocation();
@@ -219,12 +222,12 @@ namespace Zeds.Engine
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
-                DrawMenus.DrawBuildMenuPane();
-                DrawMenus.DrawMainMenuIcons();
+                DrawBuildMenus.DrawBuildMenuPane();
+                DrawBuildMenus.DrawMainMenuIcons();
             }
 
-            if (BuildMenuPane.IsBuildMenuWindowVisible && MenuInteraction.IsBuildMenuOpen)
-                DrawMenus.DrawBuildMenuIcons();
+            if (BuildMenuPane.IsBuildMenuWindowVisible && BuildMenuInteraction.IsBuildMenuOpen)
+                DrawBuildMenus.DrawBuildMenuIcons();
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
             {
@@ -234,8 +237,8 @@ namespace Zeds.Engine
                     SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
 
-            if (RollOverText.IsRollOverTextVisible)
-                RollOverText.DrawRolloverText(RollOverText.RollOverTxt);
+            if (BuildMenuRollOverText.IsBuildMenuRollOverTextVisible)
+                BuildMenuRollOverText.DrawRolloverText(BuildMenuRollOverText.RollOverTxt);
 
 
             DetailsPane.DrawDetailsPane();

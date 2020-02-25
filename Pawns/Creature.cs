@@ -11,6 +11,8 @@ namespace Zeds.Pawns
         public int Health;
         public string ID;
 
+        public string Description;
+
         public float Angle;
         public Vector2 Position;
         public float Speed;

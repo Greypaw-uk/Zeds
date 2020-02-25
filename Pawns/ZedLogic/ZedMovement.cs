@@ -1,19 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Zeds.Collisions;
-using Zeds.Pawns;
 using Zeds.Engine;
 
-namespace Zeds.ZedLogic
+namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedMovement
     {
-        private static void UpdateBoundingRectangle(Zed zed)
-        {
-            zed.BRec.X = (int) zed.Position.X;
-            zed.BRec.Y = (int) zed.Position.Y;
-        }
-
         public static void CalculateZedMovement()
         {
             if (EntityLists.ZedList.Count != 0)
@@ -26,7 +18,6 @@ namespace Zeds.ZedLogic
                     // Rotate to face movement direction
                     var rotation = (float) Math.Atan2(dir.Y, dir.X);
 
-                    UpdateBoundingRectangle(zed);
                     UpdateZedPosition(zed, rotation, dir);  
                 }
         }
@@ -72,6 +63,7 @@ namespace Zeds.ZedLogic
             return target;
         }
 
+        //ToDo 2 Rotation is affecting offset of collision box
         private static void UpdateZedPosition(Zed zed, float rotation, Vector2 dir)
         {
             ZedBuildingCollision.CheckZedBuildingCollision(zed);
@@ -79,8 +71,8 @@ namespace Zeds.ZedLogic
             zed.Angle = rotation;
             zed.Position += dir * zed.Speed;
 
-            zed.BRec.X = (int)zed.Position.X;
-            zed.BRec.Y = (int)zed.Position.Y;
+            zed.BRec.X = (int)zed.Position.X - (zed.Texture.Width / 2);
+            zed.BRec.Y = (int)zed.Position.Y - (zed.Texture.Height / 2);
         }
     }
 }

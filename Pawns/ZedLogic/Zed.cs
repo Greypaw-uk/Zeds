@@ -1,6 +1,4 @@
-﻿using Zeds.Pawns;
-
-namespace Zeds.ZedLogic
+﻿namespace Zeds.Pawns.ZedLogic
 {
     public class Zed : Creature
     {

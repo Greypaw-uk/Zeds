@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Zeds.UI;
 
 namespace Zeds.Engine
 {
@@ -17,6 +18,8 @@ namespace Zeds.Engine
         {
             recList.Clear();
 
+            recList.Add(new Rectangle(Cursor.CursorRectangle.X, Cursor.CursorRectangle.Y, Cursor.CursorRectangle.Width, Cursor.CursorRectangle.Height));
+
             foreach (var zed in EntityLists.ZedList)
                 recList.Add(new Rectangle(zed.BRec.X, zed.BRec.Y, zed.Texture.Width, zed.Texture.Height));
 
@@ -27,7 +30,10 @@ namespace Zeds.Engine
                 recList.Add(new Rectangle(human.BRec.X, human.BRec.Y, human.Texture.Width, human.Texture.Height));
 
             foreach (var rec in recList)
-                Engine.SpriteBatch.Draw(Textures.DebugSquare, new Rectangle(rec.X, rec.Y, rec.Width, rec.Height), Color.White);
+                if (rec.Height >= 100 || rec.Width >= 100 )
+                    Engine.SpriteBatch.Draw(Textures.DebugSquareLarge, new Rectangle(rec.X, rec.Y, rec.Width, rec.Height), Color.White);
+                else
+                    Engine.SpriteBatch.Draw(Textures.DebugSquareSmall, new Rectangle(rec.X, rec.Y, rec.Width, rec.Height), Color.White);
         }
     }
 }

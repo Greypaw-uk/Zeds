@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using Zeds.Engine;
 
-namespace Zeds.UI
+namespace Zeds.UI.Build_Menu
 {
     public static class BuildMenuPane
     {
@@ -72,7 +72,7 @@ namespace Zeds.UI
 
                     UpdateMainMenuLocation();
                     UpdateBuildMenuLocation();
-                    RollOverText.UpdateRollOverTextPosition();
+                    BuildMenuRollOverText.UpdateRollOverTextPosition();
                 }
             }
         }
