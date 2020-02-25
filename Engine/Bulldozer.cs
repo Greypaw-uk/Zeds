@@ -8,7 +8,7 @@ namespace Zeds.Engine
 
         public static void DemolishStructure()
         {
-            // ToDo 2 Increase precision of the intersection event
+            // ToDo 2 Exclude HQ from demolition
             foreach (var building in EntityLists.BuildingList)
                 if (Cursor.CursorRectangle.Intersects(building.BRec) && CheckMouseStateChange.IsMouseClicked())
                 {

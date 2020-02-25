@@ -78,7 +78,6 @@ namespace Zeds.Engine
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += WindowSizeChanged;
 
-            //ToDo 3 Move to new class
             void WindowSizeChanged(object sender, EventArgs e)
             {
                 ScreenWidth = Window.ClientBounds.Width;
@@ -97,6 +96,9 @@ namespace Zeds.Engine
             IsMouseVisible = false;
             MouseCoordinates.X = 0;
             MouseCoordinates.Y = 0;
+
+
+            HumanNames.PopulateNamesLists();
 
 
             KeyBindings.PreviousScrollValue = 0;
@@ -160,6 +162,7 @@ namespace Zeds.Engine
             Camera.Position = CameraPosition;
 
 
+            #region User Interface
             BuildMenuRollOverText.GenerateRollOverText();
 
 
@@ -181,9 +184,11 @@ namespace Zeds.Engine
                 BuildMenuPane.UpdateBuildMenuWindowLocation();
 
 
-            //DetailsPane.CheckForDetailsPaneMovement();
-            DetailsPane.DetailsPaneInteraction();
-            
+            // Details Pane
+            DetailsPaneInteraction.CheckForDetailsPaneInteraction();
+            DetailsPaneMovement.UpdateDetailsPaneLocation();
+            #endregion
+
 
             ZedController.IncreaseZeds();
 
@@ -240,8 +245,8 @@ namespace Zeds.Engine
             if (BuildMenuRollOverText.IsBuildMenuRollOverTextVisible)
                 BuildMenuRollOverText.DrawRolloverText(BuildMenuRollOverText.RollOverTxt);
 
-
-            DetailsPane.DrawDetailsPane();
+            if (DetailsPane.isDetailPaneVisible)
+                DrawDetailPane.DrawDetailsPane();
 
             if (!Bulldozer.IsBulldozerActive)
                 Cursor.DrawCursor();

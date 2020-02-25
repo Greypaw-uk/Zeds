@@ -39,7 +39,6 @@ namespace Zeds.BuildingLogic
 
         public static void PlaceAStructure(Texture2D texture)
         {
-            //ToDo 3 Test necessity of adjustedCoordinates
             adjustedCoordinates = new Vector2(Engine.Engine.MouseCoordinates.X, Engine.Engine.MouseCoordinates.Y);
 
             Engine.Engine.Blueprint = new Rectangle((int)adjustedCoordinates.X - (texture.Width / 2),

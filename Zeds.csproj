@@ -46,12 +46,19 @@
     <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\Tent.cs" />
+    <Compile Include="Pawns\HumanLogic\HumanAttributes.cs" />
+    <Compile Include="Pawns\HumanLogic\HumanNames.cs" />
+    <Compile Include="Pawns\HumanLogic\HumanOccupations.cs" />
+    <Compile Include="Pawns\HumanLogic\HumanRaces.cs" />
     <Compile Include="Pawns\ZedLogic\ZedBuildingCollision.cs" />
     <Compile Include="Engine\CheckMouseStateChange.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Graphics\Background\GrassTuft.cs" />
     <Compile Include="UI\Build Menu\BasicBuildMenu.cs" />
+    <Compile Include="UI\Details Pane\DetailsPaneInteraction.cs" />
+    <Compile Include="UI\Details Pane\DetailsPaneMovement.cs" />
     <Compile Include="UI\Details Pane\DetailsWindowPane.cs" />
+    <Compile Include="UI\Details Pane\DrawDetailPane.cs" />
     <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\Cursor.cs" />
@@ -103,7 +110,9 @@
     <None Include="packages.config" />
     <None Include="PatchNotes" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\MouseOverInfo\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

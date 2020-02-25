@@ -6,7 +6,6 @@ namespace Zeds.UI.Build_Menu
 {
     public static class DrawBuildMenus
     {
-        //ToDo 3 Move class to UI
         public class MainMenuIcon
         {
             public string Name;
@@ -18,7 +17,6 @@ namespace Zeds.UI.Build_Menu
             public int YOffset;
         }
 
-        //ToDo 3 Move class to UI
         public class BuildMenuIcon
         {
             public string Name;

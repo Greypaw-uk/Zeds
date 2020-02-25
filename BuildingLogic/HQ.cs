@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.WebSockets;
 using Zeds.Engine;
 
 namespace Zeds.BuildingLogic
@@ -19,6 +20,8 @@ namespace Zeds.BuildingLogic
 
             hq.BRec.Width = hq.Texture.Width;
             hq.BRec.Height = hq.Texture.Height;
+
+            hq.Description = "Operations Base";
 
             EntityLists.BuildingList.Add(hq);
         }

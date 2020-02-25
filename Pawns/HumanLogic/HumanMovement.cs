@@ -31,8 +31,6 @@ namespace Zeds.Pawns.HumanLogic
                     }
             }
         }
-
-        //ToDo 2 Rotation is affecting offset of collision box
         private static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
         { 
             human.Angle = rotation;

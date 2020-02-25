@@ -5,5 +5,7 @@
         public string Name;
         public int Age;
         public string Occupation;
+        public bool IsMale;
+        public int Race;
     }
 }

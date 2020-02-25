@@ -1,6 +1,8 @@
 Bug Fixes:
 
+
 Added/Altered:
+
 
 Refactored:
 
@@ -11,14 +13,18 @@ Refactored:
 
 Bug Fixes:
 - Collision boxes now correctly lay over an entity's sprite.
+- Entity's 'details' text only showing on mouse over
 
 Added/Altered:
 - Added separate Debug boxes, dependant on entity's texture size
+- Added logic granting random names, ages, and occupations to Humans
+- Started framework for different human races
 
 Refactored:
 - Moved all classes regarding Humans and Zeds into the Pawns folder
 - Moved all Build Menu classes into their own folder
 - Moved Background and Grass Tufts into their own folder
+- DetailsPane class broken up into separate classes
 
 --------------------
 

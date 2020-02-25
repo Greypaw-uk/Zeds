@@ -63,7 +63,6 @@ namespace Zeds.Pawns.ZedLogic
             return target;
         }
 
-        //ToDo 2 Rotation is affecting offset of collision box
         private static void UpdateZedPosition(Zed zed, float rotation, Vector2 dir)
         {
             ZedBuildingCollision.CheckZedBuildingCollision(zed);
