@@ -74,17 +74,20 @@ namespace Zeds.UI.HealthBar
 
                     };
 
+                    float width = (building.Texture.Width * (building.CurrentHealth / building.MaxHealth));
+
                     Rectangle innerBar = new Rectangle
                     {
                         X = outerBar.X + 1,
                         Y = outerBar.Y + 1,
-                        Width = (outerBar.Width -2) * (int)(building.CurrentHealth / building.MaxHealth),
+                        Width = (int)width,
                         Height = Textures.HealthBarInner.Height
                     };
 
+                    
                     Engine.Engine.SpriteBatch.Draw(Textures.HealthBarOuter,
                         new Rectangle(outerBar.X, outerBar.Y, outerBar.Width, outerBar.Height), Color.White);
-
+                        
                     Engine.Engine.SpriteBatch.Draw(Textures.HealthBarInner,
                         new Rectangle(innerBar.X, innerBar.Y, innerBar.Width, innerBar.Height),
                         Color.White);
