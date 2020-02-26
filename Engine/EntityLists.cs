@@ -19,5 +19,6 @@ namespace Zeds.Engine
         public static List<DrawBuildMenus.BuildMenuIcon> BuildIconList = new List<DrawBuildMenus.BuildMenuIcon>();
 
         public static List<GrassTuft> GrassList = new List<GrassTuft>();
+        public static List<Bush> BushList = new List<Bush>();
     }
 }

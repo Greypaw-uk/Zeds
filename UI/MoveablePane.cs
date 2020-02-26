@@ -9,5 +9,6 @@ namespace Zeds.UI
         public Vector2 Location;
         public Rectangle Rectangle;
         public Vector2 TextCoordinates;
+        public string Description;
     }
 }

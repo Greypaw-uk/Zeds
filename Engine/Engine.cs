@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
+using Zeds.Engine.Debug;
 using Zeds.Graphics;
 using Zeds.Graphics.Background;
 using Zeds.Pawns.HumanLogic;
@@ -11,6 +12,7 @@ using Zeds.Pawns.ZedLogic;
 using Zeds.UI;
 using Zeds.UI.Build_Menu;
 using Zeds.UI.Details_Pane;
+using Zeds.UI.HealthBar;
 
 namespace Zeds.Engine
 {
@@ -25,6 +27,8 @@ namespace Zeds.Engine
 
         public static int MapSizeX;
         public static int MapSizeY;
+
+        readonly FPS fps = new FPS();
 
         //ToDo 2 Align in-game coordinates with Windows coordinates 
         // see http://community.monogame.net/t/mouse-position-in-fullscreen-app/7263
@@ -105,6 +109,7 @@ namespace Zeds.Engine
 
 
             GrassTufts.CreateGrassTufts();
+            Bushes.CreateBushes();
 
             //Build Menu
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
@@ -150,6 +155,10 @@ namespace Zeds.Engine
             // This is probably relevant to the position of the Windows mouse location vs Monogame's mouse location
             MouseCoordinates.X = Mouse.GetState().X;
             MouseCoordinates.Y = Mouse.GetState().Y;
+
+
+            if( Debug.Debug.IsDebugEnabled)
+                fps.Update(gameTime);
 
 
             if (ResolutionChanged)
@@ -218,11 +227,15 @@ namespace Zeds.Engine
 
             RenderBackground.DrawBackground();
             GrassTufts.DrawGrassTufts();
+            Bushes.DrawBushes();
 
 
             DrawStructures.DrawBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
+
+
+            HealthBar.DrawHealthBar();
 
 
             if (BuildMenuPane.IsBuildMenuWindowVisible)
@@ -245,8 +258,10 @@ namespace Zeds.Engine
             if (BuildMenuRollOverText.IsBuildMenuRollOverTextVisible)
                 BuildMenuRollOverText.DrawRolloverText(BuildMenuRollOverText.RollOverTxt);
 
+            DrawDetailPane.DrawDetailsPane();
+
             if (DetailsPane.isDetailPaneVisible)
-                DrawDetailPane.DrawDetailsPane();
+                DrawDetailPane.DrawDetailsPaneText();    
 
             if (!Bulldozer.IsBulldozerActive)
                 Cursor.DrawCursor();
@@ -254,8 +269,11 @@ namespace Zeds.Engine
                 Cursor.DrawDozerCursor();
 
 
-            if (Debug.IsDebugEnabled)
-                Debug.DrawDebugInfo();
+            if (Debug.Debug.IsDebugEnabled)
+            {
+                Debug.Debug.DrawDebugInfo();
+                fps.DrawFps();
+            }
 
             SpriteBatch.End();
 

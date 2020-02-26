@@ -6,27 +6,20 @@ namespace Zeds.UI.Details_Pane
 {
     public static class DetailsPane
     {
-        public class DetailsWindowPane: MoveablePane
-        {
-            public string Description;
-        }
-
         public static bool isDetailPaneVisible;
-        public static DetailsWindowPane detailsPane;
+        public static MoveablePane detailsPane;
         public static StringBuilder descriptionBuilder = new StringBuilder();
 
         public static void CreateDetailsPane(Vector2 location, string description)
         {
-            detailsPane = new DetailsWindowPane
+            detailsPane = new MoveablePane()
 
             {
-                Location =  location,
+                Location = location,
                 Texture = Textures.BlankWindowPane,
-                Description = ""
+                Description = "",
+                Rectangle = new Rectangle(0,0,300,150)
             };
-            
-            detailsPane.Rectangle.X = (int)detailsPane.Location.X;
-            detailsPane.Rectangle.Y = (int)detailsPane.Location.Y;
 
             detailsPane.TextCoordinates.X = detailsPane.Location.X + 20;
             detailsPane.TextCoordinates.Y = detailsPane.Location.Y + 20;

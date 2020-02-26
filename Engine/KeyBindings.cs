@@ -84,10 +84,10 @@ namespace Zeds.Engine
                 Bulldozer.IsBulldozerActive = false;
 
             //Debug Mode
-            if (!Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
-                Debug.IsDebugEnabled = true;
-            if (Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
-                Debug.IsDebugEnabled = false;
+            if (!Debug.Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F11))
+                Debug.Debug.IsDebugEnabled = true;
+            if (Debug.Debug.IsDebugEnabled && Keyboard.GetState().IsKeyDown(Keys.F12))
+                Debug.Debug.IsDebugEnabled = false;
         }
 
         public static void CheckForMouseInput()

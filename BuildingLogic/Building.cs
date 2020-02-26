@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Security.RightsManagement;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Zeds.BuildingLogic
@@ -12,5 +13,8 @@ namespace Zeds.BuildingLogic
         public Rectangle BRec;
         public string Name;
         public string Description;
+        public float CurrentHealth;
+        public float MaxHealth;
+        public bool IsStillStanding;
     }
 }

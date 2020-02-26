@@ -8,7 +8,9 @@ namespace Zeds.Pawns
         public bool IsAlive;
         public bool IsSpawned;
 
-        public int Health;
+        public float CurrentHealth;
+        public float MaxHealth;
+
         public string ID;
 
         public string Description;

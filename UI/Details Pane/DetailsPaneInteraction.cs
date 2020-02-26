@@ -35,27 +35,34 @@ namespace Zeds.UI.Details_Pane
 
         private static void CheckBuildingInteraction()
         {
-            foreach (var building in EntityLists.BuildingList.Where(building => Cursor.CursorRectangle.Intersects(building.BRec)))
+            if (!DetailsPane.isDetailPaneVisible)
             {
-                DetailsPane.descriptionBuilder.Append(building.Description);
+                foreach (var building in EntityLists.BuildingList.Where(building =>
+                    Cursor.CursorRectangle.Intersects(building.BRec)))
+                {
+                    DetailsPane.descriptionBuilder.Append(building.Description);
 
-                DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
+                    DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
 
-                DetailsPane.isDetailPaneVisible = true;
-                break;
+                    DetailsPane.isDetailPaneVisible = true;
+                    break;
+                }
             }
         }
 
         private static void CheckZedInteraction()
         {
-            foreach (var zed in EntityLists.ZedList.Where(zed => Cursor.CursorRectangle.Intersects(zed.BRec)))
+            if (!DetailsPane.isDetailPaneVisible)
             {
-                DetailsPane.descriptionBuilder.Append(zed.Description);
+                foreach (var zed in EntityLists.ZedList.Where(zed => Cursor.CursorRectangle.Intersects(zed.BRec)))
+                {
+                    DetailsPane.descriptionBuilder.Append(zed.Description);
 
-                DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
+                    DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
 
-                DetailsPane.isDetailPaneVisible = true;
-                break;
+                    DetailsPane.isDetailPaneVisible = true;
+                    break;
+                }
             }
         }
     }

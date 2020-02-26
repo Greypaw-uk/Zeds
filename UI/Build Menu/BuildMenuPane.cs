@@ -22,13 +22,11 @@ namespace Zeds.UI.Build_Menu
         {
             BuildMenuWindow = new MoveablePane
             {
-                Location = Engine.Engine.MouseCoordinates,
-                Rectangle = new Rectangle((int)Engine.Engine.MouseCoordinates.X,
-                    (int)Engine.Engine.MouseCoordinates.Y, 200, 100),
-                Texture = Textures.BuildMenuPane
+                Rectangle = new Rectangle(400, 0, 200, 100), Texture = Textures.BuildMenuPane
             };
 
-            BuildMenuWindow.Location = Engine.Engine.MouseCoordinates;
+            BuildMenuWindow.Location.X = 400;
+            BuildMenuWindow.Location.Y = 0;
 
             foreach (var icon in EntityLists.MainIconList)
             {

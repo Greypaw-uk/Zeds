@@ -10,7 +10,7 @@ namespace Zeds.Pawns.ZedLogic
             foreach (var building in EntityLists.BuildingList)
                 if (zed.BRec.Intersects(building.BRec))
                 {
-                    //Console.WriteLine("Bump");
+                    building.CurrentHealth -= 1;
 
                     if (zed.Position.X >= building.Position.X)
                         zed.Position.X += 1;
@@ -20,6 +20,13 @@ namespace Zeds.Pawns.ZedLogic
                         zed.Position.Y += 1;
                     if (zed.Position.Y <= building.Position.Y)
                         zed.Position.Y -= 1;
+
+                    if (building.CurrentHealth <= 0)
+                    {
+                        EntityLists.BuildingList.Remove(building);
+                        //building.IsStillStanding = false;
+                        break;
+                    }
                 }
         }
     }

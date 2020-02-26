@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.WebSockets;
 using Zeds.Engine;
 
 namespace Zeds.BuildingLogic
@@ -12,7 +11,10 @@ namespace Zeds.BuildingLogic
             {
                 Position = Map.MapCentre(),
                 Texture = Textures.HqTexture,
-                ID = Guid.NewGuid().ToString()
+                ID = Guid.NewGuid().ToString(),
+                CurrentHealth = 200,
+                MaxHealth = 200,
+                IsStillStanding = true
             };
 
             hq.BRec.X = (int) hq.Position.X;

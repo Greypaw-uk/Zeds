@@ -1,11 +1,18 @@
 Bug Fixes:
-
+- Fixed bug where most Pawns spawned with same age
+- Fixed details pane showing more than one entity's details at the same time
+- Fixed DetailsPane not being moveable 
 
 Added/Altered:
-
+- Added logic to stop the DetailsPane and BuildMenuPane both being moved at the same time.
+- Added procedurally created bushes
+- Added FPS Display to Debug Mode
+- Added Health Bars for pawns
+- Debug mode reduces health of all pawns and buildings
+- Buildings lose health on Zed collision
 
 Refactored:
-
+- Moved Debug into its own folder
 
 --------------------
 

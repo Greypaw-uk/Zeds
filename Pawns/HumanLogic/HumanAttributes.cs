@@ -4,15 +4,15 @@ namespace Zeds.Pawns.HumanLogic
 {
     public class HumanAttributes
     {
+        private static Random random = new Random((int)DateTime.Now.Ticks);
+
         public static bool IsPawnMale()
         {
-            Random random = new Random((int)DateTime.Now.Ticks);
             return random.Next(0, 1) != 0;
         }
 
         public static int GetHumansAge()
         {
-            Random random = new Random((int)DateTime.Now.Ticks);
             var x = random.Next(100);
 
             if (x <= 25)

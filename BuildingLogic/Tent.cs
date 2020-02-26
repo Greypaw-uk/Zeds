@@ -15,7 +15,10 @@ namespace Zeds.BuildingLogic
                 Position = new Vector2(position.X, position.Y),
                 BRec = bRec,
                 Name = "Small Tent",
-                Description = "A flimsy fabric tent suitable for camping"
+                Description = "A flimsy fabric tent suitable for camping",
+                MaxHealth = 80,
+                CurrentHealth = 80,
+                IsStillStanding = true
             };
 
             smallTent.BRec.X = (int) smallTent.Position.X;
@@ -36,7 +39,10 @@ namespace Zeds.BuildingLogic
                 Position = new Vector2(position.X, position.Y),
                 BRec = bRec,
                 Name = "Large Tent",
-                Description = "A large tent, suitable for several people to camp in"
+                Description = "A large tent, suitable for several people to camp in",
+                MaxHealth = 80,
+                CurrentHealth = 80,
+                IsStillStanding = true
             };
 
             largeTent.BRec.X = (int)largeTent.Position.X;

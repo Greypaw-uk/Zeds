@@ -46,6 +46,9 @@
     <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\Tent.cs" />
+    <Compile Include="Engine\Debug\DamageEntities.cs" />
+    <Compile Include="Engine\Debug\FPS.cs" />
+    <Compile Include="Graphics\Background\Bushes.cs" />
     <Compile Include="Pawns\HumanLogic\HumanAttributes.cs" />
     <Compile Include="Pawns\HumanLogic\HumanNames.cs" />
     <Compile Include="Pawns\HumanLogic\HumanOccupations.cs" />
@@ -59,10 +62,11 @@
     <Compile Include="UI\Details Pane\DetailsPaneMovement.cs" />
     <Compile Include="UI\Details Pane\DetailsWindowPane.cs" />
     <Compile Include="UI\Details Pane\DrawDetailPane.cs" />
+    <Compile Include="UI\HealthBar\HealthBar.cs" />
     <Compile Include="UI\MoveablePane.cs" />
     <Compile Include="UI\MainMenu.cs" />
     <Compile Include="UI\Cursor.cs" />
-    <Compile Include="Engine\Debug.cs" />
+    <Compile Include="Engine\Debug\Debug.cs" />
     <Compile Include="Engine\EntityLists.cs" />
     <Compile Include="Engine\KeyBindings.cs" />
     <Compile Include="Engine\Map.cs" />

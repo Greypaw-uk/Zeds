@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using System.Net.Mime;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Zeds.Engine
@@ -10,6 +11,11 @@ namespace Zeds.Engine
         public static Texture2D GrassTuft2Texture;
         public static Texture2D GrassTuft3Texture;
         public static Texture2D GrassTuft4Texture;
+
+        public static Texture2D Bush1Texture; 
+        public static Texture2D Bush2Texture; 
+        public static Texture2D Bush3Texture; 
+        public static Texture2D Bush4Texture;
 
         public static Texture2D HumanTexture;
         public static Texture2D ZedTexture;
@@ -32,14 +38,23 @@ namespace Zeds.Engine
         public static Texture2D DebugSquareSmall;
         public static Texture2D DebugSquareLarge;
 
+        public static Texture2D HealthBarOuter;
+        public static Texture2D HealthBarInner;
+
         public static void LoadTextures(ContentManager Content)
         {
             //Maps
             BackgroundTexture = Content.Load<Texture2D>("background");
+            
             GrassTuftTexture = Content.Load<Texture2D>("grasstuft");
             GrassTuft2Texture = Content.Load<Texture2D>("grasstufttwo");
             GrassTuft3Texture = Content.Load<Texture2D>("grasstuftthree");
             GrassTuft4Texture = Content.Load<Texture2D>("grasstuftfour");
+
+            Bush1Texture = Content.Load<Texture2D>("bush1");
+            Bush2Texture = Content.Load<Texture2D>("bush2");
+            Bush3Texture = Content.Load<Texture2D>("bush3");
+            Bush4Texture = Content.Load<Texture2D>("bush4");
 
             //Pawns
             HumanTexture = Content.Load<Texture2D>("Human1");
@@ -68,6 +83,8 @@ namespace Zeds.Engine
             DebugSquareSmall = Content.Load<Texture2D>("DebugSquareSmall");
             DebugSquareLarge = Content.Load<Texture2D>("DebugSquareLarge");
 
+            HealthBarOuter = Content.Load<Texture2D>("HealthBar");
+            HealthBarInner = Content.Load<Texture2D>("HealthBarInner");
         }
     }
 }
