@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
+using Zeds.BuildingLogic.DestroyedBuilding;
 using Zeds.Engine.Debug;
 using Zeds.Graphics;
 using Zeds.Graphics.Background;
@@ -199,6 +200,9 @@ namespace Zeds.Engine
             #endregion
 
 
+            RuinedBuilding.CheckBuildingsHealth();
+
+
             ZedController.IncreaseZeds();
 
 
@@ -231,6 +235,7 @@ namespace Zeds.Engine
 
 
             DrawStructures.DrawBuildings();
+            RuinedBuilding.DrawRuinedBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 

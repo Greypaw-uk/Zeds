@@ -20,13 +20,6 @@ namespace Zeds.Pawns.ZedLogic
                         zed.Position.Y += 1;
                     if (zed.Position.Y <= building.Position.Y)
                         zed.Position.Y -= 1;
-
-                    if (building.CurrentHealth <= 0)
-                    {
-                        EntityLists.BuildingList.Remove(building);
-                        //building.IsStillStanding = false;
-                        break;
-                    }
                 }
         }
     }

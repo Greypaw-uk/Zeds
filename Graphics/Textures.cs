@@ -41,6 +41,8 @@ namespace Zeds.Engine
         public static Texture2D HealthBarOuter;
         public static Texture2D HealthBarInner;
 
+        public static Texture2D RuinedSmallTent;
+
         public static void LoadTextures(ContentManager Content)
         {
             //Maps
@@ -85,6 +87,8 @@ namespace Zeds.Engine
 
             HealthBarOuter = Content.Load<Texture2D>("HealthBar");
             HealthBarInner = Content.Load<Texture2D>("HealthBarInner");
+
+            RuinedSmallTent = Content.Load<Texture2D>("RuinedSmallTent");
         }
     }
 }
