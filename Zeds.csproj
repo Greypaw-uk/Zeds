@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BuildingLogic\Building.cs" />
     <Compile Include="BuildingLogic\BuildingPlacementHandler.cs" />
+    <Compile Include="BuildingLogic\DestroyedBuilding\RuinedBuilding.cs" />
     <Compile Include="Engine\Bulldozer.cs" />
     <Compile Include="BuildingLogic\HQ.cs" />
     <Compile Include="BuildingLogic\Tent.cs" />

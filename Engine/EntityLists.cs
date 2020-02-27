@@ -14,6 +14,7 @@ namespace Zeds.Engine
         public static List<Human> HumanList = new List<Human>();
 
         public static List<Building> BuildingList = new List<Building>();
+        public static List<Building> RuinedBuildingList = new List<Building>();
 
         public static List<DrawBuildMenus.MainMenuIcon> MainIconList = new List<DrawBuildMenus.MainMenuIcon>();
         public static List<DrawBuildMenus.BuildMenuIcon> BuildIconList = new List<DrawBuildMenus.BuildMenuIcon>();
