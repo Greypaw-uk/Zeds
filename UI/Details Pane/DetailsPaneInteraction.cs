@@ -30,6 +30,13 @@ namespace Zeds.UI.Details_Pane
                 DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
 
                 DetailsPane.isDetailPaneVisible = true;
+
+                if (CheckMouseStateChange.IsMouseClicked())
+                {
+                    PawnInfoPanel.PawnInfo.IsPawnInfoVisible = true;
+                    PawnInfoPanel.PawnInfo.DisplayPawnInfo(person);
+                    PawnInfoPanel.SelectedPawn.SetSelectedPawn(person);
+                }
                 break;
             }
         }

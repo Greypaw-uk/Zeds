@@ -7,5 +7,6 @@
         public string Occupation;
         public bool IsMale;
         public int Race;
+        public bool IsArmed;
     }
 }

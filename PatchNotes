@@ -1,4 +1,19 @@
+28/02/2020
 
+Bug Fixes:
+- Fixed all Human Pawns spawning female
+
+Added/Altered:
+- PawnInfo pane added to display pawn's full info
+- Selected Human pawns display an indicator above their heads
+- Resized DetailPane
+- Updated Ruined HQ texture
+- Added Female pawns
+- Replaced DetailsPaneWindow texture
+- Changed cursor to white and black for better contrast
+
+Refactored:
+- Re-orderd Textures into groups
 
 --------------------
 

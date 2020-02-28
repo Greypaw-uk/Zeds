@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Zeds.Engine;
 using Zeds.Graphics;
 
 namespace Zeds.UI.Details_Pane
@@ -7,7 +8,7 @@ namespace Zeds.UI.Details_Pane
     {
         public static void DrawDetailsPane()
         {
-            Engine.Engine.SpriteBatch.Draw(DetailsPane.detailsPane.Texture, DetailsPane.detailsPane.Location, Color.AliceBlue);
+            Engine.Engine.SpriteBatch.Draw(Textures.DetailsWindowPane, DetailsPane.detailsPane.Location, Color.AliceBlue);
         }
 
         public static void DrawDetailsPaneText()

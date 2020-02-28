@@ -21,7 +21,7 @@ namespace Zeds.Pawns.HumanLogic
             else
             {
                 Get23To50Jobs();
-                return "Retired " + occupationList[random.Next(0, occupationList.Count)];
+                return "Retiree";
             }
 
             return occupationList[random.Next(0, occupationList.Count)];
@@ -33,7 +33,6 @@ namespace Zeds.Pawns.HumanLogic
             occupationList.Add("Unemployed");
             occupationList.Add("Waiter");
             occupationList.Add("Retail Worker");
-            occupationList.Add("Customer Service Assistant");
             occupationList.Add("Bar Tender");
             occupationList.Add("Influencer");
             occupationList.Add("Mechanic");
@@ -83,7 +82,6 @@ namespace Zeds.Pawns.HumanLogic
             occupationList.Add("Police Officer");
             occupationList.Add("Soldier");
             occupationList.Add("Paramedic");
-            occupationList.Add("Customer Service Assistant");
             occupationList.Add("Bar Tender");
         }
 

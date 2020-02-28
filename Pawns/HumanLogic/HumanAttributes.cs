@@ -8,7 +8,10 @@ namespace Zeds.Pawns.HumanLogic
 
         public static bool IsPawnMale()
         {
-            return random.Next(0, 1) != 0;
+            if (random.Next(100) < 49)
+                return true;
+            else
+                return false;
         }
 
         public static int GetHumansAge()

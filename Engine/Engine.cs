@@ -14,6 +14,7 @@ using Zeds.UI;
 using Zeds.UI.Build_Menu;
 using Zeds.UI.Details_Pane;
 using Zeds.UI.HealthBar;
+using Zeds.UI.PawnInfoPanel;
 
 namespace Zeds.Engine
 {
@@ -197,6 +198,11 @@ namespace Zeds.Engine
             // Details Pane
             DetailsPaneInteraction.CheckForDetailsPaneInteraction();
             DetailsPaneMovement.UpdateDetailsPaneLocation();
+
+            // Selected Pawn
+            if (SelectedPawn.SelectedHuman != null)
+                SelectedPawn.UpdateIndicator(SelectedPawn.SelectedHuman);
+
             #endregion
 
 
@@ -231,13 +237,11 @@ namespace Zeds.Engine
 
             RenderBackground.DrawBackground();
             GrassTufts.DrawGrassTufts();
-            
 
             DrawStructures.DrawBuildings();
             RuinedBuilding.DrawRuinedBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
-
 
             Bushes.DrawBushes();
 
@@ -245,6 +249,7 @@ namespace Zeds.Engine
             HealthBar.DrawHealthBar();
 
 
+            //Build Menus
             if (BuildMenuPane.IsBuildMenuWindowVisible)
             {
                 DrawBuildMenus.DrawBuildMenuPane();
@@ -254,6 +259,11 @@ namespace Zeds.Engine
             if (BuildMenuPane.IsBuildMenuWindowVisible && BuildMenuInteraction.IsBuildMenuOpen)
                 DrawBuildMenus.DrawBuildMenuIcons();
 
+            if (BuildMenuRollOverText.IsBuildMenuRollOverTextVisible)
+                BuildMenuRollOverText.DrawRolloverText(BuildMenuRollOverText.RollOverTxt);
+
+
+            //Building Placement
             if (BuildingPlacementHandler.IsPlacingBuilding)
             {
                 if (BuildingPlacementHandler.CheckIfGroundClear(Blueprint))
@@ -262,13 +272,18 @@ namespace Zeds.Engine
                     SpriteBatch.Draw(BuildingPlacementHandler.SetBuildingTexture(), MouseCoordinates, Color.Red);
             }
 
-            if (BuildMenuRollOverText.IsBuildMenuRollOverTextVisible)
-                BuildMenuRollOverText.DrawRolloverText(BuildMenuRollOverText.RollOverTxt);
 
+            //Pawn info
+            if (PawnInfo.IsPawnInfoVisible)
+            {
+                PawnInfo.DrawPawnInfoPanel();
+                SelectedPawn.DrawSelectedPawnIndicator();
+            }
+
+            //Pawn rollover text
             DrawDetailPane.DrawDetailsPane();
-
             if (DetailsPane.isDetailPaneVisible)
-                DrawDetailPane.DrawDetailsPaneText();    
+                DrawDetailPane.DrawDetailsPaneText();
 
             if (!Bulldozer.IsBulldozerActive)
                 Cursor.DrawCursor();

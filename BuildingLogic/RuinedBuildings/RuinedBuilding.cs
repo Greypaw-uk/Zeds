@@ -38,7 +38,7 @@ namespace Zeds.BuildingLogic.RuinedBuildings
                     break;
                 
                 case "Headquarters":
-                    ruin.Texture = Textures.RuinedCabin;
+                    ruin.Texture = Textures.RuinedHQ;
                     ruin.Description = "Ruined HQ";
                     break;
 

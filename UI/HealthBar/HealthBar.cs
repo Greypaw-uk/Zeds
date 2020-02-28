@@ -14,7 +14,7 @@ namespace Zeds.UI.HealthBar
                     Vector2 barLocation = new Vector2
                     {
                         X = person.Position.X - Textures.HealthBarOuter.Width / 2,
-                        Y = person.Position.Y - Textures.HumanTexture.Height
+                        Y = person.Position.Y - person.Texture.Height
                     };
 
                     float width = (Textures.HealthBarInner.Width * (person.CurrentHealth / person.MaxHealth));
@@ -41,7 +41,7 @@ namespace Zeds.UI.HealthBar
                     Vector2 barLocation = new Vector2
                     {
                         X = zed.Position.X - Textures.HealthBarOuter.Width / 2,
-                        Y = zed.Position.Y - Textures.HumanTexture.Height
+                        Y = zed.Position.Y - zed.Texture.Height
                     };
 
                     float width = (Textures.HealthBarInner.Width * (zed.CurrentHealth / zed.MaxHealth));

@@ -16,9 +16,8 @@ namespace Zeds.UI.Details_Pane
 
             {
                 Location = location,
-                Texture = Textures.BlankWindowPane,
                 Description = "",
-                Rectangle = new Rectangle(0,0,300,150)
+                Rectangle = new Rectangle(0,0,Textures.BlankWindowPane.Width,Textures.BlankWindowPane.Height)
             };
 
             detailsPane.TextCoordinates.X = detailsPane.Location.X + 20;

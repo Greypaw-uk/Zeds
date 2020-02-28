@@ -14,7 +14,6 @@ namespace Zeds.Pawns.HumanLogic
             {
                 var human = new Human
                 {
-                    Texture = Textures.HumanTexture,
                     IsSpawned = true,
                     IsAlive = true,
                     CurrentHealth = 100,
@@ -26,6 +25,11 @@ namespace Zeds.Pawns.HumanLogic
                     Age = HumanAttributes.GetHumansAge(),
                     Description = ""
                 };
+
+                if (human.IsMale)
+                    human.Texture = Textures.HumanMale1Texture;
+                else
+                    human.Texture = Textures.HumanFemale1Texture;
 
                 human.Position.X = Map.MapCentre().X + random.Next(-300, 300);
                 human.Position.Y = Map.MapCentre().Y + random.Next(-300, 300);

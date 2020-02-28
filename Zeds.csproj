@@ -95,6 +95,8 @@
     <Compile Include="Pawns\ZedLogic\ZedController.cs" />
     <Compile Include="Pawns\ZedLogic\ZedMovement.cs" />
     <Compile Include="Pawns\ZedLogic\ZedSpawner.cs" />
+    <Compile Include="UI\PawnInfoPanel\PawnInfo.cs" />
+    <Compile Include="UI\PawnInfoPanel\SelectedPawn.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Comora, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
