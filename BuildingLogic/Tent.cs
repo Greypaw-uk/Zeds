@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Zeds.Engine;
+using Zeds.Graphics.Background;
 
 namespace Zeds.BuildingLogic
 {
@@ -15,10 +16,9 @@ namespace Zeds.BuildingLogic
                 Position = new Vector2(position.X, position.Y),
                 BRec = bRec,
                 Name = "Small Tent",
-                Description = "A flimsy fabric tent suitable for camping",
+                Description = "A flimsy 2-person tent",
                 MaxHealth = 80,
-                CurrentHealth = 80,
-                IsStillStanding = true
+                CurrentHealth = 80
             };
 
             smallTent.BRec.X = (int) smallTent.Position.X;
@@ -28,6 +28,7 @@ namespace Zeds.BuildingLogic
             smallTent.BRec.Height = Textures.SmallTentTexture.Height;
 
             EntityLists.BuildingList.Add(smallTent);
+            PruneBushes.CheckBushBuildingIntersection(smallTent);
         }
 
         public static void CreateLargeTent(Vector2 position, Rectangle bRec)
@@ -39,10 +40,9 @@ namespace Zeds.BuildingLogic
                 Position = new Vector2(position.X, position.Y),
                 BRec = bRec,
                 Name = "Large Tent",
-                Description = "A large tent, suitable for several people to camp in",
+                Description = "A 4-person tent",
                 MaxHealth = 80,
-                CurrentHealth = 80,
-                IsStillStanding = true
+                CurrentHealth = 80
             };
 
             largeTent.BRec.X = (int)largeTent.Position.X;
@@ -52,6 +52,7 @@ namespace Zeds.BuildingLogic
             largeTent.BRec.Height = Textures.LargeTentTexture.Height;
 
             EntityLists.BuildingList.Add(largeTent);
+            PruneBushes.CheckBushBuildingIntersection(largeTent);
         }
     }
 }

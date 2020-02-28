@@ -14,6 +14,7 @@ namespace Zeds.UI.Details_Pane
             CheckHumanInteraction();
             CheckBuildingInteraction();
             CheckZedInteraction();
+            CheckRuinedBuildingInteraction();
         }
 
         private static void CheckHumanInteraction()
@@ -57,6 +58,22 @@ namespace Zeds.UI.Details_Pane
                 foreach (var zed in EntityLists.ZedList.Where(zed => Cursor.CursorRectangle.Intersects(zed.BRec)))
                 {
                     DetailsPane.descriptionBuilder.Append(zed.Description);
+
+                    DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
+
+                    DetailsPane.isDetailPaneVisible = true;
+                    break;
+                }
+            }
+        }
+
+        private static void CheckRuinedBuildingInteraction()
+        {
+            if (!DetailsPane.isDetailPaneVisible)
+            {
+                foreach (var ruin in EntityLists.RuinedBuildingList.Where(ruin => Cursor.CursorRectangle.Intersects(ruin.BRec)))
+                {
+                    DetailsPane.descriptionBuilder.Append(ruin.Description);
 
                     DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
 

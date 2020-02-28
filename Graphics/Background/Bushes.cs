@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Windows;
 using Zeds.Engine;
 
 namespace Zeds.Graphics.Background
@@ -13,6 +10,7 @@ namespace Zeds.Graphics.Background
     {
         public Vector2 Location;
         public Texture2D Texture;
+        public Rectangle BRec;
     }
 
     public static class Bushes
@@ -46,7 +44,6 @@ namespace Zeds.Graphics.Background
                             location.Y += ran.Next(0, 200);
                         }
 
-
                 int probability = ran.Next(1, 4);
 
                 if (probability == 1)
@@ -67,8 +64,11 @@ namespace Zeds.Graphics.Background
             var bush = new Bush
             {
                 Location = location,
-                Texture = texture
+                Texture = texture,
             };
+
+            bush.BRec.X = (int)bush.Location.X;
+            bush.BRec.Y = (int)bush.Location.Y;
 
             EntityLists.BushList.Add(bush);
         }

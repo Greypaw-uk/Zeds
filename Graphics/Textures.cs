@@ -22,10 +22,12 @@ namespace Zeds.Engine
 
         public static Texture2D CursorTexture;
         public static Texture2D DozerTexture;
+        public static Texture2D DozerDeniedTexture;
 
         public static Texture2D HqTexture;
         public static Texture2D SmallTentTexture;
         public static Texture2D LargeTentTexture;
+        public static Texture2D CabineTexture;
 
         public static Texture2D BlankWindowPane;
         public static Texture2D BuildMenuPane;
@@ -42,6 +44,8 @@ namespace Zeds.Engine
         public static Texture2D HealthBarInner;
 
         public static Texture2D RuinedSmallTent;
+        public static Texture2D RuinedLargeTent;
+        public static Texture2D RuinedCabin;
 
         public static void LoadTextures(ContentManager Content)
         {
@@ -63,13 +67,16 @@ namespace Zeds.Engine
             ZedTexture = Content.Load<Texture2D>("BasicZed");
 
             //Structures
-            HqTexture = Content.Load<Texture2D>("HQ");
+            HqTexture = Content.Load<Texture2D>("HQTexture");
             SmallTentTexture = Content.Load<Texture2D>("SmallTent");
             LargeTentTexture = Content.Load<Texture2D>("LargeTent");
+            CabineTexture = Content.Load<Texture2D>("CabinTexture");
+
 
             //Cursors
             CursorTexture = Content.Load<Texture2D>("cursor");
             DozerTexture = Content.Load<Texture2D>("DozerIcon");
+            DozerDeniedTexture = Content.Load<Texture2D>("DozerDeniedIcon");
 
             //Menu Panes
             BlankWindowPane = Content.Load<Texture2D>("BlankWindowPane");
@@ -89,6 +96,8 @@ namespace Zeds.Engine
             HealthBarInner = Content.Load<Texture2D>("HealthBarInner");
 
             RuinedSmallTent = Content.Load<Texture2D>("RuinedSmallTent");
+            RuinedLargeTent = Content.Load<Texture2D>("RuinedLargeTent");
+            RuinedCabin = Content.Load<Texture2D>("RuinedCabin");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Zeds.Engine;
+using Zeds.Graphics.Background;
 
 namespace Zeds.BuildingLogic
 {
@@ -14,7 +15,7 @@ namespace Zeds.BuildingLogic
                 ID = Guid.NewGuid().ToString(),
                 CurrentHealth = 200,
                 MaxHealth = 200,
-                IsStillStanding = true
+                Name = "Headquarters"
             };
 
             hq.BRec.X = (int) hq.Position.X;
@@ -26,6 +27,7 @@ namespace Zeds.BuildingLogic
             hq.Description = "Operations Base";
 
             EntityLists.BuildingList.Add(hq);
+            PruneBushes.CheckBushBuildingIntersection(hq);
         }
     }
 }

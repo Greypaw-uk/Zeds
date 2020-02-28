@@ -17,8 +17,7 @@
         public static void DamageBuildings()
         {
             foreach (var building in EntityLists.BuildingList)
-                if (building.IsStillStanding)
-                    building.CurrentHealth -= 0.1f;
+                building.CurrentHealth -= 1;
         }
     }
 }

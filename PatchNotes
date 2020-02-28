@@ -1,3 +1,26 @@
+
+
+--------------------
+
+27/02/2020
+
+Bug Fixes:
+- Added logic to prevent bushes spawning on top of buildings
+
+Added/Altered:
+- Added logic for replacing buildings with ruined buildings
+- Added textures for ruined tents and cabins
+- Added logic for displaying ruined building names in DetailPane
+- Added logic to prevent the demolition of the HQ
+- Shortened descriptions of tents to better fit the DetailPane
+
+Refactored:
+- Removed all references to IsStillStanding in buildings
+
+--------------------
+
+26/02/2020
+
 Bug Fixes:
 - Fixed bug where most Pawns spawned with same age
 - Fixed details pane showing more than one entity's details at the same time

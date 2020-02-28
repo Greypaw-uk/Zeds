@@ -145,6 +145,18 @@
 /processorParam:TextureFormat=Color
 /build:bush4.png
 
+#begin CabinTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CabinTexture.png
+
 #begin cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -180,6 +192,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:DebugSquareSmall.png
+
+#begin DozerDeniedIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DozerDeniedIcon.png
 
 #begin DozerIcon.png
 /importer:TextureImporter
@@ -272,7 +296,7 @@
 /processorParam:TextureFormat=Color
 /build:HealthBarInner.png
 
-#begin HQ.png
+#begin HQTexture.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -282,7 +306,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:HQ.png
+/build:HQTexture.png
 
 #begin human.png
 /importer:TextureImporter
@@ -331,6 +355,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:LargeTentBuildIcon.png
+
+#begin RuinedCabin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RuinedCabin.png
+
+#begin RuinedLargeTent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RuinedLargeTent.png
 
 #begin RuinedSmallTent.png
 /importer:TextureImporter

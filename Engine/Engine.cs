@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Zeds.BuildingLogic;
-using Zeds.BuildingLogic.DestroyedBuilding;
+using Zeds.BuildingLogic.RuinedBuildings;
 using Zeds.Engine.Debug;
 using Zeds.Graphics;
 using Zeds.Graphics.Background;
@@ -231,13 +231,15 @@ namespace Zeds.Engine
 
             RenderBackground.DrawBackground();
             GrassTufts.DrawGrassTufts();
-            Bushes.DrawBushes();
-
+            
 
             DrawStructures.DrawBuildings();
             RuinedBuilding.DrawRuinedBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
+
+
+            Bushes.DrawBushes();
 
 
             HealthBar.DrawHealthBar();

@@ -24,7 +24,10 @@ namespace Zeds.UI
 
         public static void DrawDozerCursor()
         {
-            Engine.Engine.SpriteBatch.Draw(Textures.DozerTexture, Engine.Engine.MouseCoordinates, Color.White);
+            if (Bulldozer.IsDemolitionLegal)
+                Engine.Engine.SpriteBatch.Draw(Textures.DozerTexture, Engine.Engine.MouseCoordinates, Color.White);
+            else
+                Engine.Engine.SpriteBatch.Draw(Textures.DozerDeniedTexture, Engine.Engine.MouseCoordinates, Color.White);
         }
     }
 }

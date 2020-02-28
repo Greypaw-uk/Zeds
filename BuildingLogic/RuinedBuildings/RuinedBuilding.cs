@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Zeds.Engine;
 
-namespace Zeds.BuildingLogic.DestroyedBuilding
+namespace Zeds.BuildingLogic.RuinedBuildings
 {
     class RuinedBuilding : Building
     {
@@ -21,13 +21,30 @@ namespace Zeds.BuildingLogic.DestroyedBuilding
         {
             RuinedBuilding ruin = new RuinedBuilding
             {
-                Position = previousBuilding.Position
+                Position = previousBuilding.Position,
+                BRec = previousBuilding.BRec
             };
 
             switch (previousBuilding.Name)
             {
                 case "Small Tent":
                     ruin.Texture = Textures.RuinedSmallTent;
+                    ruin.Description = "A small ruined tent";
+                    break;
+
+                case "Large Tent":
+                    ruin.Texture = Textures.RuinedLargeTent;
+                    ruin.Description = "A large ruined tent";
+                    break;
+                
+                case "Headquarters":
+                    ruin.Texture = Textures.RuinedCabin;
+                    ruin.Description = "Ruined HQ";
+                    break;
+
+                case "Wooden Cabin":
+                    ruin.Texture = Textures.RuinedCabin;
+                    ruin.Description = "Ruined cabin";
                     break;
             }
 
