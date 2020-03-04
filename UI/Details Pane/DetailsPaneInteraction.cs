@@ -33,6 +33,7 @@ namespace Zeds.UI.Details_Pane
 
                 if (CheckMouseStateChange.IsMouseClicked())
                 {
+                    person.IsSelected = true;
                     PawnInfoPanel.PawnInfo.IsPawnInfoVisible = true;
                     PawnInfoPanel.PawnInfo.DisplayPawnInfo(person);
                     PawnInfoPanel.SelectedPawn.SetSelectedPawn(person);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Text;
 using Zeds.Engine;
-using Zeds.Graphics;
 using Zeds.Pawns.HumanLogic;
 
 namespace Zeds.UI.PawnInfoPanel
@@ -10,21 +9,26 @@ namespace Zeds.UI.PawnInfoPanel
     {
         public static bool IsPawnInfoVisible;
 
-        private static Rectangle pawnInfo;
+        public static Rectangle PawnInfoRec;
 
-        private static Rectangle pawnOutlineBox;
-        private static Rectangle pawnHeadBox;
-        private static Rectangle pawnChestBox;
-        private static Rectangle pawnHandBox;
-        private static Rectangle pawnMiscBox;
+        public static Rectangle PawnOutlineBox;
+        public static Rectangle PawnHeadBox;
+        public static Rectangle PawnChestBox;
+        public static Rectangle PawnHandBox;
+        public static Rectangle PawnMiscBox;
 
-        private static Vector2 infoLocation;
+        public static Rectangle ExpandHandBox;
+        public static Rectangle ExpandHeadBox;
+        public static Rectangle ExpandsChestBox;
+        public static Rectangle ExpandMiscBox;
 
-        private static string displayInfo;
+        public static Vector2 InfoLocation;
+
+        public static string DisplayInfo;
 
         public static void DisplayPawnInfo(Human pawn)
         {
-            pawnInfo = new Rectangle
+            PawnInfoRec = new Rectangle
             {
                 X = 0,
                 Y = 0,
@@ -32,10 +36,10 @@ namespace Zeds.UI.PawnInfoPanel
                 Height = 300
             };
 
-            infoLocation = new Vector2
+            InfoLocation = new Vector2
             {
-                X = pawnInfo.X + 10,
-                Y = pawnInfo.Y + 10
+                X = PawnInfoRec.X + 10,
+                Y = PawnInfoRec.Y + 10
             };
 
             StringBuilder info = new StringBuilder();
@@ -45,62 +49,81 @@ namespace Zeds.UI.PawnInfoPanel
             info.Append("Morale: " + "\n");
             info.Append("Current task: " + "\n");
 
-            displayInfo = info.ToString();
+            DisplayInfo = info.ToString();
 
-            pawnOutlineBox = new Rectangle
+            PawnOutlineBox = new Rectangle
             {
-                X = pawnInfo.X +10,
-                Y = pawnInfo.Y + 130,
+                X = PawnInfoRec.X +10,
+                Y = PawnInfoRec.Y + 130,
                 Width = Textures.InfoPawnOutline.Width,
                 Height = Textures.InfoPawnOutline.Height
             };
 
             // Row 1
-            pawnHeadBox = new Rectangle
+            PawnHeadBox = new Rectangle
             {
-                X = pawnOutlineBox.X + pawnOutlineBox.Width + 20,
-                Y = pawnOutlineBox.Y,
+                X = PawnOutlineBox.X + PawnOutlineBox.Width + 20,
+                Y = PawnOutlineBox.Y,
                 Width = 40,
                 Height = 40
             };
 
-            pawnChestBox = new Rectangle
+            ExpandHeadBox = new Rectangle
             {
-                X = pawnHeadBox.X + pawnHeadBox.Width + 10,
-                Y = pawnOutlineBox.Y,
+                X = PawnHeadBox.X + PawnHeadBox.Width - 5,
+                Y = PawnHeadBox.Y + PawnHeadBox.Height - 5,
+                Width = 10,
+                Height = 10
+            };
+
+            PawnChestBox = new Rectangle
+            {
+                X = PawnHeadBox.X + PawnHeadBox.Width + 10,
+                Y = PawnOutlineBox.Y,
                 Width = 40,
                 Height = 40
+            };
+
+            ExpandsChestBox = new Rectangle
+            {
+                X = PawnChestBox.X + PawnChestBox.Width - 5,
+                Y = PawnChestBox.Y + PawnChestBox.Height - 5,
+                Width = 10,
+                Height = 10
             };
 
             //Row 2
-            pawnHandBox = new Rectangle
+            PawnHandBox = new Rectangle
             {
-                X = pawnOutlineBox.X + pawnOutlineBox.Width + 20,
-                Y = pawnHeadBox.Y + pawnHeadBox.Height +20,
+                X = PawnOutlineBox.X + PawnOutlineBox.Width + 20,
+                Y = PawnHeadBox.Y + PawnHeadBox.Height +20,
                 Width = 40,
                 Height = 40
             };
 
-            pawnMiscBox = new Rectangle
+            ExpandHandBox = new Rectangle
             {
-                X = pawnHandBox.X + pawnHandBox.Width + 10,
-                Y = pawnChestBox.Y + pawnChestBox.Height +20,
+                X = PawnHandBox.X + PawnHandBox.Width - 5,
+                Y = PawnHandBox.Y + PawnHandBox.Height - 5,
+                Width = 10,
+                Height = 10
+            };
+
+            PawnMiscBox = new Rectangle
+            {
+                X = PawnHandBox.X + PawnHandBox.Width + 10,
+                Y = PawnChestBox.Y + PawnChestBox.Height +20,
                 Width = 40,
                 Height = 40
             };
-        }
 
-        public static void DrawPawnInfoPanel()
-        {
-            Engine.Engine.SpriteBatch.Draw(Textures.PawnInfoPane, pawnInfo, Color.White);
-            Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, displayInfo, infoLocation, Color.White);
-
-            Engine.Engine.SpriteBatch.Draw(Textures.InfoPawnOutline, pawnOutlineBox, Color.White);
-
-            Engine.Engine.SpriteBatch.Draw(Textures.InfoHead, pawnHeadBox, Color.White);
-            Engine.Engine.SpriteBatch.Draw(Textures.InfoChest, pawnChestBox, Color.White);
-            Engine.Engine.SpriteBatch.Draw(Textures.InfoHand, pawnHandBox, Color.White);
-            Engine.Engine.SpriteBatch.Draw(Textures.InfoMisc, pawnMiscBox, Color.White);
+            ExpandMiscBox = new Rectangle
+            {
+                X = PawnMiscBox.X + PawnMiscBox.Width - 5,
+                Y = PawnMiscBox.Y + PawnMiscBox.Height -5,
+                Width = 10,
+                Height = 10
+            };
         }
     }
 }

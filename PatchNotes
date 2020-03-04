@@ -1,3 +1,22 @@
+04/03/2020
+
+Bug Fixes:
+
+
+Added/Altered:
+- Started framework for Items
+   - Added method to give X items at game start
+   - Added logic to display an icon which generates an icon list if items are available to equip
+   - Clicking item from this list assigns it to a pawn and removed it from the availability list
+   - Added first weapons for testing
+
+
+Refactored:
+- Added a folder structure into Content so that it looks less like a teenager's bedroom
+- Moved InfoPane's draw method into its own class
+
+--------------------
+
 28/02/2020
 
 Bug Fixes:

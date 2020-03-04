@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Zeds.BuildingLogic;
 using Zeds.Graphics.Background;
+using Zeds.Items.Weapons;
 using Zeds.Pawns.HumanLogic;
 using Zeds.Pawns.ZedLogic;
 using Zeds.UI.Build_Menu;
+using Zeds.UI.PawnInfoPanel.Items_Boxes;
 
 namespace Zeds.Engine
 {
@@ -20,5 +22,12 @@ namespace Zeds.Engine
 
         public static List<GrassTuft> GrassList = new List<GrassTuft>();
         public static List<Bush> BushList = new List<Bush>();
+
+        public static List<Weapon> AvailableWeaponList = new List<Weapon>();
+        public static List<string> AvailableHeadwearList = new List<string>();
+        public static List<string> AvailableChestwearList = new List<string>();
+        public static List<string> AvailableMiscItemList = new List<string>();
+
+        public static List<WeaponIcon> WeaponIconList = new List<WeaponIcon>();
     }
 }

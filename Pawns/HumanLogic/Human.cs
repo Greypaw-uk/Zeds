@@ -1,4 +1,7 @@
-﻿namespace Zeds.Pawns.HumanLogic
+﻿using Microsoft.Xna.Framework.Graphics;
+using Zeds.Items.Weapons;
+
+namespace Zeds.Pawns.HumanLogic
 {
     public class Human : Creature
     {
@@ -8,5 +11,7 @@
         public bool IsMale;
         public int Race;
         public bool IsArmed;
+        public Weapon EquippedWeapon;
+        public bool IsSelected;
     }
 }

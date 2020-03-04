@@ -25,5 +25,5 @@ namespace Zeds.UI.PawnInfoPanel
         {
             Engine.Engine.SpriteBatch.Draw(Textures.SelectedEntity, pawnLocation, Color.White);
         }
-}
+    }
 }

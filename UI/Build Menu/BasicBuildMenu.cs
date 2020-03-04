@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Zeds.Engine;
-using Zeds.Graphics;
 
 namespace Zeds.UI.Build_Menu
 {

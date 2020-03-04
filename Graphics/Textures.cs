@@ -5,6 +5,7 @@ namespace Zeds.Engine
 {
     public static class Textures
     {
+        #region Terrain
         //Terrain
         public static Texture2D BackgroundTexture;
         public static Texture2D GrassTuftTexture;
@@ -12,30 +13,20 @@ namespace Zeds.Engine
         public static Texture2D GrassTuft3Texture;
         public static Texture2D GrassTuft4Texture;
 
-        public static Texture2D Bush1Texture; 
-        public static Texture2D Bush2Texture; 
-        public static Texture2D Bush3Texture; 
+        public static Texture2D Bush1Texture;
+        public static Texture2D Bush2Texture;
+        public static Texture2D Bush3Texture;
         public static Texture2D Bush4Texture;
+        #endregion
 
+        #region Pawns
         //Pawns
         public static Texture2D HumanMale1Texture;
         public static Texture2D HumanFemale1Texture;
         public static Texture2D ZedTexture;
+        #endregion
 
-        //Cursors
-        public static Texture2D CursorTexture;
-        public static Texture2D DozerTexture;
-        public static Texture2D DozerDeniedTexture;
-
-        //InfoPane
-        public static Texture2D PawnInfoPane;
-        public static Texture2D InfoPawnOutline;
-        public static Texture2D SelectedEntity;
-        public static Texture2D InfoHead;
-        public static Texture2D InfoChest;
-        public static Texture2D InfoHand;
-        public static Texture2D InfoMisc;
-
+        #region Structures
         //Structures
         public static Texture2D HqTexture;
         public static Texture2D SmallTentTexture;
@@ -47,7 +38,9 @@ namespace Zeds.Engine
         public static Texture2D RuinedLargeTent;
         public static Texture2D RuinedCabin;
         public static Texture2D RuinedHQ;
+        #endregion
 
+        #region Interface
         //Build Menus
         public static Texture2D BlankWindowPane;
 
@@ -67,69 +60,109 @@ namespace Zeds.Engine
         public static Texture2D HealthBarOuter;
         public static Texture2D HealthBarInner;
 
+        //InfoPane
+        public static Texture2D PawnInfoPane;
+        public static Texture2D InfoPawnOutline;
+        public static Texture2D SelectedEntity;
+        public static Texture2D InfoHead;
+        public static Texture2D InfoChest;
+        public static Texture2D InfoHand;
+        public static Texture2D InfoMisc;
+
+        //Cursors
+        public static Texture2D CursorTexture;
+        public static Texture2D DozerTexture;
+        public static Texture2D DozerDeniedTexture;
+
+        //Misc
+        public static Texture2D ExtendArrow;
+        #endregion
+
+        #region Items
+        // Weapons
+        public static Texture2D KitchenKnife;
+        #endregion
+
+
         public static void LoadTextures(ContentManager Content)
         {
+            #region Terrain 
             //Maps
-            BackgroundTexture = Content.Load<Texture2D>("background");
-            
-            GrassTuftTexture = Content.Load<Texture2D>("grasstuft");
-            GrassTuft2Texture = Content.Load<Texture2D>("grasstufttwo");
-            GrassTuft3Texture = Content.Load<Texture2D>("grasstuftthree");
-            GrassTuft4Texture = Content.Load<Texture2D>("grasstuftfour");
+            BackgroundTexture = Content.Load<Texture2D>("Terrain/background");
 
-            Bush1Texture = Content.Load<Texture2D>("bush1");
-            Bush2Texture = Content.Load<Texture2D>("bush2");
-            Bush3Texture = Content.Load<Texture2D>("bush3");
-            Bush4Texture = Content.Load<Texture2D>("bush4");
+            GrassTuftTexture = Content.Load<Texture2D>("Terrain/Grass/grasstuft");
+            GrassTuft2Texture = Content.Load<Texture2D>("Terrain/Grass/grasstufttwo");
+            GrassTuft3Texture = Content.Load<Texture2D>("Terrain/Grass/grasstuftthree");
+            GrassTuft4Texture = Content.Load<Texture2D>("Terrain/Grass/grasstuftfour");
 
+            Bush1Texture = Content.Load<Texture2D>("Terrain/Bushes/bush1");
+            Bush2Texture = Content.Load<Texture2D>("Terrain/Bushes/bush2");
+            Bush3Texture = Content.Load<Texture2D>("Terrain/Bushes/bush3");
+            Bush4Texture = Content.Load<Texture2D>("Terrain/Bushes/bush4");
+            #endregion
+
+            #region Pawns
             //Pawns
-            HumanMale1Texture = Content.Load<Texture2D>("HumanMale1");
-            HumanFemale1Texture = Content.Load<Texture2D>("HumanFemale1");
-            ZedTexture = Content.Load<Texture2D>("BasicZed");
+            HumanMale1Texture = Content.Load<Texture2D>("Pawns/Human/HumanMale1");
+            HumanFemale1Texture = Content.Load<Texture2D>("Pawns/Human/HumanFemale1");
+            ZedTexture = Content.Load<Texture2D>("Pawns/Zed/BasicZed");
+            #endregion
 
+            #region Structures
             //Structures
-            HqTexture = Content.Load<Texture2D>("HQTexture");
-            SmallTentTexture = Content.Load<Texture2D>("SmallTent");
-            LargeTentTexture = Content.Load<Texture2D>("LargeTent");
-            CabinTexture = Content.Load<Texture2D>("CabinTexture");
-
-            //Cursors
-            CursorTexture = Content.Load<Texture2D>("cursor");
-            DozerTexture = Content.Load<Texture2D>("DozerIcon");
-            DozerDeniedTexture = Content.Load<Texture2D>("DozerDeniedIcon");
-
-            //Menu Panes
-            BlankWindowPane = Content.Load<Texture2D>("BlankWindowPane");
-            DetailsWindowPane = Content.Load<Texture2D>("DetailsWindowPane");
-            BuildMenuPane = Content.Load<Texture2D>("BuildMenuPane");
-
-            //Pawn Info Panel
-            PawnInfoPane = Content.Load<Texture2D>("PawnInfoPane");
-            InfoPawnOutline = Content.Load<Texture2D>("PawnOutline");
-            SelectedEntity = Content.Load<Texture2D>("SelectedEntity");
-            InfoHead = Content.Load<Texture2D>("InfoHead");
-            InfoChest = Content.Load<Texture2D>("InfoChest");
-            InfoHand = Content.Load<Texture2D>("InfoHand");
-            InfoMisc = Content.Load<Texture2D>("InfoMisc");
-
-            //Menu Icons
-            BuildMenuIcon = Content.Load<Texture2D>("BuildMenuIcon");
-            DemolishIcon = Content.Load<Texture2D>("Bulldozer");
-            TempMenuIcon = Content.Load<Texture2D>("tempIcon");
-            SmallTentBuildIcon = Content.Load<Texture2D>("SmallTentBuildIcon");
-            LargeTentBuildIcon = Content.Load<Texture2D>("LargeTentBuildIcon");
-
-            DebugSquareSmall = Content.Load<Texture2D>("DebugSquareSmall");
-            DebugSquareLarge = Content.Load<Texture2D>("DebugSquareLarge");
-
-            HealthBarOuter = Content.Load<Texture2D>("HealthBar");
-            HealthBarInner = Content.Load<Texture2D>("HealthBarInner");
+            HqTexture = Content.Load<Texture2D>("Buildings/HQTexture");
+            SmallTentTexture = Content.Load<Texture2D>("Buildings/SmallTent");
+            LargeTentTexture = Content.Load<Texture2D>("Buildings/LargeTent");
+            CabinTexture = Content.Load<Texture2D>("Buildings/CabinTexture");
 
             //Ruined Structures
-            RuinedSmallTent = Content.Load<Texture2D>("RuinedSmallTent");
-            RuinedLargeTent = Content.Load<Texture2D>("RuinedLargeTent");
-            RuinedCabin = Content.Load<Texture2D>("RuinedCabin");
-            RuinedHQ = Content.Load<Texture2D>("RuinedHQTexture");
+            RuinedSmallTent = Content.Load<Texture2D>("Buildings/RuinedSmallTent");
+            RuinedLargeTent = Content.Load<Texture2D>("Buildings/RuinedLargeTent");
+            RuinedCabin = Content.Load<Texture2D>("Buildings/RuinedCabin");
+            RuinedHQ = Content.Load<Texture2D>("Buildings/RuinedHQTexture");
+            #endregion
+
+            #region Interface
+            //Cursors
+            CursorTexture = Content.Load<Texture2D>("Interface/Cursors/cursor");
+            DozerTexture = Content.Load<Texture2D>("Interface/Cursors/DozerIcon");
+            DozerDeniedTexture = Content.Load<Texture2D>("Interface/Cursors/DozerDeniedIcon");
+
+            //Menu Panes
+            BlankWindowPane = Content.Load<Texture2D>("Interface/Menus/BlankWindowPane");
+            DetailsWindowPane = Content.Load<Texture2D>("Interface/Menus/DetailsWindowPane");
+            BuildMenuPane = Content.Load<Texture2D>("Interface/Menus/BuildMenuPane");
+
+            //Pawn Info Panel
+            PawnInfoPane = Content.Load<Texture2D>("Interface/Menus/PawnInfoPane");
+            InfoPawnOutline = Content.Load<Texture2D>("Interface/Menus/PawnOutline");
+            SelectedEntity = Content.Load<Texture2D>("Interface/Menus/SelectedEntity");
+            InfoHead = Content.Load<Texture2D>("Interface/Menus/InfoHead");
+            InfoChest = Content.Load<Texture2D>("Interface/Menus/InfoChest");
+            InfoHand = Content.Load<Texture2D>("Interface/Menus/InfoHand");
+            InfoMisc = Content.Load<Texture2D>("Interface/Menus/InfoMisc");
+
+            //Menu Icons
+            BuildMenuIcon = Content.Load<Texture2D>("Interface/Menus/BuildMenuIcon");
+            DemolishIcon = Content.Load<Texture2D>("Interface/Menus/Bulldozer");
+            TempMenuIcon = Content.Load<Texture2D>("Interface/Menus/tempIcon");
+            SmallTentBuildIcon = Content.Load<Texture2D>("Interface/Menus/SmallTentBuildIcon");
+            LargeTentBuildIcon = Content.Load<Texture2D>("Interface/Menus/LargeTentBuildIcon");
+
+            DebugSquareSmall = Content.Load<Texture2D>("Interface/Debug/DebugSquareSmall");
+            DebugSquareLarge = Content.Load<Texture2D>("Interface/Debug/DebugSquareLarge");
+
+            HealthBarOuter = Content.Load<Texture2D>("Interface/HealthBar");
+            HealthBarInner = Content.Load<Texture2D>("Interface/HealthBarInner");
+
+            //Misc
+            ExtendArrow = Content.Load<Texture2D>("Interface/ExtendArrow");
+            #endregion
+
+            #region Items
+            //Weapons
+            KitchenKnife = Content.Load<Texture2D>("Item/Weapon/KitchenKnife");
+            #endregion
         }
     }
 }

@@ -8,6 +8,7 @@ using Zeds.BuildingLogic.RuinedBuildings;
 using Zeds.Engine.Debug;
 using Zeds.Graphics;
 using Zeds.Graphics.Background;
+using Zeds.Items;
 using Zeds.Pawns.HumanLogic;
 using Zeds.Pawns.ZedLogic;
 using Zeds.UI;
@@ -15,6 +16,7 @@ using Zeds.UI.Build_Menu;
 using Zeds.UI.Details_Pane;
 using Zeds.UI.HealthBar;
 using Zeds.UI.PawnInfoPanel;
+using Zeds.UI.PawnInfoPanel.Items_Boxes;
 
 namespace Zeds.Engine
 {
@@ -123,6 +125,8 @@ namespace Zeds.Engine
 
             DetailsPane.CreateDetailsPane(new Vector2(0,0), "" );
 
+            GrantStartingItems.PopulateItemList();
+
             base.Initialize();
 
             ZedController.PopulateZedList();
@@ -130,7 +134,7 @@ namespace Zeds.Engine
 
         protected override void LoadContent()
         {
-            Fonts.DebugFont = Content.Load<SpriteFont>("DebugFont");
+            Fonts.DebugFont = Content.Load<SpriteFont>("Interface/Font/Arial");
 
 
             //Initial set up
@@ -201,10 +205,21 @@ namespace Zeds.Engine
 
             // Selected Pawn
             if (SelectedPawn.SelectedHuman != null)
+            {
                 SelectedPawn.UpdateIndicator(SelectedPawn.SelectedHuman);
-
+                ExtendIconChecks.CheckExtendHandClicked();
+            }
             #endregion
 
+            #region PawnInfo
+
+            if (ExtendIconChecks.IsWeaponIconListVisible)
+            {
+                EquipWeapon.CheckWeaponIconInteraction();
+                CreateItemIcons.UpdateWeaponIconList();
+            }
+
+            #endregion
 
             RuinedBuilding.CheckBuildingsHealth();
 
@@ -276,9 +291,14 @@ namespace Zeds.Engine
             //Pawn info
             if (PawnInfo.IsPawnInfoVisible)
             {
-                PawnInfo.DrawPawnInfoPanel();
+                DrawPawnsInfoPanel.DrawPawnInfoPanel();
                 SelectedPawn.DrawSelectedPawnIndicator();
             }
+            if (ExtendIconChecks.IsWeaponIconListVisible)
+            {
+                DrawPawnInfoIcons.DrawWeaponListIcons();
+            }
+
 
             //Pawn rollover text
             DrawDetailPane.DrawDetailsPane();
