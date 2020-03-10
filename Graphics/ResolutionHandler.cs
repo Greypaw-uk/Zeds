@@ -40,10 +40,26 @@ namespace Zeds.Graphics
 
             Console.WriteLine("Resolution changed to " + resolution);
 
-            Engine.Engine.PreferredBackBufferWidth = Engine.Engine.ScreenWidth;
-            Engine.Engine.PreferredBackBufferHeight = Engine.Engine.ScreenHeight;
+            Engine.Engine.Graphics.PreferredBackBufferWidth = Engine.Engine.ScreenWidth;
+            Engine.Engine.Graphics.PreferredBackBufferHeight = Engine.Engine.ScreenHeight;
 
             Engine.Engine.Graphics.ApplyChanges();
         }
+
+
+        /*
+         Code used to update Resolution
+         
+        protected override void Update(GameTime gameTime)
+        {
+            if(userClickedTheResolutionChangeButton)
+            {
+                graphics.IsFullScreen = userRequestedFullScreen;
+                graphics.PreferredBackBufferHeight = userRequestedHeight;
+                graphics.PreferredBackBufferWidth = userRequestedWidth;
+                graphics.ApplyChanges();
+            }
+        }
+        */
     }
 }

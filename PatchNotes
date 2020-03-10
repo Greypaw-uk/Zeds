@@ -1,4 +1,26 @@
-04/03/2020
+Alpha 1.3.5 10/03/2020
+
+Bug Fixes:
+- Removed bug where selecting a weapon creating duplicates
+- Fixed bug where pawns remained selected, even when selecting another pawn
+- Fixed bug where the ItemSelect icons remained visible when clicking a new pawn
+- Camera initialised correctly to middle of screen
+
+Added/Altered:
+- Added Combat Knife
+- Moved logic for checking Cursor/Pawn interaction into its own class to make it easier to locate
+- Added MenuClose logic and icon for PawnInfo and BuildMenu
+- Mouse Coordinates are now handled in a separate method to allow for resolution adjustment
+- Updated DetailsPane movement to work off of texture size instead of magic numbers
+
+Refactored:
+- Moved instantiation for weapons into the weapon's class
+- Tidied up Graphics handler
+- Tidied up Initialisation 
+
+--------------------
+
+Alpha 1.3.4 04/03/2020
 
 Bug Fixes:
 
@@ -10,14 +32,13 @@ Added/Altered:
    - Clicking item from this list assigns it to a pawn and removed it from the availability list
    - Added first weapons for testing
 
-
 Refactored:
 - Added a folder structure into Content so that it looks less like a teenager's bedroom
 - Moved InfoPane's draw method into its own class
 
 --------------------
 
-28/02/2020
+Alpha 1.3.3 28/02/2020
 
 Bug Fixes:
 - Fixed all Human Pawns spawning female
@@ -36,7 +57,7 @@ Refactored:
 
 --------------------
 
-27/02/2020
+Alpha 1.3.2 27/02/2020
 
 Bug Fixes:
 - Added logic to prevent bushes spawning on top of buildings
@@ -53,7 +74,7 @@ Refactored:
 
 --------------------
 
-26/02/2020
+Alpha 1.3.1 26/02/2020
 
 Bug Fixes:
 - Fixed bug where most Pawns spawned with same age
@@ -73,7 +94,7 @@ Refactored:
 
 --------------------
 
-25/02/2020
+Alpha 1.3.0 25/02/2020
 
 Bug Fixes:
 - Collision boxes now correctly lay over an entity's sprite.
@@ -92,7 +113,7 @@ Refactored:
 
 --------------------
 
-20/02/2020
+Alpha 1.2.5 20/02/2020
 
 Bug Fixes:
 - Stopped menu interaction whilst in demolition mode
@@ -112,7 +133,7 @@ Refactored:
 
 --------------------
 
-19/02/2020
+Alpha 1.2.4 19/02/2020
 
 Bug Fixes:
 - Fixed BuildMenuPane display logic
@@ -131,7 +152,7 @@ Refactored:
 
 --------------------
 
-07/02/2020
+Alpha 1.2.3 07/02/2020
 
 Bug Fixes
 - Fixed issue where clicking BuildIcon moved the BuildMenuPane
@@ -154,7 +175,7 @@ Refactored
 
 --------------------
 
-03/02/2020
+Alpha 1.2.2 03/02/2020
 
 Bug Fixes:
 - Addressed Build menu not opening correctly on click
@@ -172,7 +193,7 @@ Refactored:
 
 --------------------
 
-31/01/2020
+Alpha 1.2.1 31/01/2020
 
 - Refactored UI and Build Menus into own classes
 - Added potential for Windowed (borderless) mode
@@ -181,7 +202,7 @@ Refactored:
 
 --------------------
 
-30/01/2020
+Alpha 1.2.0 30/01/2020
 
 - Replaced Windows mouse cursor with dedicated in-game cursor for more precise useage
 - Building placement added.
@@ -190,30 +211,30 @@ Refactored:
 
 --------------------
 
-10/01/2019
+Alpha 1.1.2 10/01/2019
 
 - Changed code to reduce static directives
 
 --------------------
 
-09/01/2019
+Alpha 1.1.1 09/01/2019
 
 - Tests for increasing gameplay area beyond scope of the viewport
 
 --------------------
 
-08/12/2019
+Alpha 1.1.0 08/12/2019
 
 - Added in collision-checking
 
 --------------------
 
-06/01/2019
+Alpha 1.0.1 06/01/2019
 
 - Refactored code to make it more manageable
 
 --------------------
 
-09/09/2019
+Alpha 1.0.0 09/09/2019
 
 - Updated Zed movement logic

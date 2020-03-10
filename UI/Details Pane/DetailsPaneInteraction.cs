@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Zeds.Engine;
+using Zeds.Pawns.HumanLogic;
 
 namespace Zeds.UI.Details_Pane
 {
@@ -11,35 +12,24 @@ namespace Zeds.UI.Details_Pane
             DetailsPane.descriptionBuilder.Clear();
             DetailsPane.detailsPane.Description = "";
 
-            CheckHumanInteraction();
             CheckBuildingInteraction();
             CheckZedInteraction();
             CheckRuinedBuildingInteraction();
         }
 
-        private static void CheckHumanInteraction()
+        public static void HumanHoveredOver(Human person)
         {
-            foreach (var person in EntityLists.HumanList.Where(person => Cursor.CursorRectangle.Intersects(person.BRec)))
-            {
-                DetailsPane.descriptionBuilder.Append(person.Name);
-                DetailsPane.descriptionBuilder.Append(", \n");
-                DetailsPane.descriptionBuilder.Append(person.Age);
-                DetailsPane.descriptionBuilder.Append(", ");
-                DetailsPane.descriptionBuilder.Append(person.Occupation);
 
-                DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
+            DetailsPane.descriptionBuilder.Append(person.Name);
+            DetailsPane.descriptionBuilder.Append(", \n");
+            DetailsPane.descriptionBuilder.Append(person.Age);
+            DetailsPane.descriptionBuilder.Append(", ");
+            DetailsPane.descriptionBuilder.Append(person.Occupation);
 
-                DetailsPane.isDetailPaneVisible = true;
+            DetailsPane.detailsPane.Description = DetailsPane.descriptionBuilder.ToString();
 
-                if (CheckMouseStateChange.IsMouseClicked())
-                {
-                    person.IsSelected = true;
-                    PawnInfoPanel.PawnInfo.IsPawnInfoVisible = true;
-                    PawnInfoPanel.PawnInfo.DisplayPawnInfo(person);
-                    PawnInfoPanel.SelectedPawn.SetSelectedPawn(person);
-                }
-                break;
-            }
+            DetailsPane.isDetailPaneVisible = true;
+
         }
 
         private static void CheckBuildingInteraction()

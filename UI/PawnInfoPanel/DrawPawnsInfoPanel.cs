@@ -10,6 +10,7 @@ namespace Zeds.UI.PawnInfoPanel
         public static void DrawPawnInfoPanel()
         {
             Engine.Engine.SpriteBatch.Draw(Textures.PawnInfoPane, PawnInfo.PawnInfoRec, Color.White);
+            Engine.Engine.SpriteBatch.Draw(Textures.CloseMenu, PawnInfo.MenuCloseRec, Color.White);
             Engine.Engine.SpriteBatch.DrawString(Fonts.DebugFont, PawnInfo.DisplayInfo, PawnInfo.InfoLocation, Color.White);
 
             Engine.Engine.SpriteBatch.Draw(Textures.InfoPawnOutline, PawnInfo.PawnOutlineBox, Color.White);

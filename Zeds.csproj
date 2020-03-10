@@ -52,6 +52,7 @@
     <Compile Include="Graphics\Background\Bushes.cs" />
     <Compile Include="Graphics\Background\PruneBushes.cs" />
     <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Weapons\Melee\CombatKnife.cs" />
     <Compile Include="Items\Weapons\Melee\KitchenKnife.cs" />
     <Compile Include="Items\Weapons\Weapon.cs" />
     <Compile Include="Pawns\HumanLogic\EquipWeapon.cs" />
@@ -99,10 +100,12 @@
     <Compile Include="Pawns\ZedLogic\ZedController.cs" />
     <Compile Include="Pawns\ZedLogic\ZedMovement.cs" />
     <Compile Include="Pawns\ZedLogic\ZedSpawner.cs" />
+    <Compile Include="UI\PawnCursorInteraction.cs" />
     <Compile Include="UI\PawnInfoPanel\Items Boxes\CreateItemIcons.cs" />
     <Compile Include="UI\PawnInfoPanel\Items Boxes\DrawPawnInfoIcons.cs" />
     <Compile Include="Items\GrantStartingItems.cs" />
     <Compile Include="UI\PawnInfoPanel\DrawPawnsInfoPanel.cs" />
+    <Compile Include="UI\PawnInfoPanel\Items Boxes\PawnInfoMenuClose.cs" />
     <Compile Include="UI\PawnInfoPanel\PawnInfo.cs" />
     <Compile Include="UI\PawnInfoPanel\Items Boxes\WeaponIcon.cs" />
     <Compile Include="UI\PawnInfoPanel\SelectedPawn.cs" />

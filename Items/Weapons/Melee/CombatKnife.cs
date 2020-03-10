@@ -3,20 +3,20 @@ using Zeds.Engine;
 
 namespace Zeds.Items.Weapons.Melee
 {
-    public class KitchenKnife : Weapon
+    public class CombatKnife : Weapon
     {
-        public static KitchenKnife CreateKitchenKnife()
+        public static CombatKnife CreateCombatKnife()
         {
-            KitchenKnife kitchenKnife = new KitchenKnife
+            CombatKnife combatKnife = new CombatKnife
             {
-                Icon = Textures.KitchenKnife,
+                Icon = Textures.CombatKnife,
                 Power = 1,
                 Range = 1,
                 IsWeapon = true,
                 ID = Guid.NewGuid()
             };
 
-            return kitchenKnife;
+            return combatKnife;
         }
     }
 }

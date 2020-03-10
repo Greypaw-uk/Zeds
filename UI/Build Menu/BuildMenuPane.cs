@@ -7,6 +7,7 @@ namespace Zeds.UI.Build_Menu
     public static class BuildMenuPane
     {
         public static MoveablePane BuildMenuWindow;
+        public static Rectangle CloseMenuRec;
 
         public static bool IsBuildMenuWindowVisible;
 
@@ -23,6 +24,14 @@ namespace Zeds.UI.Build_Menu
             BuildMenuWindow = new MoveablePane
             {
                 Rectangle = new Rectangle(400, 0, 200, 100), Texture = Textures.BuildMenuPane
+            };
+
+            CloseMenuRec = new Rectangle
+            {
+                X = BuildMenuWindow.Rectangle.X + BuildMenuWindow.Rectangle.Width - 30,
+                Y = BuildMenuWindow.Rectangle.Y + 10,
+                Width = 20,
+                Height = 20
             };
 
             BuildMenuWindow.Location.X = 400;
@@ -58,7 +67,10 @@ namespace Zeds.UI.Build_Menu
                     
                 if (!isHovering)
                 {
-                    //ToDo 3 Improve movement of Window
+                    CloseMenuRec.X = BuildMenuWindow.Rectangle.X + BuildMenuWindow.Rectangle.Width - 30;
+                    CloseMenuRec.Y = BuildMenuWindow.Rectangle.Y + 10;
+
+                        //ToDo 3 Improve movement of Window
                     BuildMenuWindow.Location.X =
                         (int) Engine.Engine.MouseCoordinates.X - (Textures.BuildMenuPane.Width / 2);
                     BuildMenuWindow.Location.Y =
@@ -97,6 +109,13 @@ namespace Zeds.UI.Build_Menu
                 icon.BRec.X = (int)BuildMenuWindow.Location.X + icon.XOffset;
                 icon.BRec.Y = (int)BuildMenuWindow.Location.Y + icon.YOffset;
             }
+        }
+
+        public static void CloseBuildMenu()
+        {
+            if (Cursor.CursorRectangle.Intersects(CloseMenuRec) &&
+                Mouse.GetState().LeftButton == ButtonState.Pressed)
+                BuildMenuPane.IsBuildMenuWindowVisible = false;
         }
     }
 }

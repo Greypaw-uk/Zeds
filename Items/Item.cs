@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Zeds.Items
 {
@@ -10,5 +11,6 @@ namespace Zeds.Items
         public bool IsChestwear;
         public bool IsWeapon;
         public bool IsMiscItem;
+        public Guid ID;
     }
 }

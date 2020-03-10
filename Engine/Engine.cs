@@ -1,8 +1,6 @@
 ﻿using Comora;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 using Zeds.BuildingLogic;
 using Zeds.BuildingLogic.RuinedBuildings;
 using Zeds.Engine.Debug;
@@ -22,6 +20,8 @@ namespace Zeds.Engine
 {
     public class Engine : Game
     {
+        private static readonly string versionNumber = "Alpha 1.3.5";
+
         public static SpriteBatch SpriteBatch;
 
         public static GraphicsDeviceManager Graphics;
@@ -34,10 +34,7 @@ namespace Zeds.Engine
 
         readonly FPS fps = new FPS();
 
-        //ToDo 2 Align in-game coordinates with Windows coordinates 
-        // see http://community.monogame.net/t/mouse-position-in-fullscreen-app/7263
         public static Vector2 MouseCoordinates;
-
 
         //UI
         public static Rectangle Blueprint;
@@ -45,14 +42,10 @@ namespace Zeds.Engine
 
         // Screen setup
         public static bool ResolutionChanged;
-        //public static int ScreenWidth = 1600;
-        //public static int ScreenHeight = 1200;
 
         public static int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public static int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-        public static int PreferredBackBufferWidth { get; set; }
-        public static int PreferredBackBufferHeight { get; set; }
 
         public Engine()
         {
@@ -74,43 +67,34 @@ namespace Zeds.Engine
             Textures.LoadTextures(this.Content);
 
             Camera = new Camera(Graphics.GraphicsDevice);
-            CameraPosition = Map.MapCentre();
+            CameraPosition.X = Graphics.PreferredBackBufferWidth * 1.0f /2;
+            CameraPosition.Y = Graphics.PreferredBackBufferHeight * 1.0f / 2;
 
             // Screen Setup
             //ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
-            MapSizeX = 1000;
-            MapSizeY = 1000;
+            //ToDo 3 Fix to draw background texture to fill all of the background
+            MapSizeX = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            MapSizeY = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            //Handle manual screen resizing
-            Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += WindowSizeChanged;
-
-            void WindowSizeChanged(object sender, EventArgs e)
-            {
-                ScreenWidth = Window.ClientBounds.Width;
-                ScreenHeight = Window.ClientBounds.Height;
-
-                PreferredBackBufferWidth = Window.ClientBounds.Width;
-                PreferredBackBufferHeight = Window.ClientBounds.Height;
-            }
-
-            //Screen setup
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Window.Title = "Zeds - Alpha";
+            Window.Title = "Zeds - Alpha " + versionNumber;
+
 
             //Mouse
             IsMouseVisible = false;
-            MouseCoordinates.X = 0;
-            MouseCoordinates.Y = 0;
-
-
-            HumanNames.PopulateNamesLists();
-
-
+            MouseCoordinates.X = Graphics.PreferredBackBufferWidth * 1.0f / 2;
+            MouseCoordinates.Y = Graphics.PreferredBackBufferWidth * 1.0f /2;
             KeyBindings.PreviousScrollValue = 0;
 
+            
+            //Initial set up
+            HQ.HQSetup();
+            HumanNames.PopulateNamesLists();
+
+            HumanSpawner.SpawnHumans();
+            GrantStartingItems.PopulateItemList();
 
             GrassTufts.CreateGrassTufts();
             Bushes.CreateBushes();
@@ -125,8 +109,6 @@ namespace Zeds.Engine
 
             DetailsPane.CreateDetailsPane(new Vector2(0,0), "" );
 
-            GrantStartingItems.PopulateItemList();
-
             base.Initialize();
 
             ZedController.PopulateZedList();
@@ -135,11 +117,6 @@ namespace Zeds.Engine
         protected override void LoadContent()
         {
             Fonts.DebugFont = Content.Load<SpriteFont>("Interface/Font/Arial");
-
-
-            //Initial set up
-            HQ.HQSetup();
-            HumanSpawner.SpawnHumans();
         }
 
         protected override void UnloadContent()
@@ -151,19 +128,18 @@ namespace Zeds.Engine
             Camera.Update(gameTime);
 
             /*
-            //ToDo 3 Move to new class
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             */
 
+            // Mouse
             //ToDo 1 Fix mouse getting 'stuck' in fullscreen mode
-            // This is probably relevant to the position of the Windows mouse location vs Monogame's mouse location
-            MouseCoordinates.X = Mouse.GetState().X;
-            MouseCoordinates.Y = Mouse.GetState().Y;
+            Cursor.GetMouseCoordinates();
+            Cursor.UpdateCursorRectangleLocation();
 
 
-            if( Debug.Debug.IsDebugEnabled)
+            if ( Debug.Debug.IsDebugEnabled)
                 fps.Update(gameTime);
 
 
@@ -178,7 +154,12 @@ namespace Zeds.Engine
 
 
             #region User Interface
-            BuildMenuRollOverText.GenerateRollOverText();
+
+            if (BuildMenuPane.IsBuildMenuWindowVisible)
+            {
+                BuildMenuRollOverText.GenerateRollOverText();
+                BuildMenuPane.CloseBuildMenu();
+            }
 
 
             if (BuildingPlacementHandler.IsPlacingBuilding)
@@ -212,6 +193,10 @@ namespace Zeds.Engine
             #endregion
 
             #region PawnInfo
+            PawnCursorInteraction.CheckForCursorPawnInteraction();
+
+            if (PawnInfo.IsPawnInfoVisible)
+                PawnInfo.ClosePawnInfo();
 
             if (ExtendIconChecks.IsWeaponIconListVisible)
             {
@@ -235,7 +220,6 @@ namespace Zeds.Engine
             ZedMovement.CalculateZedMovement();
             HumanMovement.RunFromZeds();
 
-            Cursor.UpdateCursorRectangleLocation();
 
             CheckMouseStateChange.UpdateMouseState();
             KeyBindings.CheckForKeyInput();
@@ -291,6 +275,7 @@ namespace Zeds.Engine
             //Pawn info
             if (PawnInfo.IsPawnInfoVisible)
             {
+                //PawnInfoMenuClose.ClosePawnInfoMenu();
                 DrawPawnsInfoPanel.DrawPawnInfoPanel();
                 SelectedPawn.DrawSelectedPawnIndicator();
             }

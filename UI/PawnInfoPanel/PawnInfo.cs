@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 using Zeds.Engine;
 using Zeds.Pawns.HumanLogic;
 
@@ -10,6 +11,7 @@ namespace Zeds.UI.PawnInfoPanel
         public static bool IsPawnInfoVisible;
 
         public static Rectangle PawnInfoRec;
+        public static Rectangle MenuCloseRec;
 
         public static Rectangle PawnOutlineBox;
         public static Rectangle PawnHeadBox;
@@ -34,6 +36,14 @@ namespace Zeds.UI.PawnInfoPanel
                 Y = 0,
                 Width = 250,
                 Height = 300
+            };
+
+            MenuCloseRec = new Rectangle
+            {
+                X = PawnInfoRec.X + PawnInfoRec.Width - 30,
+                Y = PawnInfoRec.Y + 10,
+                Width = 20,
+                Height = 20
             };
 
             InfoLocation = new Vector2
@@ -124,6 +134,12 @@ namespace Zeds.UI.PawnInfoPanel
                 Width = 10,
                 Height = 10
             };
+        }
+
+        public static void ClosePawnInfo()
+        {
+            if (Cursor.CursorRectangle.Intersects(MenuCloseRec) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                IsPawnInfoVisible = false;
         }
     }
 }

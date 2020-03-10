@@ -109,6 +109,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/SmallTent.png
 
+#begin Interface/CloseMenu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Interface/CloseMenu.png
+
 #begin Interface/Cursors/cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -415,6 +427,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Item/ItemTemplate.png
+
+#begin Item/Weapon/CombatKnife.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Item/Weapon/CombatKnife.png
 
 #begin Item/Weapon/KitchenKnife.png
 /importer:TextureImporter

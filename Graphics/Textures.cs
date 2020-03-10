@@ -41,6 +41,9 @@ namespace Zeds.Engine
         #endregion
 
         #region Interface
+
+        public static Texture2D CloseMenu;
+
         //Build Menus
         public static Texture2D BlankWindowPane;
 
@@ -81,6 +84,7 @@ namespace Zeds.Engine
         #region Items
         // Weapons
         public static Texture2D KitchenKnife;
+        public static Texture2D CombatKnife;
         #endregion
 
 
@@ -123,6 +127,9 @@ namespace Zeds.Engine
             #endregion
 
             #region Interface
+
+            CloseMenu = Content.Load<Texture2D>("Interface/CloseMenu");
+
             //Cursors
             CursorTexture = Content.Load<Texture2D>("Interface/Cursors/cursor");
             DozerTexture = Content.Load<Texture2D>("Interface/Cursors/DozerIcon");
@@ -162,6 +169,8 @@ namespace Zeds.Engine
             #region Items
             //Weapons
             KitchenKnife = Content.Load<Texture2D>("Item/Weapon/KitchenKnife");
+            CombatKnife = Content.Load<Texture2D>("Item/Weapon/CombatKnife");
+
             #endregion
         }
     }

@@ -5,8 +5,8 @@ namespace Zeds.Pawns.HumanLogic
 {
     public static class HumanSpawner
     {
-        private static int SurvivorQuantity = 5;
-        private static Random random = new Random();
+        private static readonly int SurvivorQuantity = 5;
+        private static readonly Random random = new Random();
 
         public static void SpawnHumans()
         {

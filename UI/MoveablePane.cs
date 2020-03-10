@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Zeds.UI
 {
+    //ToDo 2 Stop different MoveablePanes interfering with each other
     public class MoveablePane
     {
         public Texture2D Texture;

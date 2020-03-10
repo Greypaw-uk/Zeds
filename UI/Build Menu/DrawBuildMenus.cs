@@ -34,6 +34,8 @@ namespace Zeds.UI.Build_Menu
             {
                 Engine.Engine.SpriteBatch.Draw(icon.Texture, icon.Position, Color.White);
             }
+
+            Engine.Engine.SpriteBatch.Draw(Textures.CloseMenu, BuildMenuPane.CloseMenuRec, Color.White);
         }
 
         public static void DrawBuildMenuIcons()
