@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Windows;
 using Zeds.Engine;
 
 namespace Zeds.Graphics.Background
@@ -30,6 +29,7 @@ namespace Zeds.Graphics.Background
 
             for (int i = 0; i < 40; i++)
             {
+                // ToDo 3 Change to use mapsize height/width
                 int x = ran.Next(150, Engine.Engine.ScreenWidth);
                 int y = ran.Next(150, Engine.Engine.ScreenHeight);
 

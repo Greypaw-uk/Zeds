@@ -14,7 +14,7 @@ namespace Zeds.UI
             {
                 DetailsPaneInteraction.HumanHoveredOver(person);
 
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed && !Bulldozer.IsBulldozerActive)
                 {
                     ExtendIconChecks.IsWeaponIconListVisible = false;
 

@@ -57,6 +57,7 @@ namespace Zeds.Engine
         //Debug
         public static Texture2D DebugSquareSmall;
         public static Texture2D DebugSquareLarge;
+        public static Texture2D OnePixel;
 
         //DetailsPane
         public static Texture2D DetailsWindowPane;
@@ -158,6 +159,7 @@ namespace Zeds.Engine
 
             DebugSquareSmall = Content.Load<Texture2D>("Interface/Debug/DebugSquareSmall");
             DebugSquareLarge = Content.Load<Texture2D>("Interface/Debug/DebugSquareLarge");
+            OnePixel = Content.Load<Texture2D>("Interface/Debug/1px");
 
             HealthBarOuter = Content.Load<Texture2D>("Interface/HealthBar");
             HealthBarInner = Content.Load<Texture2D>("Interface/HealthBarInner");

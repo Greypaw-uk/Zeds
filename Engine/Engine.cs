@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.BuildingLogic;
 using Zeds.BuildingLogic.RuinedBuildings;
-using Zeds.Engine.Debug;
+using Zeds.Debug;
 using Zeds.Graphics;
 using Zeds.Graphics.Background;
 using Zeds.Items;
+using Zeds.Pathfinding;
 using Zeds.Pawns.HumanLogic;
 using Zeds.Pawns.ZedLogic;
 using Zeds.UI;
@@ -20,7 +21,7 @@ namespace Zeds.Engine
 {
     public class Engine : Game
     {
-        private static readonly string versionNumber = "Alpha 1.3.5";
+        private static readonly string versionNumber = "Alpha 1.3.6";
 
         public static SpriteBatch SpriteBatch;
 
@@ -107,11 +108,13 @@ namespace Zeds.Engine
             BuildMenuPane.IsBuildMenuWindowVisible = true;
             BuildMenuRollOverText.UpdateRollOverTextPosition();
 
-            DetailsPane.CreateDetailsPane(new Vector2(0,0), "" );
+            DetailsPane.CreateDetailsPane(new Vector2((ScreenWidth / 2) - (Textures.DetailsWindowPane.Width / 2),10), "" );
 
             base.Initialize();
 
             ZedController.PopulateZedList();
+
+            Grid.SetUpGrid();
         }
 
         protected override void LoadContent()
@@ -139,7 +142,7 @@ namespace Zeds.Engine
             Cursor.UpdateCursorRectangleLocation();
 
 
-            if ( Debug.Debug.IsDebugEnabled)
+            if ( Zeds.Debug.Debug.IsDebugEnabled)
                 fps.Update(gameTime);
 
 
@@ -219,11 +222,13 @@ namespace Zeds.Engine
             //Movement
             ZedMovement.CalculateZedMovement();
             HumanMovement.RunFromZeds();
+            PathFind.MovePawns();
 
 
             CheckMouseStateChange.UpdateMouseState();
             KeyBindings.CheckForKeyInput();
             KeyBindings.CheckForMouseInput();
+
 
             base.Update(gameTime);
         }
@@ -296,9 +301,9 @@ namespace Zeds.Engine
                 Cursor.DrawDozerCursor();
 
 
-            if (Debug.Debug.IsDebugEnabled)
+            if (Zeds.Debug.Debug.IsDebugEnabled)
             {
-                Debug.Debug.DrawDebugInfo();
+                Zeds.Debug.Debug.DrawDebugInfo();
                 fps.DrawFps();
             }
 

@@ -34,6 +34,11 @@ namespace Zeds.Pawns.HumanLogic
                 human.Position.X = Map.MapCentre().X + random.Next(-300, 300);
                 human.Position.Y = Map.MapCentre().Y + random.Next(-300, 300);
 
+                human.CurrentPoint.X = (int)human.Position.X / 15;
+                human.CurrentPoint.Y = (int) human.Position.Y / 15;
+
+                human.DestinationPoint = human.CurrentPoint;
+
                 human.Name = HumanNames.GetHumanFullName(human.IsMale);
                 human.Occupation = HumanOccupations.GetOccupation(human.Age);
 

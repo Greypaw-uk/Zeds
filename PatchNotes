@@ -1,3 +1,19 @@
+Alpha 1.3.6
+
+Bug Fixes:
+- Fixed BuildMenu/DetailsPane interfering with each other when being moved
+
+Added/Altered:
+- Added logic for creating a grid for pathfinding
+- Added logic to Human Spawns to grant them a starting Node point
+- Changed starting location for BuildMenu and DetailsPane
+
+Refactored:
+- Moved Debug out of the Engine folder
+
+
+--------------------
+
 Alpha 1.3.5 10/03/2020
 
 Bug Fixes:

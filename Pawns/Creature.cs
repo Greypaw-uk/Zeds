@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Zeds.Pathfinding;
 
 namespace Zeds.Pawns
 {
@@ -21,5 +23,10 @@ namespace Zeds.Pawns
         public Rectangle BRec;
 
         public Texture2D Texture;
+
+        public Point CurrentPoint;
+        public Point DestinationPoint;
+
+        public List<Node> Path;
     }
 }

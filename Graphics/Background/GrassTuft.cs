@@ -28,6 +28,7 @@ namespace Zeds.Graphics.Background
 
             for (int i = 0; i < 100; i++)
             {
+                // ToDo 3 Change to use mapsize height/width
                 int x = ran.Next(50, Engine.Engine.ScreenWidth);
                 int y = ran.Next(50, Engine.Engine.ScreenHeight);
 

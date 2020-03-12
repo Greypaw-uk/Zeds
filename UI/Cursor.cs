@@ -35,9 +35,6 @@ namespace Zeds.UI
 
         public static void GetMouseCoordinates()
         {
-            //ToDo 2 Align in-game coordinates with Windows coordinates 
-            // see http://community.monogame.net/t/mouse-position-in-fullscreen-app/7263
-
             Vector2 resolution = new Vector2
             {
                 X = 1.0f,

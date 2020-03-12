@@ -6,12 +6,23 @@ namespace Zeds.UI.Details_Pane
 {
     public static class DetailsPaneMovement
     {
+        public static bool IsDetailsPaneMoving;
+
         public static void UpdateDetailsPaneLocation()
         {
             if (!Cursor.CursorRectangle.Intersects(BuildMenuPane.BuildMenuWindow.Rectangle))
             {
                 if (Cursor.CursorRectangle.Intersects(DetailsPane.detailsPane.Rectangle) &&
-                    Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    Mouse.GetState().LeftButton == ButtonState.Pressed && !BuildMenuPane.IsBuildMenuMoving)
+                {
+                    IsDetailsPaneMoving = true;
+                }
+                else
+                {
+                    IsDetailsPaneMoving = false;
+                }
+
+                if (IsDetailsPaneMoving)
                 {
                     DetailsPane.detailsPane.Location.X =
                         (int) Engine.Engine.MouseCoordinates.X - (Textures.DetailsWindowPane.Width / 2);
