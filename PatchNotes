@@ -10,10 +10,12 @@ Added/Altered:
 - Altered Zed spawn logic to ensure they spawn near a node
 - Added new debug options to display Grid Nodes and lines between Pawn's path points
 - Changed starting location for BuildMenu and DetailsPane
+- Added logic for checking Human/Zed collision
+- Added logic for checking Zed and Human health, and removing if depleted
+- Added logic to change Human's attack power if armed
 
 Refactored:
 - Moved Debug out of the Engine folder
-
 
 --------------------
 

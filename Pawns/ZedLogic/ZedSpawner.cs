@@ -6,7 +6,7 @@ namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedSpawner
     {
-        public static int ZedQuantity = 5;
+        public static int ZedQuantity = 4;
         private static Vector2 zone1;
         private static Vector2 zone2;
         private static Vector2 zone3;
@@ -30,7 +30,7 @@ namespace Zeds.Pawns.ZedLogic
 
             //South-west
             zone3.X = 0  + 30;
-            zone3.Y = Engine.Engine.ScreenHeight  -30;
+            zone3.Y = Engine.Engine.ScreenHeight -30;
 
             //South-east
             zone4.X = Engine.Engine.ScreenWidth -30;
@@ -108,13 +108,13 @@ namespace Zeds.Pawns.ZedLogic
             foreach (var otherZed in EntityLists.ZedList)
                 if (zed.BRec.Intersects(otherZed.BRec) && !zed.ID.Equals(otherZed.ID))
                     if (zed.Position.X >= otherZed.Position.X)
-                        zed.Position.X -= Textures.ZedTexture.Width;
+                        zed.Position.X -= 15;
                     else if (zed.Position.X <= otherZed.Position.X)
-                        zed.Position.X += Textures.ZedTexture.Width;
+                        zed.Position.X += 15;
                     else if (zed.Position.Y >= otherZed.Position.Y)
-                        zed.Position.Y += Textures.ZedTexture.Height;
+                        zed.Position.Y += 15;
                     else if (zed.Position.Y <= otherZed.Position.Y)
-                        zed.Position.Y -= Textures.ZedTexture.Height;
+                        zed.Position.Y -= 15;
         }
     }
 }

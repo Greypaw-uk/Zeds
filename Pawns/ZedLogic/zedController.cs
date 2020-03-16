@@ -20,7 +20,8 @@ namespace Zeds.Pawns.ZedLogic
                     Texture = Textures.ZedTexture,
                     ID = Guid.NewGuid().ToString(),
                     Description = "A zombie.  Grr, argh",
-                    AlertRange = 200,
+                    AlertRange = 400,
+                    AttackPower = 1
                 };
 
                 zed.CurrentPoint = zed.Position;
@@ -43,9 +44,9 @@ namespace Zeds.Pawns.ZedLogic
             var random = new Random(Guid.NewGuid().GetHashCode());
             if (ZedSpawner.ZedQuantity < 100)
             {
-                var increaseRoll = random.Next(1, 1000);
+                var increaseRoll = random.Next(1, 100);
 
-                if (increaseRoll > 998) ZedSpawner.ZedQuantity++;
+                if (increaseRoll > 90) ZedSpawner.ZedQuantity += 1;
             }
         }
     }

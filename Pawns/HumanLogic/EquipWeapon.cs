@@ -23,6 +23,8 @@ namespace Zeds.Pawns.HumanLogic
                             if (person.IsArmed)
                             {
                                 previousWeapon = person.EquippedWeapon;
+                                person.AttackPower -= previousWeapon.Power;
+
                                 person.EquippedWeapon = weapon.Weapon;
 
                                 for (int i = EntityLists.AvailableWeaponList.Count - 1; i >= 0; i--)
@@ -34,6 +36,7 @@ namespace Zeds.Pawns.HumanLogic
                                 }
 
                                 EntityLists.AvailableWeaponList.Add(previousWeapon);
+                                person.AttackPower += weapon.Weapon.Power;
                             }
                             else
                             {
@@ -47,6 +50,8 @@ namespace Zeds.Pawns.HumanLogic
                                         EntityLists.AvailableWeaponList.Remove(person.EquippedWeapon);
                                     }
                                 }
+
+                                person.AttackPower += weapon.Weapon.Power;
                             }
                         }
                     }

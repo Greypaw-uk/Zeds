@@ -47,7 +47,6 @@ namespace Zeds.Engine
         public static int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public static int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-
         public Engine()
         {
             Graphics = new GraphicsDeviceManager(this)
@@ -142,7 +141,7 @@ namespace Zeds.Engine
             Cursor.UpdateCursorRectangleLocation();
 
 
-            if ( Zeds.Debug.Debug.IsDebugEnabled)
+            if ( Debug.Debug.IsDebugEnabled)
                 fps.Update(gameTime);
 
 
@@ -209,8 +208,9 @@ namespace Zeds.Engine
 
             #endregion
 
+            ZedDeath.CheckZedsHealth();
             RuinedBuilding.CheckBuildingsHealth();
-
+            HumanDeath.CheckHumansHealth();
 
             ZedController.IncreaseZeds();
 

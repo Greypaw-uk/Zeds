@@ -52,12 +52,14 @@ namespace Zeds.UI.PawnInfoPanel
                 Y = PawnInfoRec.Y + 10
             };
 
+            // ToDo 2 CurrentHealth and AttackPower not reporting back changes
             StringBuilder info = new StringBuilder();
             info.Append("Name: " + pawn.Name + "\n");
             info.Append("A " + pawn.Age + " year old " + pawn.Occupation + "\n\n");
             info.Append("Health: " + pawn.CurrentHealth + "/" + pawn.MaxHealth + "\n");
             info.Append("Morale: " + "\n");
             info.Append("Current task: " + "\n");
+            info.Append("Power: " + pawn.AttackPower + "\n");
 
             DisplayInfo = info.ToString();
 

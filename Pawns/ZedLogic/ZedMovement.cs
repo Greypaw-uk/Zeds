@@ -24,13 +24,7 @@ namespace Zeds.Pawns.ZedLogic
 
                 if (distance <= zed.AlertRange)
                 {
-                    ZedTarget target = new ZedTarget
-                    {
-                        Distance = distance,
-                        Destination = human.CurrentPoint
-                    };
-
-                    targetList.Add(target);
+                    targetList.Add(new ZedTarget { Distance = distance, Destination = human.CurrentPoint });
                 }
             }
 
@@ -38,29 +32,28 @@ namespace Zeds.Pawns.ZedLogic
             {
                 distance = PathFind.PythagThatMofo(building.Position, zed.CurrentPoint);
                 {
+                    //If no humans, aim for closest building
                     if (targetList.Count == 0)
-                    {
-                        if (distance <= zed.AlertRange)
+                        targetList.Add(new ZedTarget
                         {
-                            ZedTarget target = new ZedTarget
-                            {
-                                Distance = distance,
-                                Destination = building.Position
-                            };
-
-                            targetList.Add(target);
-                        }
+                            Distance = distance,
+                            Destination = new Vector2(building.Position.X + (1.0f * building.Texture.Width / 2),
+                                building.Position.Y + (1.0f *  building.Texture.Height / 2))
+                        });
+                    /*
+                    if (distance <= zed.AlertRange)
+                    {
+                        targetList.Add(new ZedTarget { Distance = distance, Destination = building.Position });
                     }
+                    */
                 }
             }
 
-            ZedTarget currentBest;
-
             if (targetList.Count > 0)
             {
-                currentBest = targetList[0];
+                var currentBest = targetList[0];
 
-                for (int i = 0; i < targetList.Count; i++)
+                for (var i = 0; i < targetList.Count; i++)
                     if (targetList[i].Distance < currentBest.Distance)
                         currentBest = targetList[i];
 

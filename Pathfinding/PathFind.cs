@@ -29,7 +29,6 @@ namespace Zeds.Pathfinding
                 {
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        // Cancel the current path and create a new one
                         pawn.Path.Clear();
                         SetHumanPawnDestination();
                     }
@@ -44,18 +43,18 @@ namespace Zeds.Pathfinding
             {
                 foreach (var zed in EntityLists.ZedList)
                 {
+                    ZedBuildingCollision.CheckZedBuildingCollision(zed);
+                    ZedHumanCollision.CheckZedHumanCollision(zed);
+
                     var target = ZedMovement.FindClosestTarget(zed);
 
                     if (target != null)
                     {
                         zed.DestinationPoint = target.Destination;
+
+                        zed.Path = GetPath(zed.CurrentPoint, zed.DestinationPoint);
+                        MovePawn(zed);
                     }
-                    else
-                    {
-                        zed.DestinationPoint = zed.CurrentPoint;
-                    }
-                    zed.Path = GetPath(zed.CurrentPoint, zed.DestinationPoint);
-                    MovePawn(zed);
                 }
             }
         }
@@ -64,11 +63,16 @@ namespace Zeds.Pathfinding
         {
             foreach (var pawn in EntityLists.HumanList)
                 if (pawn.IsSelected)
+                {
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        pawn.DestinationPoint.X = (int) Engine.Engine.MouseCoordinates.X;
-                        pawn.DestinationPoint.Y = (int) Engine.Engine.MouseCoordinates.Y;
+                        if (Mouse.GetState().X > 15 && Mouse.GetState().X < Engine.Engine.ScreenWidth - 15)
+                            pawn.DestinationPoint.X = (int) Engine.Engine.MouseCoordinates.X;
+
+                        if (Mouse.GetState().Y > 0 + 15 && Mouse.GetState().Y < Engine.Engine.ScreenHeight -15)
+                            pawn.DestinationPoint.Y = (int) Engine.Engine.MouseCoordinates.Y;
                     }
+                }
         }
 
         private static List<Vector2> GetPath (Vector2 fromPoint, Vector2 toPoint)

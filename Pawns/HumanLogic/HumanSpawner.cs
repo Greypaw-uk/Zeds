@@ -23,7 +23,8 @@ namespace Zeds.Pawns.HumanLogic
                     ID = Guid.NewGuid().ToString(),
                     IsMale = HumanAttributes.IsPawnMale(),
                     Age = HumanAttributes.GetHumansAge(),
-                    Description = ""
+                    Description = "",
+                    AttackPower = 1
                 };
 
                 if (human.IsMale)

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Zeds.Pathfinding;
+using System.Collections.Generic;
 
 namespace Zeds.Pawns
 {
@@ -29,5 +28,7 @@ namespace Zeds.Pawns
 
         public List<Vector2> Path;
         public float AlertRange;
+
+        public int AttackPower;
     }
 }
