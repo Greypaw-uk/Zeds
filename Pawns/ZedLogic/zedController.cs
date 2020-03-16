@@ -16,11 +16,15 @@ namespace Zeds.Pawns.ZedLogic
                     IsAlive = true,
                     CurrentHealth = 100,
                     MaxHealth = 100,
-                    Speed = 0.25f,
+                    Speed = 0.5f,
                     Texture = Textures.ZedTexture,
                     ID = Guid.NewGuid().ToString(),
-                    Description = "A zombie.  Grr, argh"
+                    Description = "A zombie.  Grr, argh",
+                    AlertRange = 200,
                 };
+
+                zed.CurrentPoint = zed.Position;
+                zed.DestinationPoint = zed.Position;
 
                 zed.BRec.X = (int) zed.Position.X;
                 zed.BRec.Y = (int)zed.Position.Y;

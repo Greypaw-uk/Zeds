@@ -220,8 +220,7 @@ namespace Zeds.Engine
                 Bulldozer.DemolishStructure();
 
             //Movement
-            ZedMovement.CalculateZedMovement();
-            HumanMovement.RunFromZeds();
+            //HumanMovement.RunFromZeds();
             PathFind.MovePawns();
 
 

@@ -4,7 +4,7 @@ namespace Zeds.Pathfinding
 {
     public class Node
     {
-        public Point Point;
+        public Vector2 Point;
         public int Cost;
         public Rectangle BRec;
     }

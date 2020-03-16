@@ -19,7 +19,7 @@ namespace Zeds.Pawns.HumanLogic
                     CurrentHealth = 100,
                     MaxHealth = 100,
                     Angle = 0,
-                    Speed = 0.3f,
+                    Speed = 1f,
                     ID = Guid.NewGuid().ToString(),
                     IsMale = HumanAttributes.IsPawnMale(),
                     Age = HumanAttributes.GetHumansAge(),
@@ -34,8 +34,8 @@ namespace Zeds.Pawns.HumanLogic
                 human.Position.X = Map.MapCentre().X + random.Next(-300, 300);
                 human.Position.Y = Map.MapCentre().Y + random.Next(-300, 300);
 
-                human.CurrentPoint.X = (int)human.Position.X / 15;
-                human.CurrentPoint.Y = (int) human.Position.Y / 15;
+                human.CurrentPoint.X = (int)human.Position.X;
+                human.CurrentPoint.Y = (int) human.Position.Y;
 
                 human.DestinationPoint = human.CurrentPoint;
 

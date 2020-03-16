@@ -24,9 +24,10 @@ namespace Zeds.Pawns
 
         public Texture2D Texture;
 
-        public Point CurrentPoint;
-        public Point DestinationPoint;
+        public Vector2 CurrentPoint;
+        public Vector2 DestinationPoint;
 
-        public List<Node> Path;
+        public List<Vector2> Path;
+        public float AlertRange;
     }
 }

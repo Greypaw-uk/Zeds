@@ -5,7 +5,10 @@ Bug Fixes:
 
 Added/Altered:
 - Added logic for creating a grid for pathfinding
-- Added logic to Human Spawns to grant them a starting Node point
+- Added logic for moving Humans between current location, and location determined by right click
+- Altered Zed logic to pathfind towards nearest pawn or building, if within alert range
+- Altered Zed spawn logic to ensure they spawn near a node
+- Added new debug options to display Grid Nodes and lines between Pawn's path points
 - Changed starting location for BuildMenu and DetailsPane
 
 Refactored:

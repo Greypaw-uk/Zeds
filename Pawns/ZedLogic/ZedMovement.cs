@@ -1,77 +1,73 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Zeds.Engine;
+using Zeds.Pathfinding;
 
 namespace Zeds.Pawns.ZedLogic
 {
+    public class ZedTarget
+    {
+        public int Distance;
+        public Vector2 Destination;
+    }
+
     public static class ZedMovement
     {
-        public static void CalculateZedMovement()
+        public static ZedTarget FindClosestTarget(Creature zed)
         {
-            if (EntityLists.ZedList.Count != 0)
-                foreach (var zed in EntityLists.ZedList)
+            int distance;
+            List<ZedTarget> targetList = new List<ZedTarget>();
+
+            foreach (var human in EntityLists.HumanList)
+            {
+                distance = PathFind.PythagThatMofo(human.CurrentPoint, zed.CurrentPoint);
+
+                if (distance <= zed.AlertRange)
                 {
-                    // Move zed towards closest target
-                    var dir = FindClosestTarget(zed) - zed.Position;
-                    dir.Normalize();
-                    
-                    // Rotate to face movement direction
-                    var rotation = (float) Math.Atan2(dir.Y, dir.X);
-
-                    UpdateZedPosition(zed, rotation, dir);  
-                }
-        }
-
-        private static Vector2 FindClosestTarget(Creature zed)
-        {
-            var buildingLocation = new Vector2();
-            var humanLocation = new Vector2();
-            Vector2 target;
-
-            float closestBuilding = 1000;
-            float closestHuman = 1000;
-
-            if (EntityLists.HumanList.Count != 0)
-                foreach (var human in EntityLists.HumanList)
-                {
-                    var distance = Vector2.Distance(zed.Position, human.Position);
-
-                    if (distance <= closestHuman)
+                    ZedTarget target = new ZedTarget
                     {
-                        closestHuman = distance;
-                        humanLocation = human.Position;
-                    }
+                        Distance = distance,
+                        Destination = human.CurrentPoint
+                    };
+
+                    targetList.Add(target);
                 }
-            else if (EntityLists.BuildingList.Count != 0)
-                foreach (var building in EntityLists.BuildingList)
+            }
+
+            foreach (var building in EntityLists.BuildingList)
+            {
+                distance = PathFind.PythagThatMofo(building.Position, zed.CurrentPoint);
                 {
-                    var distance = Vector2.Distance(zed.Position, building.Position);
+                    if (targetList.Count == 0)
                     {
-                        if (distance <= closestBuilding)
+                        if (distance <= zed.AlertRange)
                         {
-                            closestBuilding = distance;
-                            buildingLocation = building.Position;
+                            ZedTarget target = new ZedTarget
+                            {
+                                Distance = distance,
+                                Destination = building.Position
+                            };
+
+                            targetList.Add(target);
                         }
                     }
                 }
+            }
 
-            if (closestHuman < closestBuilding)
-                target = humanLocation;
-            else
-                target = buildingLocation;
+            ZedTarget currentBest;
 
-            return target;
-        }
+            if (targetList.Count > 0)
+            {
+                currentBest = targetList[0];
 
-        private static void UpdateZedPosition(Zed zed, float rotation, Vector2 dir)
-        {
-            ZedBuildingCollision.CheckZedBuildingCollision(zed);
+                for (int i = 0; i < targetList.Count; i++)
+                    if (targetList[i].Distance < currentBest.Distance)
+                        currentBest = targetList[i];
 
-            zed.Angle = rotation;
-            zed.Position += dir * zed.Speed;
+                return currentBest;
+            }
 
-            zed.BRec.X = (int)zed.Position.X - (zed.Texture.Width / 2);
-            zed.BRec.Y = (int)zed.Position.Y - (zed.Texture.Height / 2);
+            return null;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Zeds.Pawns.ZedLogic
 {
     public static class ZedSpawner
     {
-        public static int ZedQuantity = 1;
+        public static int ZedQuantity = 5;
         private static Vector2 zone1;
         private static Vector2 zone2;
         private static Vector2 zone3;
@@ -18,29 +18,39 @@ namespace Zeds.Pawns.ZedLogic
 
         public static Vector2 ZedSpawnPoint()
         {
-            zone1.X = 0 - Textures.ZedTexture.Width;
-            zone1.Y = 0 - Textures.ZedTexture.Height;
+            //Off set of 30 is to ensure that Zed starts at/near a node
 
-            zone2.X = Engine.Engine.MapSizeX + Textures.ZedTexture.Width;
-            zone2.Y = 0 + Textures.ZedTexture.Height;
+            //North-west
+            zone1.X = 0 +30;
+            zone1.Y = 0 +30;
 
-            zone3.X = 0 - Textures.ZedTexture.Width;
-            zone3.Y = Engine.Engine.MapSizeY - Textures.ZedTexture.Height;
+            //North-east
+            zone2.X = Engine.Engine.ScreenWidth -30;
+            zone2.Y = 0  + 30;
 
-            zone4.X = Engine.Engine.MapSizeX + Textures.ZedTexture.Width;
-            zone4.Y = Engine.Engine.MapSizeY + Textures.ZedTexture.Height;
+            //South-west
+            zone3.X = 0  + 30;
+            zone3.Y = Engine.Engine.ScreenHeight  -30;
 
-            zone5.X = Engine.Engine.MapSizeX / 2 - Textures.ZedTexture.Width;
-            zone5.Y = 0 - Textures.ZedTexture.Height;
+            //South-east
+            zone4.X = Engine.Engine.ScreenWidth -30;
+            zone4.Y = Engine.Engine.ScreenHeight -30;
 
-            zone6.X = Engine.Engine.MapSizeX - Textures.ZedTexture.Width;
-            zone6.Y = Engine.Engine.MapSizeY / 2 - Textures.ZedTexture.Height;
+            //North
+            zone5.X = 1.0f * Engine.Engine.ScreenWidth / 2 ;
+            zone5.Y = 0  +30;
 
-            zone7.X = Engine.Engine.MapSizeX / 2 - Textures.ZedTexture.Width;
-            zone7.Y = Engine.Engine.MapSizeY + Textures.ZedTexture.Height;
+            //East
+            zone6.X = Engine.Engine.ScreenWidth - 30;
+            zone6.Y = 1.0f * Engine.Engine.ScreenHeight / 2 ;
 
-            zone8.X = 0 - Textures.ZedTexture.Width;
-            zone8.Y = Engine.Engine.MapSizeY / 2 + Textures.ZedTexture.Height;
+            //South
+            zone7.X = 1.0f * Engine.Engine.ScreenWidth / 2 ;
+            zone7.Y = Engine.Engine.ScreenHeight -30;
+
+            //West
+            zone8.X = 0 + 30;
+            zone8.Y = 1.0f * Engine.Engine.ScreenHeight / 2 ;
 
             var random = new Random(Guid.NewGuid().GetHashCode());
             var randomZone = random.Next(0, 7);

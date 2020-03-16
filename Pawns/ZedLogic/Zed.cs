@@ -2,6 +2,6 @@
 {
     public class Zed : Creature
     {
-        public float AlertRange;
+        
     }
 }

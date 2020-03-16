@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Zeds.Engine;
+using Zeds.Pathfinding;
 
 namespace Zeds.Pawns.HumanLogic
 {
@@ -8,15 +9,14 @@ namespace Zeds.Pawns.HumanLogic
     {
         private static readonly float PanicDistance = 100f;
 
+
+        //ToDo 2 Re-write this to work with Pathfinding
         public static void RunFromZeds()
         {
             foreach (var human in EntityLists.HumanList)
             foreach (var zed in EntityLists.ZedList)
             {
-                var distance = (human.Position.Y - zed.Position.Y) * (human.Position.Y - zed.Position.Y) +
-                               (human.Position.X - zed.Position.X) * (human.Position.X - zed.Position.X);
-
-                distance = (float) Math.Sqrt(distance);
+                var distance = PathFind.PythagThatMofo(human.Position, zed.Position);
 
                 if (distance != 0)
                     if (distance <= PanicDistance)
@@ -31,6 +31,7 @@ namespace Zeds.Pawns.HumanLogic
                     }
             }
         }
+        
         private static void UpdateHumanPosition(Human human, float rotation, Vector2 dir)
         { 
             human.Angle = rotation;
