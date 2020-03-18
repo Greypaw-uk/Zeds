@@ -23,8 +23,11 @@ namespace Zeds.UI.PawnInfoPanel
 
         public static void DrawSelectedPawnIndicator()
         {
-            //Todo 3 Indicator still displaying above paws which have been killed
-            Engine.Engine.SpriteBatch.Draw(Textures.SelectedEntity, pawnLocation, Color.White);
+            foreach (var human in EntityLists.HumanList)
+            {
+                if (human.IsSelected && human.CurrentHealth > 0)
+                    Engine.Engine.SpriteBatch.Draw(Textures.SelectedEntity, pawnLocation, Color.White);
+            }
         }
     }
 }

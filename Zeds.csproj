@@ -95,7 +95,6 @@
     <Compile Include="Pawns\HumanLogic\HumanSpawner.cs" />
     <Compile Include="Pawns\HumanLogic\Human.cs" />
     <Compile Include="Engine\Program.cs" />
-    <Compile Include="Pawns\HumanLogic\HumanMovement.cs" />
     <Compile Include="Pawns\Creature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pawns\ZedLogic\Zed.cs" />

@@ -11,12 +11,16 @@ namespace Zeds.Pathfinding
 {
     class PathFind
     {
+        private static readonly float panicDistance = 100.0f;
+
         public static void MovePawns()
         {
             SetHumanPawnDestination();
 
             foreach (var pawn in EntityLists.HumanList)
             {
+                //ToDo 3 Implement logic for panicked movement
+
                 // i.e. if it's got somewhere to go and we haven't already worked out a route
                 // without the count check, it'll constantly be recalculating a route
                 // you might want this later but .. for now ... 
@@ -82,7 +86,6 @@ namespace Zeds.Pathfinding
             var toPointIndexX = toPoint.X / 15;
             var toPointIndexY = toPoint.Y / 15;
 
-
             var neighbours = new List<Node>
             {
                 Grid.NodeList[(int) fromPointIndexX - 1][(int) fromPointIndexY],
@@ -90,6 +93,12 @@ namespace Zeds.Pathfinding
                 Grid.NodeList[(int) fromPointIndexX][(int) fromPointIndexY - 1],
                 Grid.NodeList[(int) fromPointIndexX][(int) fromPointIndexY + 1]
             };
+
+            foreach (var node in neighbours)
+            {
+                node.BRec = new Rectangle((int) node.Point.X, (int) node.Point.Y, 15, 15);
+                node.Cost = SetNodeCost(node);
+            }
 
             var currentDistance = PythagThatMofo(Grid.NodeList[(int) toPointIndexX][(int) toPointIndexY].Point,
                 Grid.NodeList[(int) fromPointIndexX][(int) fromPointIndexY].Point);
@@ -101,7 +110,7 @@ namespace Zeds.Pathfinding
                 var newDistance = PythagThatMofo(Grid.NodeList[(int) toPointIndexX][(int) toPointIndexY].Point,
                     neighbour.Point);
 
-                if (newDistance < currentDistance) currentFavourite = neighbour;
+                if (newDistance + neighbour.Cost < currentDistance) currentFavourite = neighbour;
             }
 
             // if we get here, and currentFavourite is null, then one of 2 things has happened:
@@ -198,6 +207,16 @@ namespace Zeds.Pathfinding
             pawn.BRec.Y = (int) pawn.Position.Y - pawn.BRec.Height / 2;
 
             return pawn.BRec;
+        }
+
+        private static int SetNodeCost(Node node)
+        {
+            foreach (var building in EntityLists.BuildingList)
+            {
+                if (building.BRec.Intersects(node.BRec))
+                    return 1000;
+            }
+            return 0;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Text;
 using Microsoft.Xna.Framework.Input;
+using System.Text;
 using Zeds.Engine;
 using Zeds.Pawns.HumanLogic;
 
@@ -28,6 +28,8 @@ namespace Zeds.UI.PawnInfoPanel
 
         public static string DisplayInfo;
 
+        private static readonly StringBuilder pawnInfoSB = new StringBuilder();
+
         public static void DisplayPawnInfo(Human pawn)
         {
             PawnInfoRec = new Rectangle
@@ -52,21 +54,12 @@ namespace Zeds.UI.PawnInfoPanel
                 Y = PawnInfoRec.Y + 10
             };
 
-            // ToDo 2 CurrentHealth and AttackPower not reporting back changes
-            StringBuilder info = new StringBuilder();
-            info.Append("Name: " + pawn.Name + "\n");
-            info.Append("A " + pawn.Age + " year old " + pawn.Occupation + "\n\n");
-            info.Append("Health: " + pawn.CurrentHealth + "/" + pawn.MaxHealth + "\n");
-            info.Append("Morale: " + "\n");
-            info.Append("Current task: " + "\n");
-            info.Append("Power: " + pawn.AttackPower + "\n");
-
-            DisplayInfo = info.ToString();
+            DisplayInfo = CreatePawnInfoString(pawn);
 
             PawnOutlineBox = new Rectangle
             {
                 X = PawnInfoRec.X +10,
-                Y = PawnInfoRec.Y + 130,
+                Y = PawnInfoRec.Y + 150,
                 Width = Textures.InfoPawnOutline.Width,
                 Height = Textures.InfoPawnOutline.Height
             };
@@ -142,6 +135,27 @@ namespace Zeds.UI.PawnInfoPanel
         {
             if (Cursor.CursorRectangle.Intersects(MenuCloseRec) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                 IsPawnInfoVisible = false;
+        }
+
+        private static string CreatePawnInfoString(Human pawn)
+        {
+            pawnInfoSB.Clear();
+
+            pawnInfoSB.Append("Name: " + pawn.Name + "\n");
+            pawnInfoSB.Append("A " + pawn.Age + " year old " + pawn.Occupation + "\n\n");
+            pawnInfoSB.Append("Health: " + pawn.CurrentHealth + "/" + pawn.MaxHealth + "\n");
+            pawnInfoSB.Append("Morale: " + "\n");
+            pawnInfoSB.Append("Current task: " + "\n");
+            pawnInfoSB.Append("Power: " + pawn.AttackPower + "\n");
+
+            return pawnInfoSB.ToString();
+        }
+
+        public static void UpdatePawnInfo()
+        {
+            foreach (var human in EntityLists.HumanList)
+                if (human.IsSelected)
+                    DisplayInfo = CreatePawnInfoString(human);
         }
     }
 }

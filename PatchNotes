@@ -1,4 +1,19 @@
-Alpha 1.3.6
+Alpha 1.3.7 17/03/2020 
+
+Bug Fixes:
+- Fixed PawnInfo not displaying changes to pawn's health
+- Fixed PawnInfo not displaying changes to pawn's power when changing weapons
+- Fixed bug where SelectedIcon was still displaying on pawn's death
+
+Added/Altered:
+
+Refactored:
+- Moved logic for panicking pawns into pathfinding - disabled logic for now
+- Moved logic for assigning Node weights into Pathfind
+
+--------------------
+
+Alpha 1.3.6 16/03/2020
 
 Bug Fixes:
 - Fixed BuildMenu/DetailsPane interfering with each other when being moved

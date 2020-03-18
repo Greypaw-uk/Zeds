@@ -21,7 +21,7 @@ namespace Zeds.Engine
 {
     public class Engine : Game
     {
-        private static readonly string versionNumber = "Alpha 1.3.6";
+        private static readonly string versionNumber = "Alpha 1.3.7";
 
         public static SpriteBatch SpriteBatch;
 
@@ -191,10 +191,11 @@ namespace Zeds.Engine
             {
                 SelectedPawn.UpdateIndicator(SelectedPawn.SelectedHuman);
                 ExtendIconChecks.CheckExtendHandClicked();
+                PawnInfo.UpdatePawnInfo();
             }
             #endregion
 
-            #region PawnInfo
+            #region PawnInfoSB
             PawnCursorInteraction.CheckForCursorPawnInteraction();
 
             if (PawnInfo.IsPawnInfoVisible)
@@ -276,7 +277,7 @@ namespace Zeds.Engine
             }
 
 
-            //Pawn info
+            //Pawn PawnInfoSB
             if (PawnInfo.IsPawnInfoVisible)
             {
                 //PawnInfoMenuClose.ClosePawnInfoMenu();
