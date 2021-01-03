@@ -28,7 +28,7 @@ namespace Zeds.BuildingLogic
             smallTent.BRec.Height = Textures.SmallTentTexture.Height;
 
             EntityLists.BuildingList.Add(smallTent);
-            PruneBushes.CheckBushBuildingIntersection(smallTent);
+            PruneFoliage.CheckBushBuildingIntersection(smallTent);
         }
 
         public static void CreateLargeTent(Vector2 position, Rectangle bRec)
@@ -52,7 +52,7 @@ namespace Zeds.BuildingLogic
             largeTent.BRec.Height = Textures.LargeTentTexture.Height;
 
             EntityLists.BuildingList.Add(largeTent);
-            PruneBushes.CheckBushBuildingIntersection(largeTent);
+            PruneFoliage.CheckBushBuildingIntersection(largeTent);
         }
     }
 }

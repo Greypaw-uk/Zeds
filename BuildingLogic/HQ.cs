@@ -27,7 +27,7 @@ namespace Zeds.BuildingLogic
             hq.Description = "Operations Base";
 
             EntityLists.BuildingList.Add(hq);
-            PruneBushes.CheckBushBuildingIntersection(hq);
+            PruneFoliage.CheckBushBuildingIntersection(hq);
         }
     }
 }
