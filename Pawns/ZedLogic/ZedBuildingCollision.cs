@@ -9,7 +9,16 @@ namespace Zeds.Pawns.ZedLogic
             foreach (var building in EntityLists.BuildingList)
                 if (zed.BRec.Intersects(building.BRec))
                 {
-                    building.CurrentHealth -= zed.AttackPower;
+                    if (zed.NextAttack <= 0)
+                    {
+                        building.CurrentHealth -= zed.AttackPower;
+
+                        zed.NextAttack = zed.AttackSpeed;
+                    }
+                    else
+                    {
+                        zed.NextAttack--;
+                    }
 
                     if (zed.Position.X >= building.Position.X)
                         zed.Position.X += 1;

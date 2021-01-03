@@ -24,7 +24,9 @@ namespace Zeds.Pawns.HumanLogic
                     IsMale = HumanAttributes.IsPawnMale(),
                     Age = HumanAttributes.GetHumansAge(),
                     Description = "",
-                    AttackPower = 1
+                    AttackPower = 1,
+                    AttackSpeed = 2,
+                    NextAttack = 2
                 };
 
                 if (human.IsMale)

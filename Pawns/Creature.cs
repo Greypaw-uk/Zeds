@@ -30,5 +30,7 @@ namespace Zeds.Pawns
         public float AlertRange;
 
         public int AttackPower;
+        public int AttackSpeed;
+        public int NextAttack;
     }
 }

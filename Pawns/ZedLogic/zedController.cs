@@ -21,7 +21,9 @@ namespace Zeds.Pawns.ZedLogic
                     ID = Guid.NewGuid().ToString(),
                     Description = "A zombie.  Grr, argh",
                     AlertRange = 400,
-                    AttackPower = 1
+                    AttackPower = 1,
+                    AttackSpeed = 4,
+                    NextAttack = 4
                 };
 
                 zed.CurrentPoint = zed.Position;
