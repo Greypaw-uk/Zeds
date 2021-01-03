@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Zeds.Graphics.Background;
 
 namespace Zeds.Engine
 {
@@ -17,6 +18,13 @@ namespace Zeds.Engine
         public static Texture2D Bush2Texture;
         public static Texture2D Bush3Texture;
         public static Texture2D Bush4Texture;
+
+        public static Texture2D Tree1Texture;
+        public static Texture2D Tree2Texture;
+        public static Texture2D Tree3Texture;
+        public static Texture2D Tree4Texture;
+
+        public static Texture2D TreeFoliage1;
         #endregion
 
         #region Pawns
@@ -104,6 +112,13 @@ namespace Zeds.Engine
             Bush2Texture = Content.Load<Texture2D>("Terrain/Bushes/bush2");
             Bush3Texture = Content.Load<Texture2D>("Terrain/Bushes/bush3");
             Bush4Texture = Content.Load<Texture2D>("Terrain/Bushes/bush4");
+
+            Tree1Texture = Content.Load<Texture2D>("Terrain/Tree/tree1");
+            Tree2Texture = Content.Load<Texture2D>("Terrain/Tree/tree2");
+            Tree3Texture = Content.Load<Texture2D>("Terrain/Tree/tree3");
+            Tree4Texture = Content.Load<Texture2D>("Terrain/Tree/tree4");
+
+            TreeFoliage1 = Content.Load<Texture2D>("Terrain/Tree/Tree1Folliage");
             #endregion
 
             #region Pawns
