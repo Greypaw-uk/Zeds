@@ -70,6 +70,18 @@ namespace Zeds.BuildingLogic
                     return false;
             }
 
+            foreach (var tree in EntityLists.TreeList)
+            {
+                if (blueprint.Intersects(tree.BRec))
+                    return false;
+            }
+
+            foreach (var foliage in EntityLists.TreeFoliageList)
+            {
+                if (blueprint.Intersects(foliage.BRec))
+                    return false;
+            }
+
             return true;
         }
     }
