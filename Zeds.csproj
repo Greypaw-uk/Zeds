@@ -50,7 +50,8 @@
     <Compile Include="Debug\DamageEntities.cs" />
     <Compile Include="Debug\FPS.cs" />
     <Compile Include="Graphics\Background\Bushes.cs" />
-    <Compile Include="Graphics\Background\PruneBushes.cs" />
+    <Compile Include="Graphics\Background\PruneFoliage.cs" />
+    <Compile Include="Graphics\Background\Trees.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\Weapons\Melee\CombatKnife.cs" />
     <Compile Include="Items\Weapons\Melee\KitchenKnife.cs" />
@@ -129,12 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="PatchNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
-    <None Include="PatchNotes" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
