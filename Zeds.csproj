@@ -51,7 +51,7 @@
     <Compile Include="Debug\FPS.cs" />
     <Compile Include="Graphics\Background\Bushes.cs" />
     <Compile Include="Graphics\Background\PruneFoliage.cs" />
-    <Compile Include="Graphics\Background\Trees.cs" />
+    <Compile Include="Resources\Trees.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\Weapons\Melee\CombatKnife.cs" />
     <Compile Include="Items\Weapons\Melee\KitchenKnife.cs" />

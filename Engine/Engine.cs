@@ -10,6 +10,7 @@ using Zeds.Items;
 using Zeds.Pathfinding;
 using Zeds.Pawns.HumanLogic;
 using Zeds.Pawns.ZedLogic;
+using Zeds.Resources;
 using Zeds.UI;
 using Zeds.UI.Build_Menu;
 using Zeds.UI.Details_Pane;

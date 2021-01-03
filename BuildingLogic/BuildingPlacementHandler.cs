@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Zeds.Engine;
-using Zeds.Graphics.Background;
 using Zeds.UI.Build_Menu;
 
 namespace Zeds.BuildingLogic

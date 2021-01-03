@@ -1,11 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
 using Zeds.Engine;
 using Zeds.UI;
 
-namespace Zeds.Graphics.Background
+namespace Zeds.Resources
 {
     public class Tree
     {

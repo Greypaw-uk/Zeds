@@ -4,6 +4,7 @@ using Zeds.Graphics.Background;
 using Zeds.Items.Weapons;
 using Zeds.Pawns.HumanLogic;
 using Zeds.Pawns.ZedLogic;
+using Zeds.Resources;
 using Zeds.UI.Build_Menu;
 using Zeds.UI.PawnInfoPanel.Items_Boxes;
 
