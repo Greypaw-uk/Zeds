@@ -22,6 +22,8 @@ namespace Zeds.Engine
 
         public static List<GrassTuft> GrassList = new List<GrassTuft>();
         public static List<Bush> BushList = new List<Bush>();
+        public static List<Tree> TreeList = new List<Tree>();
+        public static List<TreeFoliage> TreeFoliageList = new List<TreeFoliage>();
 
         public static List<Weapon> AvailableWeaponList = new List<Weapon>();
         public static List<string> AvailableHeadwearList = new List<string>();

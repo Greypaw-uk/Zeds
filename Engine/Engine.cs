@@ -66,11 +66,13 @@ namespace Zeds.Engine
         {
             Textures.LoadTextures(this.Content);
 
+            #region Camera
             Camera = new Camera(Graphics.GraphicsDevice);
-            CameraPosition.X = Graphics.PreferredBackBufferWidth * 1.0f /2;
+            CameraPosition.X = Graphics.PreferredBackBufferWidth * 1.0f / 2;
             CameraPosition.Y = Graphics.PreferredBackBufferHeight * 1.0f / 2;
+            #endregion
 
-            // Screen Setup
+            #region Screen Setup
             //ResolutionHandler.resolution = ResolutionHandler.Resolution.Three;
 
             //ToDo 3 Fix to draw background texture to fill all of the background
@@ -80,15 +82,15 @@ namespace Zeds.Engine
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             Window.Title = "Zeds - Alpha " + versionNumber;
+            #endregion
 
-
-            //Mouse
+            #region Mouse
             IsMouseVisible = false;
             MouseCoordinates.X = Graphics.PreferredBackBufferWidth * 1.0f / 2;
             MouseCoordinates.Y = Graphics.PreferredBackBufferWidth * 1.0f /2;
             KeyBindings.PreviousScrollValue = 0;
+            #endregion
 
-            
             //Initial set up
             HQ.HQSetup();
             HumanNames.PopulateNamesLists();
@@ -96,16 +98,21 @@ namespace Zeds.Engine
             HumanSpawner.SpawnHumans();
             GrantStartingItems.PopulateItemList();
 
+            #region Terrain
             GrassTufts.CreateGrassTufts();
             Bushes.CreateBushes();
+            Trees.CreateTrees();
+            Trees.CreateTreeFoliage();
+            #endregion
 
-            //Build Menu
+            #region Build Menu
             BuildingPlacementHandler.SelectedStructure = BuildingSelected.None;
 
             PopulateBuildMenus.PopulateMenuIconList();
             BuildMenuPane.InitialiseBuildMenuLocation();
             BuildMenuPane.IsBuildMenuWindowVisible = true;
             BuildMenuRollOverText.UpdateRollOverTextPosition();
+            #endregion
 
             DetailsPane.CreateDetailsPane(new Vector2((ScreenWidth / 2) - (Textures.DetailsWindowPane.Width / 2),10), "" );
 
@@ -137,8 +144,14 @@ namespace Zeds.Engine
 
             // Mouse
             //ToDo 1 Fix mouse getting 'stuck' in fullscreen mode
+            MouseCoordinates = Cursor.GetMouseCoordinates();
             Cursor.GetMouseCoordinates();
             Cursor.UpdateCursorRectangleLocation();
+
+            //Update Tree Foliage Transparency
+            EntityLists.TreeFoliageList.Clear();
+            Trees.CreateTreeFoliage();
+            Trees.ChangeTreeFoliageTransparency();
 
 
             if ( Debug.Debug.IsDebugEnabled)
@@ -241,14 +254,16 @@ namespace Zeds.Engine
 
             RenderBackground.DrawBackground();
             GrassTufts.DrawGrassTufts();
+            Bushes.DrawBushes();
 
-            DrawStructures.DrawBuildings();
-            RuinedBuilding.DrawRuinedBuildings();
             DrawHumanPawns.DrawHumans();
             DrawZedPawns.DrawZeds();
 
-            Bushes.DrawBushes();
+            DrawStructures.DrawBuildings();
+            RuinedBuilding.DrawRuinedBuildings();
 
+            Trees.DrawTrees();
+            Trees.DrawTreeFoliage();
 
             HealthBar.DrawHealthBar();
 
