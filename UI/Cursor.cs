@@ -33,7 +33,7 @@ namespace Zeds.UI
                 Engine.Engine.SpriteBatch.Draw(Textures.DozerDeniedTexture, Engine.Engine.MouseCoordinates, Color.White);
         }
 
-        public static void GetMouseCoordinates()
+        public static Vector2 GetMouseCoordinates()
         {
             Vector2 resolution = new Vector2
             {
@@ -49,7 +49,7 @@ namespace Zeds.UI
                 Y = Mouse.GetState().Y * resolution.Y
             };
 
-            Engine.Engine.MouseCoordinates = adjustedMouseCoordinates;
+            return adjustedMouseCoordinates;
         }
     }
 }
