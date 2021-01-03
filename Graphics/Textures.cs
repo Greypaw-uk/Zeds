@@ -61,6 +61,7 @@ namespace Zeds.Engine
         public static Texture2D TempMenuIcon;
         public static Texture2D SmallTentBuildIcon;
         public static Texture2D LargeTentBuildIcon;
+        public static Texture2D GatherIcon;
 
         //Debug
         public static Texture2D DebugSquareSmall;
@@ -88,6 +89,8 @@ namespace Zeds.Engine
 
         //Misc
         public static Texture2D ExtendArrow;
+
+        public static Texture2D RedCross;
         #endregion
 
         #region Items
@@ -171,6 +174,7 @@ namespace Zeds.Engine
             TempMenuIcon = Content.Load<Texture2D>("Interface/Menus/tempIcon");
             SmallTentBuildIcon = Content.Load<Texture2D>("Interface/Menus/SmallTentBuildIcon");
             LargeTentBuildIcon = Content.Load<Texture2D>("Interface/Menus/LargeTentBuildIcon");
+            GatherIcon = Content.Load<Texture2D>("Interface/Menus/pickaxe");
 
             DebugSquareSmall = Content.Load<Texture2D>("Interface/Debug/DebugSquareSmall");
             DebugSquareLarge = Content.Load<Texture2D>("Interface/Debug/DebugSquareLarge");
@@ -181,6 +185,8 @@ namespace Zeds.Engine
 
             //Misc
             ExtendArrow = Content.Load<Texture2D>("Interface/ExtendArrow");
+
+            RedCross = Content.Load<Texture2D>("Interface/redcross");
             #endregion
 
             #region Items

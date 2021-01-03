@@ -17,6 +17,7 @@ using Zeds.UI.Details_Pane;
 using Zeds.UI.HealthBar;
 using Zeds.UI.PawnInfoPanel;
 using Zeds.UI.PawnInfoPanel.Items_Boxes;
+using Zeds.Resources;
 
 namespace Zeds.Engine
 {
@@ -241,6 +242,8 @@ namespace Zeds.Engine
             KeyBindings.CheckForKeyInput();
             KeyBindings.CheckForMouseInput();
 
+            Resource.SetResourcesForGathering();
+
 
             base.Update(gameTime);
         }
@@ -263,6 +266,7 @@ namespace Zeds.Engine
 
             Trees.DrawTrees();
             Trees.DrawTreeFoliage();
+            Resource.DrawGatherIcon();
 
             HealthBar.DrawHealthBar();
 

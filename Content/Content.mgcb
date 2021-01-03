@@ -392,6 +392,18 @@
 /processorParam:TextureFormat=Color
 /build:Interface/Menus/PawnOutline.png
 
+#begin Interface/Menus/pickaxe.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Interface/Menus/pickaxe.png
+
 #begin Interface/Menus/SelectedEntity.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -427,6 +439,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Interface/Menus/tempIcon.png
+
+#begin Interface/redcross.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Interface/redcross.png
 
 #begin Item/ItemTemplate.png
 /importer:TextureImporter

@@ -6,7 +6,7 @@ using Zeds.UI;
 
 namespace Zeds.Resources
 {
-    public class Tree
+    public class Tree : Resource
     {
         public Vector2 Location;
         public Texture2D Texture;
@@ -104,6 +104,8 @@ namespace Zeds.Resources
 
                 newTree.BRec.Height = texture.Height;
                 newTree.BRec.Width = texture.Width;
+
+                newTree.Name = "Tree";
 
                 EntityLists.TreeList.Add(newTree);
             }

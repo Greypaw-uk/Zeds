@@ -1,11 +1,14 @@
 Alpha 1.3.8 03/01/2021
 
 Bug Fixes:
-- Corrected spelling of name 'Louise'
+- Corrected typo in Human Name 'Louise'
+- Corrected typo in Debug's fps display
 
 Added/Altered:
 - Added trees
+- Added logic to dynamically set Alpha on foliage textures - contact with a human or the cursor will turn foliage translucent.
 - Updated prunebushes to prunefoliage to accomodate trees and their foliage
+- Updating building placement check to see if any trees are in the way
 
 --------------------
 
