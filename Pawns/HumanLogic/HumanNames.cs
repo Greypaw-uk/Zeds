@@ -75,7 +75,7 @@ namespace Zeds.Pawns.HumanLogic
             femaleNamesUk.Add("Claire");
             femaleNamesUk.Add("Alison");
             femaleNamesUk.Add("Sue");
-            femaleNamesUk.Add("Lousie");
+            femaleNamesUk.Add("Louise");
             femaleNamesUk.Add("Jane");
             femaleNamesUk.Add("Emma");
             femaleNamesUk.Add("Lisa");
