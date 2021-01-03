@@ -42,15 +42,21 @@ namespace Zeds.Graphics.Background
 
         public static void ChangeTreeFoliageTransparency()
         {
-            for (int i = 0; i < EntityLists.TreeFoliageList.Count; i++)
+            foreach (var foliage in EntityLists.TreeFoliageList)
             {
-                if (EntityLists.TreeFoliageList[i].BRec.Intersects(Cursor.CursorRectangle))
+                foliage.Transparency = 1f;
+
+                if (foliage.BRec.Intersects(Cursor.CursorRectangle))
                 {
-                    EntityLists.TreeFoliageList[i].Transparency = 25f;
+                    foliage.Transparency = 0.25f;
                 }
-                else
+
+                foreach (var human in EntityLists.HumanList)
                 {
-                    EntityLists.TreeFoliageList[i].Transparency = 100f;
+                    if (foliage.BRec.Contains(human.BRec))
+                    {
+                        foliage.Transparency = 0.25f;
+                    }
                 }
             }
         }

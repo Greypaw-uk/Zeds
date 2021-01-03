@@ -149,8 +149,6 @@ namespace Zeds.Engine
             Cursor.UpdateCursorRectangleLocation();
 
             //Update Tree Foliage Transparency
-            EntityLists.TreeFoliageList.Clear();
-            Trees.CreateTreeFoliage();
             Trees.ChangeTreeFoliageTransparency();
 
 
