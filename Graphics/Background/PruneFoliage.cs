@@ -2,7 +2,7 @@
 
 namespace Zeds.Graphics.Background
 {
-    class PruneBushes
+    class PruneFoliage
     {
         public static void CheckBushBuildingIntersection(BuildingLogic.Building building)
         {
@@ -11,6 +11,14 @@ namespace Zeds.Graphics.Background
                 if (EntityLists.BushList[i].BRec.Intersects(building.BRec))
                 {
                     EntityLists.BushList.RemoveAt(i);
+                }
+            }
+
+            for (int i = EntityLists.TreeList.Count - 1; i >= 0; i--)
+            {
+                if (EntityLists.TreeList[i].BRec.Intersects(building.BRec))
+                {
+                    EntityLists.TreeList.RemoveAt(i);
                 }
             }
         }
