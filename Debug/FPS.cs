@@ -20,7 +20,7 @@ namespace Zeds.Debug
             if (elapsed > msgFrequency)
             {
                 msg = "FPS: " + (int)(frames / elapsed) +
-                      "\nUpdate: " + updates;
+                      "\nUpdates: " + updates;
 
                 elapsed = 0;
                 frames = 0;
